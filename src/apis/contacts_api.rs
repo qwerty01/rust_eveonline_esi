@@ -14,6 +14,219 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `delete_characters_character_id_contacts`
+#[derive(Clone, Debug)]
+pub struct DeleteCharactersCharacterIdContactsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// A list of contacts to delete
+    pub contact_ids: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_alliances_alliance_id_contacts`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesAllianceIdContactsParams {
+    /// An EVE alliance ID
+    pub alliance_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_alliances_alliance_id_contacts_labels`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesAllianceIdContactsLabelsParams {
+    /// An EVE alliance ID
+    pub alliance_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_contacts`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdContactsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_contacts_labels`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdContactsLabelsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_contacts`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContactsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_contacts_labels`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContactsLabelsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_contacts`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdContactsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// Standing for the contact
+    pub standing: f32,
+    /// A list of contacts
+    pub contact_ids: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Add custom labels to the new contact
+    pub label_ids: Option<Vec<i64>>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>,
+    /// Whether the contact should be watched, note this is only effective on characters
+    pub watched: Option<bool>
+}
+
+/// struct for passing parameters to the method `put_characters_character_id_contacts`
+#[derive(Clone, Debug)]
+pub struct PutCharactersCharacterIdContactsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// Standing for the contact
+    pub standing: f32,
+    /// A list of contacts
+    pub contact_ids: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Add custom labels to the contact
+    pub label_ids: Option<Vec<i64>>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>,
+    /// Whether the contact should be watched, note this is only effective on characters
+    pub watched: Option<bool>
+}
+
+
+/// struct for typed successes of method `delete_characters_character_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteCharactersCharacterIdContactsSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_alliances_alliance_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesAllianceIdContactsSuccess {
+    Status200(Vec<crate::models::GetAlliancesAllianceIdContacts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_alliances_alliance_id_contacts_labels`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesAllianceIdContactsLabelsSuccess {
+    Status200(Vec<crate::models::GetAlliancesAllianceIdContactsLabels200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdContactsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdContacts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_contacts_labels`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdContactsLabelsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdContactsLabels200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContactsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContacts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_contacts_labels`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContactsLabelsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContactsLabels200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdContactsSuccess {
+    Status201(Vec<i32>),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_characters_character_id_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutCharactersCharacterIdContactsSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `delete_characters_character_id_contacts`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -144,7 +357,13 @@ pub enum PutCharactersCharacterIdContactsError {
 
 
 /// Bulk delete contacts  --- Alternate route: `/dev/characters/{character_id}/contacts/`  Alternate route: `/v2/characters/{character_id}/contacts/` 
-pub async fn delete_characters_character_id_contacts(configuration: &configuration::Configuration, character_id: i32, contact_ids: Vec<i32>, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteCharactersCharacterIdContactsError>> {
+pub async fn delete_characters_character_id_contacts(configuration: &configuration::Configuration, params: DeleteCharactersCharacterIdContactsParams) -> Result<ResponseContent<DeleteCharactersCharacterIdContactsSuccess>, Error<DeleteCharactersCharacterIdContactsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let contact_ids = params.contact_ids;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -172,7 +391,9 @@ pub async fn delete_characters_character_id_contacts(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteCharactersCharacterIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteCharactersCharacterIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -181,7 +402,14 @@ pub async fn delete_characters_character_id_contacts(configuration: &configurati
 }
 
 /// Return contacts of an alliance  --- Alternate route: `/dev/alliances/{alliance_id}/contacts/`  Alternate route: `/v2/alliances/{alliance_id}/contacts/`  --- This route is cached for up to 300 seconds
-pub async fn get_alliances_alliance_id_contacts(configuration: &configuration::Configuration, alliance_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetAlliancesAllianceIdContacts200Ok>, Error<GetAlliancesAllianceIdContactsError>> {
+pub async fn get_alliances_alliance_id_contacts(configuration: &configuration::Configuration, params: GetAlliancesAllianceIdContactsParams) -> Result<ResponseContent<GetAlliancesAllianceIdContactsSuccess>, Error<GetAlliancesAllianceIdContactsError>> {
+    // unbox the parameters
+    let alliance_id = params.alliance_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -214,7 +442,9 @@ pub async fn get_alliances_alliance_id_contacts(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesAllianceIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesAllianceIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -223,7 +453,13 @@ pub async fn get_alliances_alliance_id_contacts(configuration: &configuration::C
 }
 
 /// Return custom labels for an alliance's contacts  --- Alternate route: `/dev/alliances/{alliance_id}/contacts/labels/`  Alternate route: `/legacy/alliances/{alliance_id}/contacts/labels/`  Alternate route: `/v1/alliances/{alliance_id}/contacts/labels/`  --- This route is cached for up to 300 seconds
-pub async fn get_alliances_alliance_id_contacts_labels(configuration: &configuration::Configuration, alliance_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetAlliancesAllianceIdContactsLabels200Ok>, Error<GetAlliancesAllianceIdContactsLabelsError>> {
+pub async fn get_alliances_alliance_id_contacts_labels(configuration: &configuration::Configuration, params: GetAlliancesAllianceIdContactsLabelsParams) -> Result<ResponseContent<GetAlliancesAllianceIdContactsLabelsSuccess>, Error<GetAlliancesAllianceIdContactsLabelsError>> {
+    // unbox the parameters
+    let alliance_id = params.alliance_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -253,7 +489,9 @@ pub async fn get_alliances_alliance_id_contacts_labels(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesAllianceIdContactsLabelsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesAllianceIdContactsLabelsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -262,7 +500,14 @@ pub async fn get_alliances_alliance_id_contacts_labels(configuration: &configura
 }
 
 /// Return contacts of a character  --- Alternate route: `/dev/characters/{character_id}/contacts/`  Alternate route: `/v2/characters/{character_id}/contacts/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_contacts(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdContacts200Ok>, Error<GetCharactersCharacterIdContactsError>> {
+pub async fn get_characters_character_id_contacts(configuration: &configuration::Configuration, params: GetCharactersCharacterIdContactsParams) -> Result<ResponseContent<GetCharactersCharacterIdContactsSuccess>, Error<GetCharactersCharacterIdContactsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -295,7 +540,9 @@ pub async fn get_characters_character_id_contacts(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -304,7 +551,13 @@ pub async fn get_characters_character_id_contacts(configuration: &configuration:
 }
 
 /// Return custom labels for a character's contacts  --- Alternate route: `/dev/characters/{character_id}/contacts/labels/`  Alternate route: `/legacy/characters/{character_id}/contacts/labels/`  Alternate route: `/v1/characters/{character_id}/contacts/labels/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_contacts_labels(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdContactsLabels200Ok>, Error<GetCharactersCharacterIdContactsLabelsError>> {
+pub async fn get_characters_character_id_contacts_labels(configuration: &configuration::Configuration, params: GetCharactersCharacterIdContactsLabelsParams) -> Result<ResponseContent<GetCharactersCharacterIdContactsLabelsSuccess>, Error<GetCharactersCharacterIdContactsLabelsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -334,7 +587,9 @@ pub async fn get_characters_character_id_contacts_labels(configuration: &configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdContactsLabelsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdContactsLabelsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -343,7 +598,14 @@ pub async fn get_characters_character_id_contacts_labels(configuration: &configu
 }
 
 /// Return contacts of a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/contacts/`  Alternate route: `/v2/corporations/{corporation_id}/contacts/`  --- This route is cached for up to 300 seconds
-pub async fn get_corporations_corporation_id_contacts(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContacts200Ok>, Error<GetCorporationsCorporationIdContactsError>> {
+pub async fn get_corporations_corporation_id_contacts(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContactsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContactsSuccess>, Error<GetCorporationsCorporationIdContactsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -376,7 +638,9 @@ pub async fn get_corporations_corporation_id_contacts(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -385,7 +649,13 @@ pub async fn get_corporations_corporation_id_contacts(configuration: &configurat
 }
 
 /// Return custom labels for a corporation's contacts  --- Alternate route: `/dev/corporations/{corporation_id}/contacts/labels/`  Alternate route: `/legacy/corporations/{corporation_id}/contacts/labels/`  Alternate route: `/v1/corporations/{corporation_id}/contacts/labels/`  --- This route is cached for up to 300 seconds
-pub async fn get_corporations_corporation_id_contacts_labels(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContactsLabels200Ok>, Error<GetCorporationsCorporationIdContactsLabelsError>> {
+pub async fn get_corporations_corporation_id_contacts_labels(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContactsLabelsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContactsLabelsSuccess>, Error<GetCorporationsCorporationIdContactsLabelsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -415,7 +685,9 @@ pub async fn get_corporations_corporation_id_contacts_labels(configuration: &con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContactsLabelsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContactsLabelsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -424,7 +696,16 @@ pub async fn get_corporations_corporation_id_contacts_labels(configuration: &con
 }
 
 /// Bulk add contacts with same settings  --- Alternate route: `/dev/characters/{character_id}/contacts/`  Alternate route: `/v2/characters/{character_id}/contacts/` 
-pub async fn post_characters_character_id_contacts(configuration: &configuration::Configuration, character_id: i32, standing: f32, contact_ids: Vec<i32>, datasource: Option<&str>, label_ids: Option<Vec<i64>>, token: Option<&str>, watched: Option<bool>) -> Result<Vec<i32>, Error<PostCharactersCharacterIdContactsError>> {
+pub async fn post_characters_character_id_contacts(configuration: &configuration::Configuration, params: PostCharactersCharacterIdContactsParams) -> Result<ResponseContent<PostCharactersCharacterIdContactsSuccess>, Error<PostCharactersCharacterIdContactsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let standing = params.standing;
+    let contact_ids = params.contact_ids;
+    let datasource = params.datasource;
+    let label_ids = params.label_ids;
+    let token = params.token;
+    let watched = params.watched;
+
 
     let local_var_client = &configuration.client;
 
@@ -459,7 +740,9 @@ pub async fn post_characters_character_id_contacts(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -468,7 +751,16 @@ pub async fn post_characters_character_id_contacts(configuration: &configuration
 }
 
 /// Bulk edit contacts with same settings  --- Alternate route: `/dev/characters/{character_id}/contacts/`  Alternate route: `/v2/characters/{character_id}/contacts/` 
-pub async fn put_characters_character_id_contacts(configuration: &configuration::Configuration, character_id: i32, standing: f32, contact_ids: Vec<i32>, datasource: Option<&str>, label_ids: Option<Vec<i64>>, token: Option<&str>, watched: Option<bool>) -> Result<(), Error<PutCharactersCharacterIdContactsError>> {
+pub async fn put_characters_character_id_contacts(configuration: &configuration::Configuration, params: PutCharactersCharacterIdContactsParams) -> Result<ResponseContent<PutCharactersCharacterIdContactsSuccess>, Error<PutCharactersCharacterIdContactsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let standing = params.standing;
+    let contact_ids = params.contact_ids;
+    let datasource = params.datasource;
+    let label_ids = params.label_ids;
+    let token = params.token;
+    let watched = params.watched;
+
 
     let local_var_client = &configuration.client;
 
@@ -503,7 +795,9 @@ pub async fn put_characters_character_id_contacts(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutCharactersCharacterIdContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutCharactersCharacterIdContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

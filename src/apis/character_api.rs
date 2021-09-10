@@ -14,6 +14,304 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_agents_research`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdAgentsResearchParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_blueprints`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdBlueprintsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_corporationhistory`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdCorporationhistoryParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_fatigue`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdFatigueParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_medals`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMedalsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_notifications`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdNotificationsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_notifications_contacts`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdNotificationsContactsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_portrait`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdPortraitParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_roles`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdRolesParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_standings`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdStandingsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_titles`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdTitlesParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_affiliation`
+#[derive(Clone, Debug)]
+pub struct PostCharactersAffiliationParams {
+    /// The character IDs to fetch affiliations for. All characters must exist, or none will be returned
+    pub characters: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_cspa`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdCspaParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The target characters to calculate the charge for
+    pub characters: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdSuccess {
+    Status200(crate::models::GetCharactersCharacterIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_agents_research`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdAgentsResearchSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdAgentsResearch200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_blueprints`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdBlueprintsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdBlueprints200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_corporationhistory`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdCorporationhistorySuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdCorporationhistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_fatigue`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdFatigueSuccess {
+    Status200(crate::models::GetCharactersCharacterIdFatigueOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_medals`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMedalsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdMedals200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_notifications`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdNotificationsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdNotifications200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_notifications_contacts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdNotificationsContactsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdNotificationsContacts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_portrait`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdPortraitSuccess {
+    Status200(crate::models::GetCharactersCharacterIdPortraitOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_roles`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdRolesSuccess {
+    Status200(crate::models::GetCharactersCharacterIdRolesOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_standings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdStandingsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdStandings200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_titles`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdTitlesSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdTitles200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_affiliation`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersAffiliationSuccess {
+    Status200(Vec<crate::models::PostCharactersAffiliation200Ok>),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_cspa`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdCspaSuccess {
+    Status201(f32),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -207,7 +505,12 @@ pub enum PostCharactersCharacterIdCspaError {
 
 
 /// Public information about a character  --- Alternate route: `/v4/characters/{character_id}/`  --- This route is cached for up to 86400 seconds  --- Warning: This route has an upgrade available  --- [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/)
-pub async fn get_characters_character_id(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdOk, Error<GetCharactersCharacterIdError>> {
+pub async fn get_characters_character_id(configuration: &configuration::Configuration, params: GetCharactersCharacterIdParams) -> Result<ResponseContent<GetCharactersCharacterIdSuccess>, Error<GetCharactersCharacterIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -231,7 +534,9 @@ pub async fn get_characters_character_id(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -240,7 +545,13 @@ pub async fn get_characters_character_id(configuration: &configuration::Configur
 }
 
 /// Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate)  --- Alternate route: `/dev/characters/{character_id}/agents_research/`  Alternate route: `/v2/characters/{character_id}/agents_research/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_agents_research(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdAgentsResearch200Ok>, Error<GetCharactersCharacterIdAgentsResearchError>> {
+pub async fn get_characters_character_id_agents_research(configuration: &configuration::Configuration, params: GetCharactersCharacterIdAgentsResearchParams) -> Result<ResponseContent<GetCharactersCharacterIdAgentsResearchSuccess>, Error<GetCharactersCharacterIdAgentsResearchError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -270,7 +581,9 @@ pub async fn get_characters_character_id_agents_research(configuration: &configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdAgentsResearchSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdAgentsResearchError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -279,7 +592,14 @@ pub async fn get_characters_character_id_agents_research(configuration: &configu
 }
 
 /// Return a list of blueprints the character owns  --- Alternate route: `/dev/characters/{character_id}/blueprints/`  Alternate route: `/v3/characters/{character_id}/blueprints/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_blueprints(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdBlueprints200Ok>, Error<GetCharactersCharacterIdBlueprintsError>> {
+pub async fn get_characters_character_id_blueprints(configuration: &configuration::Configuration, params: GetCharactersCharacterIdBlueprintsParams) -> Result<ResponseContent<GetCharactersCharacterIdBlueprintsSuccess>, Error<GetCharactersCharacterIdBlueprintsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -312,7 +632,9 @@ pub async fn get_characters_character_id_blueprints(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdBlueprintsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdBlueprintsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -321,7 +643,12 @@ pub async fn get_characters_character_id_blueprints(configuration: &configuratio
 }
 
 /// Get a list of all the corporations a character has been a member of  --- Alternate route: `/dev/characters/{character_id}/corporationhistory/`  Alternate route: `/v2/characters/{character_id}/corporationhistory/`  --- This route is cached for up to 86400 seconds
-pub async fn get_characters_character_id_corporationhistory(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdCorporationhistory200Ok>, Error<GetCharactersCharacterIdCorporationhistoryError>> {
+pub async fn get_characters_character_id_corporationhistory(configuration: &configuration::Configuration, params: GetCharactersCharacterIdCorporationhistoryParams) -> Result<ResponseContent<GetCharactersCharacterIdCorporationhistorySuccess>, Error<GetCharactersCharacterIdCorporationhistoryError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -345,7 +672,9 @@ pub async fn get_characters_character_id_corporationhistory(configuration: &conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdCorporationhistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdCorporationhistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -354,7 +683,13 @@ pub async fn get_characters_character_id_corporationhistory(configuration: &conf
 }
 
 /// Return a character's jump activation and fatigue information  --- Alternate route: `/dev/characters/{character_id}/fatigue/`  Alternate route: `/v2/characters/{character_id}/fatigue/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_fatigue(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdFatigueOk, Error<GetCharactersCharacterIdFatigueError>> {
+pub async fn get_characters_character_id_fatigue(configuration: &configuration::Configuration, params: GetCharactersCharacterIdFatigueParams) -> Result<ResponseContent<GetCharactersCharacterIdFatigueSuccess>, Error<GetCharactersCharacterIdFatigueError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -384,7 +719,9 @@ pub async fn get_characters_character_id_fatigue(configuration: &configuration::
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdFatigueSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdFatigueError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -393,7 +730,13 @@ pub async fn get_characters_character_id_fatigue(configuration: &configuration::
 }
 
 /// Return a list of medals the character has  --- Alternate route: `/dev/characters/{character_id}/medals/`  Alternate route: `/v2/characters/{character_id}/medals/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_medals(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdMedals200Ok>, Error<GetCharactersCharacterIdMedalsError>> {
+pub async fn get_characters_character_id_medals(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMedalsParams) -> Result<ResponseContent<GetCharactersCharacterIdMedalsSuccess>, Error<GetCharactersCharacterIdMedalsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -423,7 +766,9 @@ pub async fn get_characters_character_id_medals(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMedalsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMedalsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -432,7 +777,13 @@ pub async fn get_characters_character_id_medals(configuration: &configuration::C
 }
 
 /// Return character notifications  --- Alternate route: `/dev/characters/{character_id}/notifications/`  Alternate route: `/v5/characters/{character_id}/notifications/`  Alternate route: `/v6/characters/{character_id}/notifications/`  --- This route is cached for up to 600 seconds
-pub async fn get_characters_character_id_notifications(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdNotifications200Ok>, Error<GetCharactersCharacterIdNotificationsError>> {
+pub async fn get_characters_character_id_notifications(configuration: &configuration::Configuration, params: GetCharactersCharacterIdNotificationsParams) -> Result<ResponseContent<GetCharactersCharacterIdNotificationsSuccess>, Error<GetCharactersCharacterIdNotificationsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -462,7 +813,9 @@ pub async fn get_characters_character_id_notifications(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdNotificationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdNotificationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -471,7 +824,13 @@ pub async fn get_characters_character_id_notifications(configuration: &configura
 }
 
 /// Return notifications about having been added to someone's contact list  --- Alternate route: `/dev/characters/{character_id}/notifications/contacts/`  Alternate route: `/v2/characters/{character_id}/notifications/contacts/`  --- This route is cached for up to 600 seconds
-pub async fn get_characters_character_id_notifications_contacts(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdNotificationsContacts200Ok>, Error<GetCharactersCharacterIdNotificationsContactsError>> {
+pub async fn get_characters_character_id_notifications_contacts(configuration: &configuration::Configuration, params: GetCharactersCharacterIdNotificationsContactsParams) -> Result<ResponseContent<GetCharactersCharacterIdNotificationsContactsSuccess>, Error<GetCharactersCharacterIdNotificationsContactsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -501,7 +860,9 @@ pub async fn get_characters_character_id_notifications_contacts(configuration: &
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdNotificationsContactsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdNotificationsContactsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -510,7 +871,12 @@ pub async fn get_characters_character_id_notifications_contacts(configuration: &
 }
 
 /// Get portrait urls for a character  --- Alternate route: `/dev/characters/{character_id}/portrait/`  Alternate route: `/v2/characters/{character_id}/portrait/`  Alternate route: `/v3/characters/{character_id}/portrait/`  --- This route expires daily at 11:05
-pub async fn get_characters_character_id_portrait(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdPortraitOk, Error<GetCharactersCharacterIdPortraitError>> {
+pub async fn get_characters_character_id_portrait(configuration: &configuration::Configuration, params: GetCharactersCharacterIdPortraitParams) -> Result<ResponseContent<GetCharactersCharacterIdPortraitSuccess>, Error<GetCharactersCharacterIdPortraitError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -534,7 +900,9 @@ pub async fn get_characters_character_id_portrait(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdPortraitSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdPortraitError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -543,7 +911,13 @@ pub async fn get_characters_character_id_portrait(configuration: &configuration:
 }
 
 /// Returns a character's corporation roles  --- Alternate route: `/dev/characters/{character_id}/roles/`  Alternate route: `/v3/characters/{character_id}/roles/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_roles(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdRolesOk, Error<GetCharactersCharacterIdRolesError>> {
+pub async fn get_characters_character_id_roles(configuration: &configuration::Configuration, params: GetCharactersCharacterIdRolesParams) -> Result<ResponseContent<GetCharactersCharacterIdRolesSuccess>, Error<GetCharactersCharacterIdRolesError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -573,7 +947,9 @@ pub async fn get_characters_character_id_roles(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdRolesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdRolesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -582,7 +958,13 @@ pub async fn get_characters_character_id_roles(configuration: &configuration::Co
 }
 
 /// Return character standings from agents, NPC corporations, and factions  --- Alternate route: `/dev/characters/{character_id}/standings/`  Alternate route: `/v2/characters/{character_id}/standings/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_standings(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdStandings200Ok>, Error<GetCharactersCharacterIdStandingsError>> {
+pub async fn get_characters_character_id_standings(configuration: &configuration::Configuration, params: GetCharactersCharacterIdStandingsParams) -> Result<ResponseContent<GetCharactersCharacterIdStandingsSuccess>, Error<GetCharactersCharacterIdStandingsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -612,7 +994,9 @@ pub async fn get_characters_character_id_standings(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdStandingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdStandingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -621,7 +1005,13 @@ pub async fn get_characters_character_id_standings(configuration: &configuration
 }
 
 /// Returns a character's titles  --- Alternate route: `/dev/characters/{character_id}/titles/`  Alternate route: `/v2/characters/{character_id}/titles/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_titles(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdTitles200Ok>, Error<GetCharactersCharacterIdTitlesError>> {
+pub async fn get_characters_character_id_titles(configuration: &configuration::Configuration, params: GetCharactersCharacterIdTitlesParams) -> Result<ResponseContent<GetCharactersCharacterIdTitlesSuccess>, Error<GetCharactersCharacterIdTitlesError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -651,7 +1041,9 @@ pub async fn get_characters_character_id_titles(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdTitlesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdTitlesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -660,7 +1052,11 @@ pub async fn get_characters_character_id_titles(configuration: &configuration::C
 }
 
 /// Bulk lookup of character IDs to corporation, alliance and faction  --- Alternate route: `/dev/characters/affiliation/`  Alternate route: `/v2/characters/affiliation/`  --- This route is cached for up to 3600 seconds
-pub async fn post_characters_affiliation(configuration: &configuration::Configuration, characters: Vec<i32>, datasource: Option<&str>) -> Result<Vec<crate::models::PostCharactersAffiliation200Ok>, Error<PostCharactersAffiliationError>> {
+pub async fn post_characters_affiliation(configuration: &configuration::Configuration, params: PostCharactersAffiliationParams) -> Result<ResponseContent<PostCharactersAffiliationSuccess>, Error<PostCharactersAffiliationError>> {
+    // unbox the parameters
+    let characters = params.characters;
+    let datasource = params.datasource;
+
 
     let local_var_client = &configuration.client;
 
@@ -682,7 +1078,9 @@ pub async fn post_characters_affiliation(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersAffiliationSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersAffiliationError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -691,7 +1089,13 @@ pub async fn post_characters_affiliation(configuration: &configuration::Configur
 }
 
 /// Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost  --- Alternate route: `/dev/characters/{character_id}/cspa/`  Alternate route: `/v5/characters/{character_id}/cspa/` 
-pub async fn post_characters_character_id_cspa(configuration: &configuration::Configuration, character_id: i32, characters: Vec<i32>, datasource: Option<&str>, token: Option<&str>) -> Result<f32, Error<PostCharactersCharacterIdCspaError>> {
+pub async fn post_characters_character_id_cspa(configuration: &configuration::Configuration, params: PostCharactersCharacterIdCspaParams) -> Result<ResponseContent<PostCharactersCharacterIdCspaSuccess>, Error<PostCharactersCharacterIdCspaError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let characters = params.characters;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -719,7 +1123,9 @@ pub async fn post_characters_character_id_cspa(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdCspaSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdCspaError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

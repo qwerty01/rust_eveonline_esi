@@ -14,6 +14,624 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_universe_ancestries`
+#[derive(Clone, Debug)]
+pub struct GetUniverseAncestriesParams {
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_asteroid_belts_asteroid_belt_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseAsteroidBeltsAsteroidBeltIdParams {
+    /// asteroid_belt_id integer
+    pub asteroid_belt_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_bloodlines`
+#[derive(Clone, Debug)]
+pub struct GetUniverseBloodlinesParams {
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_categories`
+#[derive(Clone, Debug)]
+pub struct GetUniverseCategoriesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_categories_category_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseCategoriesCategoryIdParams {
+    /// An Eve item category ID
+    pub category_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_constellations`
+#[derive(Clone, Debug)]
+pub struct GetUniverseConstellationsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_constellations_constellation_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseConstellationsConstellationIdParams {
+    /// constellation_id integer
+    pub constellation_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_factions`
+#[derive(Clone, Debug)]
+pub struct GetUniverseFactionsParams {
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_graphics`
+#[derive(Clone, Debug)]
+pub struct GetUniverseGraphicsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_graphics_graphic_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseGraphicsGraphicIdParams {
+    /// graphic_id integer
+    pub graphic_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_groups`
+#[derive(Clone, Debug)]
+pub struct GetUniverseGroupsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_universe_groups_group_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseGroupsGroupIdParams {
+    /// An Eve item group ID
+    pub group_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_moons_moon_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseMoonsMoonIdParams {
+    /// moon_id integer
+    pub moon_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_planets_planet_id`
+#[derive(Clone, Debug)]
+pub struct GetUniversePlanetsPlanetIdParams {
+    /// planet_id integer
+    pub planet_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_races`
+#[derive(Clone, Debug)]
+pub struct GetUniverseRacesParams {
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_regions`
+#[derive(Clone, Debug)]
+pub struct GetUniverseRegionsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_regions_region_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseRegionsRegionIdParams {
+    /// region_id integer
+    pub region_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_stargates_stargate_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseStargatesStargateIdParams {
+    /// stargate_id integer
+    pub stargate_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_stars_star_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseStarsStarIdParams {
+    /// star_id integer
+    pub star_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_stations_station_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseStationsStationIdParams {
+    /// station_id integer
+    pub station_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_structures`
+#[derive(Clone, Debug)]
+pub struct GetUniverseStructuresParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Only list public structures that have this service online
+    pub filter: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_structures_structure_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseStructuresStructureIdParams {
+    /// An Eve structure ID
+    pub structure_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_system_jumps`
+#[derive(Clone, Debug)]
+pub struct GetUniverseSystemJumpsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_system_kills`
+#[derive(Clone, Debug)]
+pub struct GetUniverseSystemKillsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_systems`
+#[derive(Clone, Debug)]
+pub struct GetUniverseSystemsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_systems_system_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseSystemsSystemIdParams {
+    /// system_id integer
+    pub system_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_universe_types`
+#[derive(Clone, Debug)]
+pub struct GetUniverseTypesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_universe_types_type_id`
+#[derive(Clone, Debug)]
+pub struct GetUniverseTypesTypeIdParams {
+    /// An Eve item type ID
+    pub type_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `post_universe_ids`
+#[derive(Clone, Debug)]
+pub struct PostUniverseIdsParams {
+    /// The names to resolve
+    pub names: Vec<String>,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `post_universe_names`
+#[derive(Clone, Debug)]
+pub struct PostUniverseNamesParams {
+    /// The ids to resolve
+    pub ids: Vec<i32>,
+    /// The server name you would like data from
+    pub datasource: Option<String>
+}
+
+
+/// struct for typed successes of method `get_universe_ancestries`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseAncestriesSuccess {
+    Status200(Vec<crate::models::GetUniverseAncestries200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_asteroid_belts_asteroid_belt_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseAsteroidBeltsAsteroidBeltIdSuccess {
+    Status200(crate::models::GetUniverseAsteroidBeltsAsteroidBeltIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_bloodlines`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseBloodlinesSuccess {
+    Status200(Vec<crate::models::GetUniverseBloodlines200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_categories`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseCategoriesSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_categories_category_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseCategoriesCategoryIdSuccess {
+    Status200(crate::models::GetUniverseCategoriesCategoryIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_constellations`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseConstellationsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_constellations_constellation_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseConstellationsConstellationIdSuccess {
+    Status200(crate::models::GetUniverseConstellationsConstellationIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_factions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseFactionsSuccess {
+    Status200(Vec<crate::models::GetUniverseFactions200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_graphics`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseGraphicsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_graphics_graphic_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseGraphicsGraphicIdSuccess {
+    Status200(crate::models::GetUniverseGraphicsGraphicIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_groups`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseGroupsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_groups_group_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseGroupsGroupIdSuccess {
+    Status200(crate::models::GetUniverseGroupsGroupIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_moons_moon_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseMoonsMoonIdSuccess {
+    Status200(crate::models::GetUniverseMoonsMoonIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_planets_planet_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniversePlanetsPlanetIdSuccess {
+    Status200(crate::models::GetUniversePlanetsPlanetIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_races`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseRacesSuccess {
+    Status200(Vec<crate::models::GetUniverseRaces200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_regions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseRegionsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_regions_region_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseRegionsRegionIdSuccess {
+    Status200(crate::models::GetUniverseRegionsRegionIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_stargates_stargate_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseStargatesStargateIdSuccess {
+    Status200(crate::models::GetUniverseStargatesStargateIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_stars_star_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseStarsStarIdSuccess {
+    Status200(crate::models::GetUniverseStarsStarIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_stations_station_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseStationsStationIdSuccess {
+    Status200(crate::models::GetUniverseStationsStationIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_structures`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseStructuresSuccess {
+    Status200(Vec<i64>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_structures_structure_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseStructuresStructureIdSuccess {
+    Status200(crate::models::GetUniverseStructuresStructureIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_system_jumps`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseSystemJumpsSuccess {
+    Status200(Vec<crate::models::GetUniverseSystemJumps200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_system_kills`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseSystemKillsSuccess {
+    Status200(Vec<crate::models::GetUniverseSystemKills200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_systems`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseSystemsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_systems_system_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseSystemsSystemIdSuccess {
+    Status200(crate::models::GetUniverseSystemsSystemIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_types`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseTypesSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_universe_types_type_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetUniverseTypesTypeIdSuccess {
+    Status200(crate::models::GetUniverseTypesTypeIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_universe_ids`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUniverseIdsSuccess {
+    Status200(crate::models::PostUniverseIdsOk),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_universe_names`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUniverseNamesSuccess {
+    Status200(Vec<crate::models::PostUniverseNames200Ok>),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_universe_ancestries`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -393,7 +1011,13 @@ pub enum PostUniverseNamesError {
 
 
 /// Get all character ancestries  --- Alternate route: `/legacy/universe/ancestries/`  Alternate route: `/v1/universe/ancestries/`  --- This route expires daily at 11:05
-pub async fn get_universe_ancestries(configuration: &configuration::Configuration, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<Vec<crate::models::GetUniverseAncestries200Ok>, Error<GetUniverseAncestriesError>> {
+pub async fn get_universe_ancestries(configuration: &configuration::Configuration, params: GetUniverseAncestriesParams) -> Result<ResponseContent<GetUniverseAncestriesSuccess>, Error<GetUniverseAncestriesError>> {
+    // unbox the parameters
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -423,7 +1047,9 @@ pub async fn get_universe_ancestries(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseAncestriesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseAncestriesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -432,7 +1058,12 @@ pub async fn get_universe_ancestries(configuration: &configuration::Configuratio
 }
 
 /// Get information on an asteroid belt  --- Alternate route: `/legacy/universe/asteroid_belts/{asteroid_belt_id}/`  Alternate route: `/v1/universe/asteroid_belts/{asteroid_belt_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_asteroid_belts_asteroid_belt_id(configuration: &configuration::Configuration, asteroid_belt_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseAsteroidBeltsAsteroidBeltIdOk, Error<GetUniverseAsteroidBeltsAsteroidBeltIdError>> {
+pub async fn get_universe_asteroid_belts_asteroid_belt_id(configuration: &configuration::Configuration, params: GetUniverseAsteroidBeltsAsteroidBeltIdParams) -> Result<ResponseContent<GetUniverseAsteroidBeltsAsteroidBeltIdSuccess>, Error<GetUniverseAsteroidBeltsAsteroidBeltIdError>> {
+    // unbox the parameters
+    let asteroid_belt_id = params.asteroid_belt_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -456,7 +1087,9 @@ pub async fn get_universe_asteroid_belts_asteroid_belt_id(configuration: &config
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseAsteroidBeltsAsteroidBeltIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseAsteroidBeltsAsteroidBeltIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -465,7 +1098,13 @@ pub async fn get_universe_asteroid_belts_asteroid_belt_id(configuration: &config
 }
 
 /// Get a list of bloodlines  --- Alternate route: `/legacy/universe/bloodlines/`  Alternate route: `/v1/universe/bloodlines/`  --- This route expires daily at 11:05
-pub async fn get_universe_bloodlines(configuration: &configuration::Configuration, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<Vec<crate::models::GetUniverseBloodlines200Ok>, Error<GetUniverseBloodlinesError>> {
+pub async fn get_universe_bloodlines(configuration: &configuration::Configuration, params: GetUniverseBloodlinesParams) -> Result<ResponseContent<GetUniverseBloodlinesSuccess>, Error<GetUniverseBloodlinesError>> {
+    // unbox the parameters
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -495,7 +1134,9 @@ pub async fn get_universe_bloodlines(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseBloodlinesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseBloodlinesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -504,7 +1145,11 @@ pub async fn get_universe_bloodlines(configuration: &configuration::Configuratio
 }
 
 /// Get a list of item categories  --- Alternate route: `/legacy/universe/categories/`  Alternate route: `/v1/universe/categories/`  --- This route expires daily at 11:05
-pub async fn get_universe_categories(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetUniverseCategoriesError>> {
+pub async fn get_universe_categories(configuration: &configuration::Configuration, params: GetUniverseCategoriesParams) -> Result<ResponseContent<GetUniverseCategoriesSuccess>, Error<GetUniverseCategoriesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -528,7 +1173,9 @@ pub async fn get_universe_categories(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseCategoriesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseCategoriesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -537,7 +1184,14 @@ pub async fn get_universe_categories(configuration: &configuration::Configuratio
 }
 
 /// Get information of an item category  --- Alternate route: `/legacy/universe/categories/{category_id}/`  Alternate route: `/v1/universe/categories/{category_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_categories_category_id(configuration: &configuration::Configuration, category_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseCategoriesCategoryIdOk, Error<GetUniverseCategoriesCategoryIdError>> {
+pub async fn get_universe_categories_category_id(configuration: &configuration::Configuration, params: GetUniverseCategoriesCategoryIdParams) -> Result<ResponseContent<GetUniverseCategoriesCategoryIdSuccess>, Error<GetUniverseCategoriesCategoryIdError>> {
+    // unbox the parameters
+    let category_id = params.category_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -567,7 +1221,9 @@ pub async fn get_universe_categories_category_id(configuration: &configuration::
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseCategoriesCategoryIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseCategoriesCategoryIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -576,7 +1232,11 @@ pub async fn get_universe_categories_category_id(configuration: &configuration::
 }
 
 /// Get a list of constellations  --- Alternate route: `/legacy/universe/constellations/`  Alternate route: `/v1/universe/constellations/`  --- This route expires daily at 11:05
-pub async fn get_universe_constellations(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetUniverseConstellationsError>> {
+pub async fn get_universe_constellations(configuration: &configuration::Configuration, params: GetUniverseConstellationsParams) -> Result<ResponseContent<GetUniverseConstellationsSuccess>, Error<GetUniverseConstellationsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -600,7 +1260,9 @@ pub async fn get_universe_constellations(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseConstellationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseConstellationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -609,7 +1271,14 @@ pub async fn get_universe_constellations(configuration: &configuration::Configur
 }
 
 /// Get information on a constellation  --- Alternate route: `/legacy/universe/constellations/{constellation_id}/`  Alternate route: `/v1/universe/constellations/{constellation_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_constellations_constellation_id(configuration: &configuration::Configuration, constellation_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseConstellationsConstellationIdOk, Error<GetUniverseConstellationsConstellationIdError>> {
+pub async fn get_universe_constellations_constellation_id(configuration: &configuration::Configuration, params: GetUniverseConstellationsConstellationIdParams) -> Result<ResponseContent<GetUniverseConstellationsConstellationIdSuccess>, Error<GetUniverseConstellationsConstellationIdError>> {
+    // unbox the parameters
+    let constellation_id = params.constellation_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -639,7 +1308,9 @@ pub async fn get_universe_constellations_constellation_id(configuration: &config
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseConstellationsConstellationIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseConstellationsConstellationIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -648,7 +1319,13 @@ pub async fn get_universe_constellations_constellation_id(configuration: &config
 }
 
 /// Get a list of factions  --- Alternate route: `/dev/universe/factions/`  Alternate route: `/v2/universe/factions/`  --- This route expires daily at 11:05
-pub async fn get_universe_factions(configuration: &configuration::Configuration, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<Vec<crate::models::GetUniverseFactions200Ok>, Error<GetUniverseFactionsError>> {
+pub async fn get_universe_factions(configuration: &configuration::Configuration, params: GetUniverseFactionsParams) -> Result<ResponseContent<GetUniverseFactionsSuccess>, Error<GetUniverseFactionsError>> {
+    // unbox the parameters
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -678,7 +1355,9 @@ pub async fn get_universe_factions(configuration: &configuration::Configuration,
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseFactionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseFactionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -687,7 +1366,11 @@ pub async fn get_universe_factions(configuration: &configuration::Configuration,
 }
 
 /// Get a list of graphics  --- Alternate route: `/legacy/universe/graphics/`  Alternate route: `/v1/universe/graphics/`  --- This route expires daily at 11:05
-pub async fn get_universe_graphics(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetUniverseGraphicsError>> {
+pub async fn get_universe_graphics(configuration: &configuration::Configuration, params: GetUniverseGraphicsParams) -> Result<ResponseContent<GetUniverseGraphicsSuccess>, Error<GetUniverseGraphicsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -711,7 +1394,9 @@ pub async fn get_universe_graphics(configuration: &configuration::Configuration,
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseGraphicsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseGraphicsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -720,7 +1405,12 @@ pub async fn get_universe_graphics(configuration: &configuration::Configuration,
 }
 
 /// Get information on a graphic  --- Alternate route: `/dev/universe/graphics/{graphic_id}/`  Alternate route: `/legacy/universe/graphics/{graphic_id}/`  Alternate route: `/v1/universe/graphics/{graphic_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_graphics_graphic_id(configuration: &configuration::Configuration, graphic_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseGraphicsGraphicIdOk, Error<GetUniverseGraphicsGraphicIdError>> {
+pub async fn get_universe_graphics_graphic_id(configuration: &configuration::Configuration, params: GetUniverseGraphicsGraphicIdParams) -> Result<ResponseContent<GetUniverseGraphicsGraphicIdSuccess>, Error<GetUniverseGraphicsGraphicIdError>> {
+    // unbox the parameters
+    let graphic_id = params.graphic_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -744,7 +1434,9 @@ pub async fn get_universe_graphics_graphic_id(configuration: &configuration::Con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseGraphicsGraphicIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseGraphicsGraphicIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -753,7 +1445,12 @@ pub async fn get_universe_graphics_graphic_id(configuration: &configuration::Con
 }
 
 /// Get a list of item groups  --- Alternate route: `/legacy/universe/groups/`  Alternate route: `/v1/universe/groups/`  --- This route expires daily at 11:05
-pub async fn get_universe_groups(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<i32>, Error<GetUniverseGroupsError>> {
+pub async fn get_universe_groups(configuration: &configuration::Configuration, params: GetUniverseGroupsParams) -> Result<ResponseContent<GetUniverseGroupsSuccess>, Error<GetUniverseGroupsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -780,7 +1477,9 @@ pub async fn get_universe_groups(configuration: &configuration::Configuration, d
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseGroupsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseGroupsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -789,7 +1488,14 @@ pub async fn get_universe_groups(configuration: &configuration::Configuration, d
 }
 
 /// Get information on an item group  --- Alternate route: `/dev/universe/groups/{group_id}/`  Alternate route: `/legacy/universe/groups/{group_id}/`  Alternate route: `/v1/universe/groups/{group_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_groups_group_id(configuration: &configuration::Configuration, group_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseGroupsGroupIdOk, Error<GetUniverseGroupsGroupIdError>> {
+pub async fn get_universe_groups_group_id(configuration: &configuration::Configuration, params: GetUniverseGroupsGroupIdParams) -> Result<ResponseContent<GetUniverseGroupsGroupIdSuccess>, Error<GetUniverseGroupsGroupIdError>> {
+    // unbox the parameters
+    let group_id = params.group_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -819,7 +1525,9 @@ pub async fn get_universe_groups_group_id(configuration: &configuration::Configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseGroupsGroupIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseGroupsGroupIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -828,7 +1536,12 @@ pub async fn get_universe_groups_group_id(configuration: &configuration::Configu
 }
 
 /// Get information on a moon  --- Alternate route: `/legacy/universe/moons/{moon_id}/`  Alternate route: `/v1/universe/moons/{moon_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_moons_moon_id(configuration: &configuration::Configuration, moon_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseMoonsMoonIdOk, Error<GetUniverseMoonsMoonIdError>> {
+pub async fn get_universe_moons_moon_id(configuration: &configuration::Configuration, params: GetUniverseMoonsMoonIdParams) -> Result<ResponseContent<GetUniverseMoonsMoonIdSuccess>, Error<GetUniverseMoonsMoonIdError>> {
+    // unbox the parameters
+    let moon_id = params.moon_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -852,7 +1565,9 @@ pub async fn get_universe_moons_moon_id(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseMoonsMoonIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseMoonsMoonIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -861,7 +1576,12 @@ pub async fn get_universe_moons_moon_id(configuration: &configuration::Configura
 }
 
 /// Get information on a planet  --- Alternate route: `/legacy/universe/planets/{planet_id}/`  Alternate route: `/v1/universe/planets/{planet_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_planets_planet_id(configuration: &configuration::Configuration, planet_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniversePlanetsPlanetIdOk, Error<GetUniversePlanetsPlanetIdError>> {
+pub async fn get_universe_planets_planet_id(configuration: &configuration::Configuration, params: GetUniversePlanetsPlanetIdParams) -> Result<ResponseContent<GetUniversePlanetsPlanetIdSuccess>, Error<GetUniversePlanetsPlanetIdError>> {
+    // unbox the parameters
+    let planet_id = params.planet_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -885,7 +1605,9 @@ pub async fn get_universe_planets_planet_id(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniversePlanetsPlanetIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniversePlanetsPlanetIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -894,7 +1616,13 @@ pub async fn get_universe_planets_planet_id(configuration: &configuration::Confi
 }
 
 /// Get a list of character races  --- Alternate route: `/dev/universe/races/`  Alternate route: `/legacy/universe/races/`  Alternate route: `/v1/universe/races/`  --- This route expires daily at 11:05
-pub async fn get_universe_races(configuration: &configuration::Configuration, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<Vec<crate::models::GetUniverseRaces200Ok>, Error<GetUniverseRacesError>> {
+pub async fn get_universe_races(configuration: &configuration::Configuration, params: GetUniverseRacesParams) -> Result<ResponseContent<GetUniverseRacesSuccess>, Error<GetUniverseRacesError>> {
+    // unbox the parameters
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -924,7 +1652,9 @@ pub async fn get_universe_races(configuration: &configuration::Configuration, ac
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseRacesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseRacesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -933,7 +1663,11 @@ pub async fn get_universe_races(configuration: &configuration::Configuration, ac
 }
 
 /// Get a list of regions  --- Alternate route: `/legacy/universe/regions/`  Alternate route: `/v1/universe/regions/`  --- This route expires daily at 11:05
-pub async fn get_universe_regions(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetUniverseRegionsError>> {
+pub async fn get_universe_regions(configuration: &configuration::Configuration, params: GetUniverseRegionsParams) -> Result<ResponseContent<GetUniverseRegionsSuccess>, Error<GetUniverseRegionsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -957,7 +1691,9 @@ pub async fn get_universe_regions(configuration: &configuration::Configuration, 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseRegionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseRegionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -966,7 +1702,14 @@ pub async fn get_universe_regions(configuration: &configuration::Configuration, 
 }
 
 /// Get information on a region  --- Alternate route: `/legacy/universe/regions/{region_id}/`  Alternate route: `/v1/universe/regions/{region_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_regions_region_id(configuration: &configuration::Configuration, region_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseRegionsRegionIdOk, Error<GetUniverseRegionsRegionIdError>> {
+pub async fn get_universe_regions_region_id(configuration: &configuration::Configuration, params: GetUniverseRegionsRegionIdParams) -> Result<ResponseContent<GetUniverseRegionsRegionIdSuccess>, Error<GetUniverseRegionsRegionIdError>> {
+    // unbox the parameters
+    let region_id = params.region_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -996,7 +1739,9 @@ pub async fn get_universe_regions_region_id(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseRegionsRegionIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseRegionsRegionIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1005,7 +1750,12 @@ pub async fn get_universe_regions_region_id(configuration: &configuration::Confi
 }
 
 /// Get information on a stargate  --- Alternate route: `/legacy/universe/stargates/{stargate_id}/`  Alternate route: `/v1/universe/stargates/{stargate_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_stargates_stargate_id(configuration: &configuration::Configuration, stargate_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseStargatesStargateIdOk, Error<GetUniverseStargatesStargateIdError>> {
+pub async fn get_universe_stargates_stargate_id(configuration: &configuration::Configuration, params: GetUniverseStargatesStargateIdParams) -> Result<ResponseContent<GetUniverseStargatesStargateIdSuccess>, Error<GetUniverseStargatesStargateIdError>> {
+    // unbox the parameters
+    let stargate_id = params.stargate_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1029,7 +1779,9 @@ pub async fn get_universe_stargates_stargate_id(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseStargatesStargateIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseStargatesStargateIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1038,7 +1790,12 @@ pub async fn get_universe_stargates_stargate_id(configuration: &configuration::C
 }
 
 /// Get information on a star  --- Alternate route: `/legacy/universe/stars/{star_id}/`  Alternate route: `/v1/universe/stars/{star_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_stars_star_id(configuration: &configuration::Configuration, star_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseStarsStarIdOk, Error<GetUniverseStarsStarIdError>> {
+pub async fn get_universe_stars_star_id(configuration: &configuration::Configuration, params: GetUniverseStarsStarIdParams) -> Result<ResponseContent<GetUniverseStarsStarIdSuccess>, Error<GetUniverseStarsStarIdError>> {
+    // unbox the parameters
+    let star_id = params.star_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1062,7 +1819,9 @@ pub async fn get_universe_stars_star_id(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseStarsStarIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseStarsStarIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1071,7 +1830,12 @@ pub async fn get_universe_stars_star_id(configuration: &configuration::Configura
 }
 
 /// Get information on a station  --- Alternate route: `/dev/universe/stations/{station_id}/`  Alternate route: `/v2/universe/stations/{station_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_stations_station_id(configuration: &configuration::Configuration, station_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetUniverseStationsStationIdOk, Error<GetUniverseStationsStationIdError>> {
+pub async fn get_universe_stations_station_id(configuration: &configuration::Configuration, params: GetUniverseStationsStationIdParams) -> Result<ResponseContent<GetUniverseStationsStationIdSuccess>, Error<GetUniverseStationsStationIdError>> {
+    // unbox the parameters
+    let station_id = params.station_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1095,7 +1859,9 @@ pub async fn get_universe_stations_station_id(configuration: &configuration::Con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseStationsStationIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseStationsStationIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1104,7 +1870,12 @@ pub async fn get_universe_stations_station_id(configuration: &configuration::Con
 }
 
 /// List all public structures  --- Alternate route: `/dev/universe/structures/`  Alternate route: `/legacy/universe/structures/`  Alternate route: `/v1/universe/structures/`  --- This route is cached for up to 3600 seconds
-pub async fn get_universe_structures(configuration: &configuration::Configuration, datasource: Option<&str>, filter: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i64>, Error<GetUniverseStructuresError>> {
+pub async fn get_universe_structures(configuration: &configuration::Configuration, params: GetUniverseStructuresParams) -> Result<ResponseContent<GetUniverseStructuresSuccess>, Error<GetUniverseStructuresError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let filter = params.filter;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1131,7 +1902,9 @@ pub async fn get_universe_structures(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseStructuresSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseStructuresError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1140,7 +1913,13 @@ pub async fn get_universe_structures(configuration: &configuration::Configuratio
 }
 
 /// Returns information on requested structure if you are on the ACL. Otherwise, returns \"Forbidden\" for all inputs.  --- Alternate route: `/v2/universe/structures/{structure_id}/`  --- This route is cached for up to 3600 seconds
-pub async fn get_universe_structures_structure_id(configuration: &configuration::Configuration, structure_id: i64, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetUniverseStructuresStructureIdOk, Error<GetUniverseStructuresStructureIdError>> {
+pub async fn get_universe_structures_structure_id(configuration: &configuration::Configuration, params: GetUniverseStructuresStructureIdParams) -> Result<ResponseContent<GetUniverseStructuresStructureIdSuccess>, Error<GetUniverseStructuresStructureIdError>> {
+    // unbox the parameters
+    let structure_id = params.structure_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -1170,7 +1949,9 @@ pub async fn get_universe_structures_structure_id(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseStructuresStructureIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseStructuresStructureIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1179,7 +1960,11 @@ pub async fn get_universe_structures_structure_id(configuration: &configuration:
 }
 
 /// Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed  --- Alternate route: `/legacy/universe/system_jumps/`  Alternate route: `/v1/universe/system_jumps/`  --- This route is cached for up to 3600 seconds
-pub async fn get_universe_system_jumps(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetUniverseSystemJumps200Ok>, Error<GetUniverseSystemJumpsError>> {
+pub async fn get_universe_system_jumps(configuration: &configuration::Configuration, params: GetUniverseSystemJumpsParams) -> Result<ResponseContent<GetUniverseSystemJumpsSuccess>, Error<GetUniverseSystemJumpsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1203,7 +1988,9 @@ pub async fn get_universe_system_jumps(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseSystemJumpsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseSystemJumpsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1212,7 +1999,11 @@ pub async fn get_universe_system_jumps(configuration: &configuration::Configurat
 }
 
 /// Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed  --- Alternate route: `/v2/universe/system_kills/`  --- This route is cached for up to 3600 seconds
-pub async fn get_universe_system_kills(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetUniverseSystemKills200Ok>, Error<GetUniverseSystemKillsError>> {
+pub async fn get_universe_system_kills(configuration: &configuration::Configuration, params: GetUniverseSystemKillsParams) -> Result<ResponseContent<GetUniverseSystemKillsSuccess>, Error<GetUniverseSystemKillsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1236,7 +2027,9 @@ pub async fn get_universe_system_kills(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseSystemKillsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseSystemKillsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1245,7 +2038,11 @@ pub async fn get_universe_system_kills(configuration: &configuration::Configurat
 }
 
 /// Get a list of solar systems  --- Alternate route: `/dev/universe/systems/`  Alternate route: `/legacy/universe/systems/`  Alternate route: `/v1/universe/systems/`  --- This route expires daily at 11:05
-pub async fn get_universe_systems(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetUniverseSystemsError>> {
+pub async fn get_universe_systems(configuration: &configuration::Configuration, params: GetUniverseSystemsParams) -> Result<ResponseContent<GetUniverseSystemsSuccess>, Error<GetUniverseSystemsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1269,7 +2066,9 @@ pub async fn get_universe_systems(configuration: &configuration::Configuration, 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseSystemsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseSystemsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1278,7 +2077,14 @@ pub async fn get_universe_systems(configuration: &configuration::Configuration, 
 }
 
 /// Get information on a solar system.  --- Alternate route: `/dev/universe/systems/{system_id}/`  Alternate route: `/v4/universe/systems/{system_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_systems_system_id(configuration: &configuration::Configuration, system_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseSystemsSystemIdOk, Error<GetUniverseSystemsSystemIdError>> {
+pub async fn get_universe_systems_system_id(configuration: &configuration::Configuration, params: GetUniverseSystemsSystemIdParams) -> Result<ResponseContent<GetUniverseSystemsSystemIdSuccess>, Error<GetUniverseSystemsSystemIdError>> {
+    // unbox the parameters
+    let system_id = params.system_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -1308,7 +2114,9 @@ pub async fn get_universe_systems_system_id(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseSystemsSystemIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseSystemsSystemIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1317,7 +2125,12 @@ pub async fn get_universe_systems_system_id(configuration: &configuration::Confi
 }
 
 /// Get a list of type ids  --- Alternate route: `/legacy/universe/types/`  Alternate route: `/v1/universe/types/`  --- This route expires daily at 11:05
-pub async fn get_universe_types(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<i32>, Error<GetUniverseTypesError>> {
+pub async fn get_universe_types(configuration: &configuration::Configuration, params: GetUniverseTypesParams) -> Result<ResponseContent<GetUniverseTypesSuccess>, Error<GetUniverseTypesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -1344,7 +2157,9 @@ pub async fn get_universe_types(configuration: &configuration::Configuration, da
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseTypesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseTypesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1353,7 +2168,14 @@ pub async fn get_universe_types(configuration: &configuration::Configuration, da
 }
 
 /// Get information on a type  --- Alternate route: `/dev/universe/types/{type_id}/`  Alternate route: `/v3/universe/types/{type_id}/`  --- This route expires daily at 11:05
-pub async fn get_universe_types_type_id(configuration: &configuration::Configuration, type_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetUniverseTypesTypeIdOk, Error<GetUniverseTypesTypeIdError>> {
+pub async fn get_universe_types_type_id(configuration: &configuration::Configuration, params: GetUniverseTypesTypeIdParams) -> Result<ResponseContent<GetUniverseTypesTypeIdSuccess>, Error<GetUniverseTypesTypeIdError>> {
+    // unbox the parameters
+    let type_id = params.type_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -1383,7 +2205,9 @@ pub async fn get_universe_types_type_id(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetUniverseTypesTypeIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetUniverseTypesTypeIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1392,7 +2216,13 @@ pub async fn get_universe_types_type_id(configuration: &configuration::Configura
 }
 
 /// Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours  --- Alternate route: `/dev/universe/ids/`  Alternate route: `/legacy/universe/ids/`  Alternate route: `/v1/universe/ids/` 
-pub async fn post_universe_ids(configuration: &configuration::Configuration, names: Vec<String>, accept_language: Option<&str>, datasource: Option<&str>, language: Option<&str>) -> Result<crate::models::PostUniverseIdsOk, Error<PostUniverseIdsError>> {
+pub async fn post_universe_ids(configuration: &configuration::Configuration, params: PostUniverseIdsParams) -> Result<ResponseContent<PostUniverseIdsSuccess>, Error<PostUniverseIdsError>> {
+    // unbox the parameters
+    let names = params.names;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -1420,7 +2250,9 @@ pub async fn post_universe_ids(configuration: &configuration::Configuration, nam
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostUniverseIdsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUniverseIdsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1429,7 +2261,11 @@ pub async fn post_universe_ids(configuration: &configuration::Configuration, nam
 }
 
 /// Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types, Factions  --- Alternate route: `/dev/universe/names/`  Alternate route: `/v3/universe/names/` 
-pub async fn post_universe_names(configuration: &configuration::Configuration, ids: Vec<i32>, datasource: Option<&str>) -> Result<Vec<crate::models::PostUniverseNames200Ok>, Error<PostUniverseNamesError>> {
+pub async fn post_universe_names(configuration: &configuration::Configuration, params: PostUniverseNamesParams) -> Result<ResponseContent<PostUniverseNamesSuccess>, Error<PostUniverseNamesError>> {
+    // unbox the parameters
+    let ids = params.ids;
+    let datasource = params.datasource;
+
 
     let local_var_client = &configuration.client;
 
@@ -1451,7 +2287,9 @@ pub async fn post_universe_names(configuration: &configuration::Configuration, i
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostUniverseNamesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUniverseNamesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

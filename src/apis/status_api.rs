@@ -14,6 +14,24 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_status`
+#[derive(Clone, Debug)]
+pub struct GetStatusParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_status`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetStatusSuccess {
+    Status200(crate::models::GetStatusOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_status`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -29,7 +47,11 @@ pub enum GetStatusError {
 
 
 /// EVE Server status  --- Alternate route: `/dev/status/`  Alternate route: `/legacy/status/`  Alternate route: `/v1/status/`  Alternate route: `/v2/status/`  --- This route is cached for up to 30 seconds
-pub async fn get_status(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetStatusOk, Error<GetStatusError>> {
+pub async fn get_status(configuration: &configuration::Configuration, params: GetStatusParams) -> Result<ResponseContent<GetStatusSuccess>, Error<GetStatusError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -53,7 +75,9 @@ pub async fn get_status(configuration: &configuration::Configuration, datasource
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetStatusSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetStatusError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

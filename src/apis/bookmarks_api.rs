@@ -14,6 +14,102 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_bookmarks`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdBookmarksParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_bookmarks_folders`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdBookmarksFoldersParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_bookmarks`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdBookmarksParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_bookmarks_folders`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdBookmarksFoldersParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_bookmarks`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdBookmarksSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdBookmarks200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_bookmarks_folders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdBookmarksFoldersSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdBookmarksFolders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_bookmarks`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdBookmarksSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdBookmarks200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_bookmarks_folders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdBookmarksFoldersSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdBookmarksFolders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_bookmarks`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -73,7 +169,14 @@ pub enum GetCorporationsCorporationIdBookmarksFoldersError {
 
 
 /// A list of your character's personal bookmarks  --- Alternate route: `/dev/characters/{character_id}/bookmarks/`  Alternate route: `/v2/characters/{character_id}/bookmarks/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_bookmarks(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdBookmarks200Ok>, Error<GetCharactersCharacterIdBookmarksError>> {
+pub async fn get_characters_character_id_bookmarks(configuration: &configuration::Configuration, params: GetCharactersCharacterIdBookmarksParams) -> Result<ResponseContent<GetCharactersCharacterIdBookmarksSuccess>, Error<GetCharactersCharacterIdBookmarksError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -106,7 +209,9 @@ pub async fn get_characters_character_id_bookmarks(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdBookmarksSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdBookmarksError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -115,7 +220,14 @@ pub async fn get_characters_character_id_bookmarks(configuration: &configuration
 }
 
 /// A list of your character's personal bookmark folders  --- Alternate route: `/dev/characters/{character_id}/bookmarks/folders/`  Alternate route: `/v2/characters/{character_id}/bookmarks/folders/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_bookmarks_folders(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdBookmarksFolders200Ok>, Error<GetCharactersCharacterIdBookmarksFoldersError>> {
+pub async fn get_characters_character_id_bookmarks_folders(configuration: &configuration::Configuration, params: GetCharactersCharacterIdBookmarksFoldersParams) -> Result<ResponseContent<GetCharactersCharacterIdBookmarksFoldersSuccess>, Error<GetCharactersCharacterIdBookmarksFoldersError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -148,7 +260,9 @@ pub async fn get_characters_character_id_bookmarks_folders(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdBookmarksFoldersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdBookmarksFoldersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -157,7 +271,14 @@ pub async fn get_characters_character_id_bookmarks_folders(configuration: &confi
 }
 
 /// A list of your corporation's bookmarks  --- Alternate route: `/dev/corporations/{corporation_id}/bookmarks/`  Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/`  Alternate route: `/v1/corporations/{corporation_id}/bookmarks/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_bookmarks(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdBookmarks200Ok>, Error<GetCorporationsCorporationIdBookmarksError>> {
+pub async fn get_corporations_corporation_id_bookmarks(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdBookmarksParams) -> Result<ResponseContent<GetCorporationsCorporationIdBookmarksSuccess>, Error<GetCorporationsCorporationIdBookmarksError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -190,7 +311,9 @@ pub async fn get_corporations_corporation_id_bookmarks(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdBookmarksSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdBookmarksError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -199,7 +322,14 @@ pub async fn get_corporations_corporation_id_bookmarks(configuration: &configura
 }
 
 /// A list of your corporation's bookmark folders  --- Alternate route: `/dev/corporations/{corporation_id}/bookmarks/folders/`  Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/folders/`  Alternate route: `/v1/corporations/{corporation_id}/bookmarks/folders/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_bookmarks_folders(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdBookmarksFolders200Ok>, Error<GetCorporationsCorporationIdBookmarksFoldersError>> {
+pub async fn get_corporations_corporation_id_bookmarks_folders(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdBookmarksFoldersParams) -> Result<ResponseContent<GetCorporationsCorporationIdBookmarksFoldersSuccess>, Error<GetCorporationsCorporationIdBookmarksFoldersError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -232,7 +362,9 @@ pub async fn get_corporations_corporation_id_bookmarks_folders(configuration: &c
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdBookmarksFoldersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdBookmarksFoldersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

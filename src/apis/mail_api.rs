@@ -14,6 +14,204 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `delete_characters_character_id_mail_labels_label_id`
+#[derive(Clone, Debug)]
+pub struct DeleteCharactersCharacterIdMailLabelsLabelIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// An EVE label id
+    pub label_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `delete_characters_character_id_mail_mail_id`
+#[derive(Clone, Debug)]
+pub struct DeleteCharactersCharacterIdMailMailIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// An EVE mail ID
+    pub mail_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_mail`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMailParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Fetch only mails that match one or more of the given labels
+    pub labels: Option<Vec<i32>>,
+    /// List only mail with an ID lower than the given ID, if present
+    pub last_mail_id: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_mail_labels`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMailLabelsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_mail_lists`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMailListsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_mail_mail_id`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMailMailIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// An EVE mail ID
+    pub mail_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_mail`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdMailParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    pub mail: crate::models::PostCharactersCharacterIdMailMail,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_mail_labels`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdMailLabelsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    pub label: crate::models::PostCharactersCharacterIdMailLabelsLabel,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_characters_character_id_mail_mail_id`
+#[derive(Clone, Debug)]
+pub struct PutCharactersCharacterIdMailMailIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// An EVE mail ID
+    pub mail_id: i32,
+    pub contents: crate::models::PutCharactersCharacterIdMailMailIdContents,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `delete_characters_character_id_mail_labels_label_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteCharactersCharacterIdMailLabelsLabelIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `delete_characters_character_id_mail_mail_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteCharactersCharacterIdMailMailIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_mail`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMailSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdMail200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_mail_labels`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMailLabelsSuccess {
+    Status200(crate::models::GetCharactersCharacterIdMailLabelsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_mail_lists`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMailListsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdMailLists200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_mail_mail_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMailMailIdSuccess {
+    Status200(crate::models::GetCharactersCharacterIdMailMailIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_mail`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdMailSuccess {
+    Status201(i32),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_mail_labels`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdMailLabelsSuccess {
+    Status201(i32),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_characters_character_id_mail_mail_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutCharactersCharacterIdMailMailIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `delete_characters_character_id_mail_labels_label_id`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -146,7 +344,13 @@ pub enum PutCharactersCharacterIdMailMailIdError {
 
 
 /// Delete a mail label  --- Alternate route: `/dev/characters/{character_id}/mail/labels/{label_id}/`  Alternate route: `/legacy/characters/{character_id}/mail/labels/{label_id}/`  Alternate route: `/v1/characters/{character_id}/mail/labels/{label_id}/` 
-pub async fn delete_characters_character_id_mail_labels_label_id(configuration: &configuration::Configuration, character_id: i32, label_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteCharactersCharacterIdMailLabelsLabelIdError>> {
+pub async fn delete_characters_character_id_mail_labels_label_id(configuration: &configuration::Configuration, params: DeleteCharactersCharacterIdMailLabelsLabelIdParams) -> Result<ResponseContent<DeleteCharactersCharacterIdMailLabelsLabelIdSuccess>, Error<DeleteCharactersCharacterIdMailLabelsLabelIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let label_id = params.label_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -173,7 +377,9 @@ pub async fn delete_characters_character_id_mail_labels_label_id(configuration: 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteCharactersCharacterIdMailLabelsLabelIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteCharactersCharacterIdMailLabelsLabelIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -182,7 +388,13 @@ pub async fn delete_characters_character_id_mail_labels_label_id(configuration: 
 }
 
 /// Delete a mail  --- Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/` 
-pub async fn delete_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, character_id: i32, mail_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteCharactersCharacterIdMailMailIdError>> {
+pub async fn delete_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, params: DeleteCharactersCharacterIdMailMailIdParams) -> Result<ResponseContent<DeleteCharactersCharacterIdMailMailIdSuccess>, Error<DeleteCharactersCharacterIdMailMailIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let mail_id = params.mail_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -209,7 +421,9 @@ pub async fn delete_characters_character_id_mail_mail_id(configuration: &configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteCharactersCharacterIdMailMailIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteCharactersCharacterIdMailMailIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -218,7 +432,15 @@ pub async fn delete_characters_character_id_mail_mail_id(configuration: &configu
 }
 
 /// Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards  --- Alternate route: `/dev/characters/{character_id}/mail/`  Alternate route: `/legacy/characters/{character_id}/mail/`  Alternate route: `/v1/characters/{character_id}/mail/`  --- This route is cached for up to 30 seconds
-pub async fn get_characters_character_id_mail(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, labels: Option<Vec<i32>>, last_mail_id: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdMail200Ok>, Error<GetCharactersCharacterIdMailError>> {
+pub async fn get_characters_character_id_mail(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMailParams) -> Result<ResponseContent<GetCharactersCharacterIdMailSuccess>, Error<GetCharactersCharacterIdMailError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let labels = params.labels;
+    let last_mail_id = params.last_mail_id;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -254,7 +476,9 @@ pub async fn get_characters_character_id_mail(configuration: &configuration::Con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMailSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMailError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -263,7 +487,13 @@ pub async fn get_characters_character_id_mail(configuration: &configuration::Con
 }
 
 /// Return a list of the users mail labels, unread counts for each label and a total unread count.  --- Alternate route: `/dev/characters/{character_id}/mail/labels/`  Alternate route: `/v3/characters/{character_id}/mail/labels/`  --- This route is cached for up to 30 seconds
-pub async fn get_characters_character_id_mail_labels(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdMailLabelsOk, Error<GetCharactersCharacterIdMailLabelsError>> {
+pub async fn get_characters_character_id_mail_labels(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMailLabelsParams) -> Result<ResponseContent<GetCharactersCharacterIdMailLabelsSuccess>, Error<GetCharactersCharacterIdMailLabelsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -293,7 +523,9 @@ pub async fn get_characters_character_id_mail_labels(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMailLabelsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMailLabelsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -302,7 +534,13 @@ pub async fn get_characters_character_id_mail_labels(configuration: &configurati
 }
 
 /// Return all mailing lists that the character is subscribed to  --- Alternate route: `/dev/characters/{character_id}/mail/lists/`  Alternate route: `/legacy/characters/{character_id}/mail/lists/`  Alternate route: `/v1/characters/{character_id}/mail/lists/`  --- This route is cached for up to 120 seconds
-pub async fn get_characters_character_id_mail_lists(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdMailLists200Ok>, Error<GetCharactersCharacterIdMailListsError>> {
+pub async fn get_characters_character_id_mail_lists(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMailListsParams) -> Result<ResponseContent<GetCharactersCharacterIdMailListsSuccess>, Error<GetCharactersCharacterIdMailListsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -332,7 +570,9 @@ pub async fn get_characters_character_id_mail_lists(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMailListsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMailListsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -341,7 +581,14 @@ pub async fn get_characters_character_id_mail_lists(configuration: &configuratio
 }
 
 /// Return the contents of an EVE mail  --- Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`  --- This route is cached for up to 30 seconds
-pub async fn get_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, character_id: i32, mail_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdMailMailIdOk, Error<GetCharactersCharacterIdMailMailIdError>> {
+pub async fn get_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMailMailIdParams) -> Result<ResponseContent<GetCharactersCharacterIdMailMailIdSuccess>, Error<GetCharactersCharacterIdMailMailIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let mail_id = params.mail_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -371,7 +618,9 @@ pub async fn get_characters_character_id_mail_mail_id(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMailMailIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMailMailIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -380,7 +629,13 @@ pub async fn get_characters_character_id_mail_mail_id(configuration: &configurat
 }
 
 /// Create and send a new mail  --- Alternate route: `/dev/characters/{character_id}/mail/`  Alternate route: `/legacy/characters/{character_id}/mail/`  Alternate route: `/v1/characters/{character_id}/mail/` 
-pub async fn post_characters_character_id_mail(configuration: &configuration::Configuration, character_id: i32, mail: crate::models::PostCharactersCharacterIdMailMail, datasource: Option<&str>, token: Option<&str>) -> Result<i32, Error<PostCharactersCharacterIdMailError>> {
+pub async fn post_characters_character_id_mail(configuration: &configuration::Configuration, params: PostCharactersCharacterIdMailParams) -> Result<ResponseContent<PostCharactersCharacterIdMailSuccess>, Error<PostCharactersCharacterIdMailError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let mail = params.mail;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -408,7 +663,9 @@ pub async fn post_characters_character_id_mail(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdMailSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdMailError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -417,7 +674,13 @@ pub async fn post_characters_character_id_mail(configuration: &configuration::Co
 }
 
 /// Create a mail label  --- Alternate route: `/dev/characters/{character_id}/mail/labels/`  Alternate route: `/legacy/characters/{character_id}/mail/labels/`  Alternate route: `/v2/characters/{character_id}/mail/labels/` 
-pub async fn post_characters_character_id_mail_labels(configuration: &configuration::Configuration, character_id: i32, label: crate::models::PostCharactersCharacterIdMailLabelsLabel, datasource: Option<&str>, token: Option<&str>) -> Result<i32, Error<PostCharactersCharacterIdMailLabelsError>> {
+pub async fn post_characters_character_id_mail_labels(configuration: &configuration::Configuration, params: PostCharactersCharacterIdMailLabelsParams) -> Result<ResponseContent<PostCharactersCharacterIdMailLabelsSuccess>, Error<PostCharactersCharacterIdMailLabelsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let label = params.label;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -445,7 +708,9 @@ pub async fn post_characters_character_id_mail_labels(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdMailLabelsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdMailLabelsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -454,7 +719,14 @@ pub async fn post_characters_character_id_mail_labels(configuration: &configurat
 }
 
 /// Update metadata about a mail  --- Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`  Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/` 
-pub async fn put_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, character_id: i32, mail_id: i32, contents: crate::models::PutCharactersCharacterIdMailMailIdContents, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutCharactersCharacterIdMailMailIdError>> {
+pub async fn put_characters_character_id_mail_mail_id(configuration: &configuration::Configuration, params: PutCharactersCharacterIdMailMailIdParams) -> Result<ResponseContent<PutCharactersCharacterIdMailMailIdSuccess>, Error<PutCharactersCharacterIdMailMailIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let mail_id = params.mail_id;
+    let contents = params.contents;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -482,7 +754,9 @@ pub async fn put_characters_character_id_mail_mail_id(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutCharactersCharacterIdMailMailIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutCharactersCharacterIdMailMailIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

@@ -14,6 +14,104 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `post_ui_autopilot_waypoint`
+#[derive(Clone, Debug)]
+pub struct PostUiAutopilotWaypointParams {
+    /// Whether this solar system should be added to the beginning of all waypoints
+    pub add_to_beginning: bool,
+    /// Whether clean other waypoints beforing adding this one
+    pub clear_other_waypoints: bool,
+    /// The destination to travel to, can be solar system, station or structure's id
+    pub destination_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_ui_openwindow_contract`
+#[derive(Clone, Debug)]
+pub struct PostUiOpenwindowContractParams {
+    /// The contract to open
+    pub contract_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_ui_openwindow_information`
+#[derive(Clone, Debug)]
+pub struct PostUiOpenwindowInformationParams {
+    /// The target to open
+    pub target_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_ui_openwindow_marketdetails`
+#[derive(Clone, Debug)]
+pub struct PostUiOpenwindowMarketdetailsParams {
+    /// The item type to open in market window
+    pub type_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_ui_openwindow_newmail`
+#[derive(Clone, Debug)]
+pub struct PostUiOpenwindowNewmailParams {
+    pub new_mail: crate::models::PostUiOpenwindowNewmailNewMail,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `post_ui_autopilot_waypoint`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUiAutopilotWaypointSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_ui_openwindow_contract`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUiOpenwindowContractSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_ui_openwindow_information`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUiOpenwindowInformationSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_ui_openwindow_marketdetails`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUiOpenwindowMarketdetailsSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_ui_openwindow_newmail`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostUiOpenwindowNewmailSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `post_ui_autopilot_waypoint`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -88,7 +186,14 @@ pub enum PostUiOpenwindowNewmailError {
 
 
 /// Set a solar system as autopilot waypoint  --- Alternate route: `/dev/ui/autopilot/waypoint/`  Alternate route: `/legacy/ui/autopilot/waypoint/`  Alternate route: `/v2/ui/autopilot/waypoint/` 
-pub async fn post_ui_autopilot_waypoint(configuration: &configuration::Configuration, add_to_beginning: bool, clear_other_waypoints: bool, destination_id: i64, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostUiAutopilotWaypointError>> {
+pub async fn post_ui_autopilot_waypoint(configuration: &configuration::Configuration, params: PostUiAutopilotWaypointParams) -> Result<ResponseContent<PostUiAutopilotWaypointSuccess>, Error<PostUiAutopilotWaypointError>> {
+    // unbox the parameters
+    let add_to_beginning = params.add_to_beginning;
+    let clear_other_waypoints = params.clear_other_waypoints;
+    let destination_id = params.destination_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -118,7 +223,9 @@ pub async fn post_ui_autopilot_waypoint(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostUiAutopilotWaypointSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUiAutopilotWaypointError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -127,7 +234,12 @@ pub async fn post_ui_autopilot_waypoint(configuration: &configuration::Configura
 }
 
 /// Open the contract window inside the client  --- Alternate route: `/dev/ui/openwindow/contract/`  Alternate route: `/legacy/ui/openwindow/contract/`  Alternate route: `/v1/ui/openwindow/contract/` 
-pub async fn post_ui_openwindow_contract(configuration: &configuration::Configuration, contract_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostUiOpenwindowContractError>> {
+pub async fn post_ui_openwindow_contract(configuration: &configuration::Configuration, params: PostUiOpenwindowContractParams) -> Result<ResponseContent<PostUiOpenwindowContractSuccess>, Error<PostUiOpenwindowContractError>> {
+    // unbox the parameters
+    let contract_id = params.contract_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -155,7 +267,9 @@ pub async fn post_ui_openwindow_contract(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostUiOpenwindowContractSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUiOpenwindowContractError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -164,7 +278,12 @@ pub async fn post_ui_openwindow_contract(configuration: &configuration::Configur
 }
 
 /// Open the information window for a character, corporation or alliance inside the client  --- Alternate route: `/dev/ui/openwindow/information/`  Alternate route: `/legacy/ui/openwindow/information/`  Alternate route: `/v1/ui/openwindow/information/` 
-pub async fn post_ui_openwindow_information(configuration: &configuration::Configuration, target_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostUiOpenwindowInformationError>> {
+pub async fn post_ui_openwindow_information(configuration: &configuration::Configuration, params: PostUiOpenwindowInformationParams) -> Result<ResponseContent<PostUiOpenwindowInformationSuccess>, Error<PostUiOpenwindowInformationError>> {
+    // unbox the parameters
+    let target_id = params.target_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -192,7 +311,9 @@ pub async fn post_ui_openwindow_information(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostUiOpenwindowInformationSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUiOpenwindowInformationError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -201,7 +322,12 @@ pub async fn post_ui_openwindow_information(configuration: &configuration::Confi
 }
 
 /// Open the market details window for a specific typeID inside the client  --- Alternate route: `/dev/ui/openwindow/marketdetails/`  Alternate route: `/legacy/ui/openwindow/marketdetails/`  Alternate route: `/v1/ui/openwindow/marketdetails/` 
-pub async fn post_ui_openwindow_marketdetails(configuration: &configuration::Configuration, type_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostUiOpenwindowMarketdetailsError>> {
+pub async fn post_ui_openwindow_marketdetails(configuration: &configuration::Configuration, params: PostUiOpenwindowMarketdetailsParams) -> Result<ResponseContent<PostUiOpenwindowMarketdetailsSuccess>, Error<PostUiOpenwindowMarketdetailsError>> {
+    // unbox the parameters
+    let type_id = params.type_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -229,7 +355,9 @@ pub async fn post_ui_openwindow_marketdetails(configuration: &configuration::Con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostUiOpenwindowMarketdetailsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUiOpenwindowMarketdetailsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -238,7 +366,12 @@ pub async fn post_ui_openwindow_marketdetails(configuration: &configuration::Con
 }
 
 /// Open the New Mail window, according to settings from the request if applicable  --- Alternate route: `/dev/ui/openwindow/newmail/`  Alternate route: `/legacy/ui/openwindow/newmail/`  Alternate route: `/v1/ui/openwindow/newmail/` 
-pub async fn post_ui_openwindow_newmail(configuration: &configuration::Configuration, new_mail: crate::models::PostUiOpenwindowNewmailNewMail, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostUiOpenwindowNewmailError>> {
+pub async fn post_ui_openwindow_newmail(configuration: &configuration::Configuration, params: PostUiOpenwindowNewmailParams) -> Result<ResponseContent<PostUiOpenwindowNewmailSuccess>, Error<PostUiOpenwindowNewmailError>> {
+    // unbox the parameters
+    let new_mail = params.new_mail;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -266,7 +399,9 @@ pub async fn post_ui_openwindow_newmail(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostUiOpenwindowNewmailSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostUiOpenwindowNewmailError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

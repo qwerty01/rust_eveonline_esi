@@ -1,4 +1,4 @@
-# Rust API client for openapi
+# Rust API client for rust_eveonline_esi
 
 An OpenAPI for EVE Online
 

@@ -14,6 +14,76 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_killmails_recent`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdKillmailsRecentParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_killmails_recent`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdKillmailsRecentParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_killmails_killmail_id_killmail_hash`
+#[derive(Clone, Debug)]
+pub struct GetKillmailsKillmailIdKillmailHashParams {
+    /// The killmail hash for verification
+    pub killmail_hash: String,
+    /// The killmail ID to be queried
+    pub killmail_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_killmails_recent`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdKillmailsRecentSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdKillmailsRecent200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_killmails_recent`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdKillmailsRecentSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdKillmailsRecent200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_killmails_killmail_id_killmail_hash`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetKillmailsKillmailIdKillmailHashSuccess {
+    Status200(crate::models::GetKillmailsKillmailIdKillmailHashOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_killmails_recent`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -58,7 +128,14 @@ pub enum GetKillmailsKillmailIdKillmailHashError {
 
 
 /// Return a list of a character's kills and losses going back 90 days  --- Alternate route: `/dev/characters/{character_id}/killmails/recent/`  Alternate route: `/legacy/characters/{character_id}/killmails/recent/`  Alternate route: `/v1/characters/{character_id}/killmails/recent/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_killmails_recent(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdKillmailsRecent200Ok>, Error<GetCharactersCharacterIdKillmailsRecentError>> {
+pub async fn get_characters_character_id_killmails_recent(configuration: &configuration::Configuration, params: GetCharactersCharacterIdKillmailsRecentParams) -> Result<ResponseContent<GetCharactersCharacterIdKillmailsRecentSuccess>, Error<GetCharactersCharacterIdKillmailsRecentError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -91,7 +168,9 @@ pub async fn get_characters_character_id_killmails_recent(configuration: &config
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdKillmailsRecentSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdKillmailsRecentError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -100,7 +179,14 @@ pub async fn get_characters_character_id_killmails_recent(configuration: &config
 }
 
 /// Get a list of a corporation's kills and losses going back 90 days  --- Alternate route: `/dev/corporations/{corporation_id}/killmails/recent/`  Alternate route: `/legacy/corporations/{corporation_id}/killmails/recent/`  Alternate route: `/v1/corporations/{corporation_id}/killmails/recent/`  --- This route is cached for up to 300 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_killmails_recent(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdKillmailsRecent200Ok>, Error<GetCorporationsCorporationIdKillmailsRecentError>> {
+pub async fn get_corporations_corporation_id_killmails_recent(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdKillmailsRecentParams) -> Result<ResponseContent<GetCorporationsCorporationIdKillmailsRecentSuccess>, Error<GetCorporationsCorporationIdKillmailsRecentError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -133,7 +219,9 @@ pub async fn get_corporations_corporation_id_killmails_recent(configuration: &co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdKillmailsRecentSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdKillmailsRecentError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -142,7 +230,13 @@ pub async fn get_corporations_corporation_id_killmails_recent(configuration: &co
 }
 
 /// Return a single killmail from its ID and hash  --- Alternate route: `/dev/killmails/{killmail_id}/{killmail_hash}/`  Alternate route: `/legacy/killmails/{killmail_id}/{killmail_hash}/`  Alternate route: `/v1/killmails/{killmail_id}/{killmail_hash}/`  --- This route is cached for up to 30758400 seconds
-pub async fn get_killmails_killmail_id_killmail_hash(configuration: &configuration::Configuration, killmail_hash: &str, killmail_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetKillmailsKillmailIdKillmailHashOk, Error<GetKillmailsKillmailIdKillmailHashError>> {
+pub async fn get_killmails_killmail_id_killmail_hash(configuration: &configuration::Configuration, params: GetKillmailsKillmailIdKillmailHashParams) -> Result<ResponseContent<GetKillmailsKillmailIdKillmailHashSuccess>, Error<GetKillmailsKillmailIdKillmailHashError>> {
+    // unbox the parameters
+    let killmail_hash = params.killmail_hash;
+    let killmail_id = params.killmail_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -166,7 +260,9 @@ pub async fn get_killmails_killmail_id_killmail_hash(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetKillmailsKillmailIdKillmailHashSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetKillmailsKillmailIdKillmailHashError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

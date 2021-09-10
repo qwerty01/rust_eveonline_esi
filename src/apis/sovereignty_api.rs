@@ -14,6 +14,60 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_sovereignty_campaigns`
+#[derive(Clone, Debug)]
+pub struct GetSovereigntyCampaignsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_sovereignty_map`
+#[derive(Clone, Debug)]
+pub struct GetSovereigntyMapParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_sovereignty_structures`
+#[derive(Clone, Debug)]
+pub struct GetSovereigntyStructuresParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_sovereignty_campaigns`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetSovereigntyCampaignsSuccess {
+    Status200(Vec<crate::models::GetSovereigntyCampaigns200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_sovereignty_map`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetSovereigntyMapSuccess {
+    Status200(Vec<crate::models::GetSovereigntyMap200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_sovereignty_structures`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetSovereigntyStructuresSuccess {
+    Status200(Vec<crate::models::GetSovereigntyStructures200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_sovereignty_campaigns`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -53,7 +107,11 @@ pub enum GetSovereigntyStructuresError {
 
 
 /// Shows sovereignty data for campaigns.  --- Alternate route: `/dev/sovereignty/campaigns/`  Alternate route: `/legacy/sovereignty/campaigns/`  Alternate route: `/v1/sovereignty/campaigns/`  --- This route is cached for up to 5 seconds
-pub async fn get_sovereignty_campaigns(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetSovereigntyCampaigns200Ok>, Error<GetSovereigntyCampaignsError>> {
+pub async fn get_sovereignty_campaigns(configuration: &configuration::Configuration, params: GetSovereigntyCampaignsParams) -> Result<ResponseContent<GetSovereigntyCampaignsSuccess>, Error<GetSovereigntyCampaignsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -77,7 +135,9 @@ pub async fn get_sovereignty_campaigns(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetSovereigntyCampaignsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetSovereigntyCampaignsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -86,7 +146,11 @@ pub async fn get_sovereignty_campaigns(configuration: &configuration::Configurat
 }
 
 /// Shows sovereignty information for solar systems  --- Alternate route: `/dev/sovereignty/map/`  Alternate route: `/legacy/sovereignty/map/`  Alternate route: `/v1/sovereignty/map/`  --- This route is cached for up to 3600 seconds
-pub async fn get_sovereignty_map(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetSovereigntyMap200Ok>, Error<GetSovereigntyMapError>> {
+pub async fn get_sovereignty_map(configuration: &configuration::Configuration, params: GetSovereigntyMapParams) -> Result<ResponseContent<GetSovereigntyMapSuccess>, Error<GetSovereigntyMapError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -110,7 +174,9 @@ pub async fn get_sovereignty_map(configuration: &configuration::Configuration, d
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetSovereigntyMapSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetSovereigntyMapError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -119,7 +185,11 @@ pub async fn get_sovereignty_map(configuration: &configuration::Configuration, d
 }
 
 /// Shows sovereignty data for structures.  --- Alternate route: `/dev/sovereignty/structures/`  Alternate route: `/legacy/sovereignty/structures/`  Alternate route: `/v1/sovereignty/structures/`  --- This route is cached for up to 120 seconds
-pub async fn get_sovereignty_structures(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetSovereigntyStructures200Ok>, Error<GetSovereigntyStructuresError>> {
+pub async fn get_sovereignty_structures(configuration: &configuration::Configuration, params: GetSovereigntyStructuresParams) -> Result<ResponseContent<GetSovereigntyStructuresSuccess>, Error<GetSovereigntyStructuresError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -143,7 +213,9 @@ pub async fn get_sovereignty_structures(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetSovereigntyStructuresSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetSovereigntyStructuresError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

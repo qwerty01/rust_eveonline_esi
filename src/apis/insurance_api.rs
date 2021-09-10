@@ -14,6 +14,28 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_insurance_prices`
+#[derive(Clone, Debug)]
+pub struct GetInsurancePricesParams {
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+
+/// struct for typed successes of method `get_insurance_prices`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetInsurancePricesSuccess {
+    Status200(Vec<crate::models::GetInsurancePrices200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_insurance_prices`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -29,7 +51,13 @@ pub enum GetInsurancePricesError {
 
 
 /// Return available insurance levels for all ship types  --- Alternate route: `/dev/insurance/prices/`  Alternate route: `/legacy/insurance/prices/`  Alternate route: `/v1/insurance/prices/`  --- This route is cached for up to 3600 seconds
-pub async fn get_insurance_prices(configuration: &configuration::Configuration, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<Vec<crate::models::GetInsurancePrices200Ok>, Error<GetInsurancePricesError>> {
+pub async fn get_insurance_prices(configuration: &configuration::Configuration, params: GetInsurancePricesParams) -> Result<ResponseContent<GetInsurancePricesSuccess>, Error<GetInsurancePricesError>> {
+    // unbox the parameters
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -59,7 +87,9 @@ pub async fn get_insurance_prices(configuration: &configuration::Configuration, 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetInsurancePricesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetInsurancePricesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

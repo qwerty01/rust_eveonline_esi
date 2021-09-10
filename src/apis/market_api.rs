@@ -14,6 +14,254 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_orders`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdOrdersParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_orders_history`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdOrdersHistoryParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_orders`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdOrdersParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_orders_history`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdOrdersHistoryParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_markets_groups`
+#[derive(Clone, Debug)]
+pub struct GetMarketsGroupsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_markets_groups_market_group_id`
+#[derive(Clone, Debug)]
+pub struct GetMarketsGroupsMarketGroupIdParams {
+    /// An Eve item group ID
+    pub market_group_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_markets_prices`
+#[derive(Clone, Debug)]
+pub struct GetMarketsPricesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_markets_region_id_history`
+#[derive(Clone, Debug)]
+pub struct GetMarketsRegionIdHistoryParams {
+    /// Return statistics in this region
+    pub region_id: i32,
+    /// Return statistics for this type
+    pub type_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_markets_region_id_orders`
+#[derive(Clone, Debug)]
+pub struct GetMarketsRegionIdOrdersParams {
+    /// Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders
+    pub order_type: String,
+    /// Return orders in this region
+    pub region_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Return orders only for this type
+    pub type_id: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_markets_region_id_types`
+#[derive(Clone, Debug)]
+pub struct GetMarketsRegionIdTypesParams {
+    /// Return statistics in this region
+    pub region_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_markets_structures_structure_id`
+#[derive(Clone, Debug)]
+pub struct GetMarketsStructuresStructureIdParams {
+    /// Return orders in this structure
+    pub structure_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_orders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdOrdersSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdOrders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_orders_history`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdOrdersHistorySuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdOrdersHistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_orders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdOrdersSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdOrders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_orders_history`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdOrdersHistorySuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdOrdersHistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_groups`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsGroupsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_groups_market_group_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsGroupsMarketGroupIdSuccess {
+    Status200(crate::models::GetMarketsGroupsMarketGroupIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_prices`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsPricesSuccess {
+    Status200(Vec<crate::models::GetMarketsPrices200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_region_id_history`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsRegionIdHistorySuccess {
+    Status200(Vec<crate::models::GetMarketsRegionIdHistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_region_id_orders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsRegionIdOrdersSuccess {
+    Status200(Vec<crate::models::GetMarketsRegionIdOrders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_region_id_types`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsRegionIdTypesSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_markets_structures_structure_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetMarketsStructuresStructureIdSuccess {
+    Status200(Vec<crate::models::GetMarketsStructuresStructureId200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_orders`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -165,7 +413,13 @@ pub enum GetMarketsStructuresStructureIdError {
 
 
 /// List open market orders placed by a character  --- Alternate route: `/dev/characters/{character_id}/orders/`  Alternate route: `/v2/characters/{character_id}/orders/`  --- This route is cached for up to 1200 seconds
-pub async fn get_characters_character_id_orders(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdOrders200Ok>, Error<GetCharactersCharacterIdOrdersError>> {
+pub async fn get_characters_character_id_orders(configuration: &configuration::Configuration, params: GetCharactersCharacterIdOrdersParams) -> Result<ResponseContent<GetCharactersCharacterIdOrdersSuccess>, Error<GetCharactersCharacterIdOrdersError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -195,7 +449,9 @@ pub async fn get_characters_character_id_orders(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdOrdersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdOrdersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -204,7 +460,14 @@ pub async fn get_characters_character_id_orders(configuration: &configuration::C
 }
 
 /// List cancelled and expired market orders placed by a character up to 90 days in the past.  --- Alternate route: `/dev/characters/{character_id}/orders/history/`  Alternate route: `/legacy/characters/{character_id}/orders/history/`  Alternate route: `/v1/characters/{character_id}/orders/history/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_orders_history(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdOrdersHistory200Ok>, Error<GetCharactersCharacterIdOrdersHistoryError>> {
+pub async fn get_characters_character_id_orders_history(configuration: &configuration::Configuration, params: GetCharactersCharacterIdOrdersHistoryParams) -> Result<ResponseContent<GetCharactersCharacterIdOrdersHistorySuccess>, Error<GetCharactersCharacterIdOrdersHistoryError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -237,7 +500,9 @@ pub async fn get_characters_character_id_orders_history(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdOrdersHistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdOrdersHistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -246,7 +511,14 @@ pub async fn get_characters_character_id_orders_history(configuration: &configur
 }
 
 /// List open market orders placed on behalf of a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/orders/`  Alternate route: `/v3/corporations/{corporation_id}/orders/`  --- This route is cached for up to 1200 seconds  --- Requires one of the following EVE corporation role(s): Accountant, Trader 
-pub async fn get_corporations_corporation_id_orders(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdOrders200Ok>, Error<GetCorporationsCorporationIdOrdersError>> {
+pub async fn get_corporations_corporation_id_orders(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdOrdersParams) -> Result<ResponseContent<GetCorporationsCorporationIdOrdersSuccess>, Error<GetCorporationsCorporationIdOrdersError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -279,7 +551,9 @@ pub async fn get_corporations_corporation_id_orders(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdOrdersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdOrdersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -288,7 +562,14 @@ pub async fn get_corporations_corporation_id_orders(configuration: &configuratio
 }
 
 /// List cancelled and expired market orders placed on behalf of a corporation up to 90 days in the past.  --- Alternate route: `/dev/corporations/{corporation_id}/orders/history/`  Alternate route: `/v2/corporations/{corporation_id}/orders/history/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Accountant, Trader 
-pub async fn get_corporations_corporation_id_orders_history(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdOrdersHistory200Ok>, Error<GetCorporationsCorporationIdOrdersHistoryError>> {
+pub async fn get_corporations_corporation_id_orders_history(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdOrdersHistoryParams) -> Result<ResponseContent<GetCorporationsCorporationIdOrdersHistorySuccess>, Error<GetCorporationsCorporationIdOrdersHistoryError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -321,7 +602,9 @@ pub async fn get_corporations_corporation_id_orders_history(configuration: &conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdOrdersHistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdOrdersHistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -330,7 +613,11 @@ pub async fn get_corporations_corporation_id_orders_history(configuration: &conf
 }
 
 /// Get a list of item groups  --- Alternate route: `/dev/markets/groups/`  Alternate route: `/legacy/markets/groups/`  Alternate route: `/v1/markets/groups/`  --- This route expires daily at 11:05
-pub async fn get_markets_groups(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetMarketsGroupsError>> {
+pub async fn get_markets_groups(configuration: &configuration::Configuration, params: GetMarketsGroupsParams) -> Result<ResponseContent<GetMarketsGroupsSuccess>, Error<GetMarketsGroupsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -354,7 +641,9 @@ pub async fn get_markets_groups(configuration: &configuration::Configuration, da
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsGroupsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsGroupsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -363,7 +652,14 @@ pub async fn get_markets_groups(configuration: &configuration::Configuration, da
 }
 
 /// Get information on an item group  --- Alternate route: `/dev/markets/groups/{market_group_id}/`  Alternate route: `/legacy/markets/groups/{market_group_id}/`  Alternate route: `/v1/markets/groups/{market_group_id}/`  --- This route expires daily at 11:05
-pub async fn get_markets_groups_market_group_id(configuration: &configuration::Configuration, market_group_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetMarketsGroupsMarketGroupIdOk, Error<GetMarketsGroupsMarketGroupIdError>> {
+pub async fn get_markets_groups_market_group_id(configuration: &configuration::Configuration, params: GetMarketsGroupsMarketGroupIdParams) -> Result<ResponseContent<GetMarketsGroupsMarketGroupIdSuccess>, Error<GetMarketsGroupsMarketGroupIdError>> {
+    // unbox the parameters
+    let market_group_id = params.market_group_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -393,7 +689,9 @@ pub async fn get_markets_groups_market_group_id(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsGroupsMarketGroupIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsGroupsMarketGroupIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -402,7 +700,11 @@ pub async fn get_markets_groups_market_group_id(configuration: &configuration::C
 }
 
 /// Return a list of prices  --- Alternate route: `/dev/markets/prices/`  Alternate route: `/legacy/markets/prices/`  Alternate route: `/v1/markets/prices/`  --- This route is cached for up to 3600 seconds
-pub async fn get_markets_prices(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetMarketsPrices200Ok>, Error<GetMarketsPricesError>> {
+pub async fn get_markets_prices(configuration: &configuration::Configuration, params: GetMarketsPricesParams) -> Result<ResponseContent<GetMarketsPricesSuccess>, Error<GetMarketsPricesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -426,7 +728,9 @@ pub async fn get_markets_prices(configuration: &configuration::Configuration, da
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsPricesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsPricesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -435,7 +739,13 @@ pub async fn get_markets_prices(configuration: &configuration::Configuration, da
 }
 
 /// Return a list of historical market statistics for the specified type in a region  --- Alternate route: `/dev/markets/{region_id}/history/`  Alternate route: `/legacy/markets/{region_id}/history/`  Alternate route: `/v1/markets/{region_id}/history/`  --- This route expires daily at 11:05
-pub async fn get_markets_region_id_history(configuration: &configuration::Configuration, region_id: i32, type_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetMarketsRegionIdHistory200Ok>, Error<GetMarketsRegionIdHistoryError>> {
+pub async fn get_markets_region_id_history(configuration: &configuration::Configuration, params: GetMarketsRegionIdHistoryParams) -> Result<ResponseContent<GetMarketsRegionIdHistorySuccess>, Error<GetMarketsRegionIdHistoryError>> {
+    // unbox the parameters
+    let region_id = params.region_id;
+    let type_id = params.type_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -460,7 +770,9 @@ pub async fn get_markets_region_id_history(configuration: &configuration::Config
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsRegionIdHistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsRegionIdHistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -469,7 +781,15 @@ pub async fn get_markets_region_id_history(configuration: &configuration::Config
 }
 
 /// Return a list of orders in a region  --- Alternate route: `/dev/markets/{region_id}/orders/`  Alternate route: `/legacy/markets/{region_id}/orders/`  Alternate route: `/v1/markets/{region_id}/orders/`  --- This route is cached for up to 300 seconds
-pub async fn get_markets_region_id_orders(configuration: &configuration::Configuration, order_type: &str, region_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, type_id: Option<i32>) -> Result<Vec<crate::models::GetMarketsRegionIdOrders200Ok>, Error<GetMarketsRegionIdOrdersError>> {
+pub async fn get_markets_region_id_orders(configuration: &configuration::Configuration, params: GetMarketsRegionIdOrdersParams) -> Result<ResponseContent<GetMarketsRegionIdOrdersSuccess>, Error<GetMarketsRegionIdOrdersError>> {
+    // unbox the parameters
+    let order_type = params.order_type;
+    let region_id = params.region_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let type_id = params.type_id;
+
 
     let local_var_client = &configuration.client;
 
@@ -500,7 +820,9 @@ pub async fn get_markets_region_id_orders(configuration: &configuration::Configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsRegionIdOrdersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsRegionIdOrdersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -509,7 +831,13 @@ pub async fn get_markets_region_id_orders(configuration: &configuration::Configu
 }
 
 /// Return a list of type IDs that have active orders in the region, for efficient market indexing.  --- Alternate route: `/dev/markets/{region_id}/types/`  Alternate route: `/legacy/markets/{region_id}/types/`  Alternate route: `/v1/markets/{region_id}/types/`  --- This route is cached for up to 600 seconds
-pub async fn get_markets_region_id_types(configuration: &configuration::Configuration, region_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<i32>, Error<GetMarketsRegionIdTypesError>> {
+pub async fn get_markets_region_id_types(configuration: &configuration::Configuration, params: GetMarketsRegionIdTypesParams) -> Result<ResponseContent<GetMarketsRegionIdTypesSuccess>, Error<GetMarketsRegionIdTypesError>> {
+    // unbox the parameters
+    let region_id = params.region_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -536,7 +864,9 @@ pub async fn get_markets_region_id_types(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsRegionIdTypesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsRegionIdTypesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -545,7 +875,14 @@ pub async fn get_markets_region_id_types(configuration: &configuration::Configur
 }
 
 /// Return all orders in a structure  --- Alternate route: `/dev/markets/structures/{structure_id}/`  Alternate route: `/legacy/markets/structures/{structure_id}/`  Alternate route: `/v1/markets/structures/{structure_id}/`  --- This route is cached for up to 300 seconds
-pub async fn get_markets_structures_structure_id(configuration: &configuration::Configuration, structure_id: i64, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetMarketsStructuresStructureId200Ok>, Error<GetMarketsStructuresStructureIdError>> {
+pub async fn get_markets_structures_structure_id(configuration: &configuration::Configuration, params: GetMarketsStructuresStructureIdParams) -> Result<ResponseContent<GetMarketsStructuresStructureIdSuccess>, Error<GetMarketsStructuresStructureIdError>> {
+    // unbox the parameters
+    let structure_id = params.structure_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -578,7 +915,9 @@ pub async fn get_markets_structures_structure_id(configuration: &configuration::
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetMarketsStructuresStructureIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetMarketsStructuresStructureIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

@@ -14,6 +14,66 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_search`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdSearchParams {
+    /// Type of entities to search for
+    pub categories: Vec<String>,
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The string to search on
+    pub search: String,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>,
+    /// Whether the search should be a strict match
+    pub strict: Option<bool>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_search`
+#[derive(Clone, Debug)]
+pub struct GetSearchParams {
+    /// Type of entities to search for
+    pub categories: Vec<String>,
+    /// The string to search on
+    pub search: String,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>,
+    /// Whether the search should be a strict match
+    pub strict: Option<bool>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_search`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdSearchSuccess {
+    Status200(crate::models::GetCharactersCharacterIdSearchOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_search`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetSearchSuccess {
+    Status200(crate::models::GetSearchOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_search`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -43,7 +103,18 @@ pub enum GetSearchError {
 
 
 /// Search for entities that match a given sub-string.  --- Alternate route: `/dev/characters/{character_id}/search/`  Alternate route: `/legacy/characters/{character_id}/search/`  Alternate route: `/v3/characters/{character_id}/search/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_search(configuration: &configuration::Configuration, categories: Vec<String>, character_id: i32, search: &str, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>, strict: Option<bool>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdSearchOk, Error<GetCharactersCharacterIdSearchError>> {
+pub async fn get_characters_character_id_search(configuration: &configuration::Configuration, params: GetCharactersCharacterIdSearchParams) -> Result<ResponseContent<GetCharactersCharacterIdSearchSuccess>, Error<GetCharactersCharacterIdSearchError>> {
+    // unbox the parameters
+    let categories = params.categories;
+    let character_id = params.character_id;
+    let search = params.search;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+    let strict = params.strict;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -84,7 +155,9 @@ pub async fn get_characters_character_id_search(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdSearchSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdSearchError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -93,7 +166,16 @@ pub async fn get_characters_character_id_search(configuration: &configuration::C
 }
 
 /// Search for entities that match a given sub-string.  --- Alternate route: `/dev/search/`  Alternate route: `/legacy/search/`  Alternate route: `/v2/search/`  --- This route is cached for up to 3600 seconds
-pub async fn get_search(configuration: &configuration::Configuration, categories: Vec<String>, search: &str, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>, strict: Option<bool>) -> Result<crate::models::GetSearchOk, Error<GetSearchError>> {
+pub async fn get_search(configuration: &configuration::Configuration, params: GetSearchParams) -> Result<ResponseContent<GetSearchSuccess>, Error<GetSearchError>> {
+    // unbox the parameters
+    let categories = params.categories;
+    let search = params.search;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+    let strict = params.strict;
+
 
     let local_var_client = &configuration.client;
 
@@ -128,7 +210,9 @@ pub async fn get_search(configuration: &configuration::Configuration, categories
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetSearchSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetSearchError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

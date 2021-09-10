@@ -14,6 +14,68 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_wars`
+#[derive(Clone, Debug)]
+pub struct GetWarsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Only return wars with ID smaller than this
+    pub max_war_id: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_wars_war_id`
+#[derive(Clone, Debug)]
+pub struct GetWarsWarIdParams {
+    /// ID for a war
+    pub war_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_wars_war_id_killmails`
+#[derive(Clone, Debug)]
+pub struct GetWarsWarIdKillmailsParams {
+    /// A valid war ID
+    pub war_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+
+/// struct for typed successes of method `get_wars`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetWarsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_wars_war_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetWarsWarIdSuccess {
+    Status200(crate::models::GetWarsWarIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_wars_war_id_killmails`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetWarsWarIdKillmailsSuccess {
+    Status200(Vec<crate::models::GetWarsWarIdKillmails200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_wars`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -55,7 +117,12 @@ pub enum GetWarsWarIdKillmailsError {
 
 
 /// Return a list of wars  --- Alternate route: `/dev/wars/`  Alternate route: `/legacy/wars/`  Alternate route: `/v1/wars/`  --- This route is cached for up to 3600 seconds
-pub async fn get_wars(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>, max_war_id: Option<i32>) -> Result<Vec<i32>, Error<GetWarsError>> {
+pub async fn get_wars(configuration: &configuration::Configuration, params: GetWarsParams) -> Result<ResponseContent<GetWarsSuccess>, Error<GetWarsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let max_war_id = params.max_war_id;
+
 
     let local_var_client = &configuration.client;
 
@@ -82,7 +149,9 @@ pub async fn get_wars(configuration: &configuration::Configuration, datasource: 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetWarsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetWarsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -91,7 +160,12 @@ pub async fn get_wars(configuration: &configuration::Configuration, datasource: 
 }
 
 /// Return details about a war  --- Alternate route: `/dev/wars/{war_id}/`  Alternate route: `/legacy/wars/{war_id}/`  Alternate route: `/v1/wars/{war_id}/`  --- This route is cached for up to 3600 seconds
-pub async fn get_wars_war_id(configuration: &configuration::Configuration, war_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetWarsWarIdOk, Error<GetWarsWarIdError>> {
+pub async fn get_wars_war_id(configuration: &configuration::Configuration, params: GetWarsWarIdParams) -> Result<ResponseContent<GetWarsWarIdSuccess>, Error<GetWarsWarIdError>> {
+    // unbox the parameters
+    let war_id = params.war_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -115,7 +189,9 @@ pub async fn get_wars_war_id(configuration: &configuration::Configuration, war_i
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetWarsWarIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetWarsWarIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -124,7 +200,13 @@ pub async fn get_wars_war_id(configuration: &configuration::Configuration, war_i
 }
 
 /// Return a list of kills related to a war  --- Alternate route: `/dev/wars/{war_id}/killmails/`  Alternate route: `/legacy/wars/{war_id}/killmails/`  Alternate route: `/v1/wars/{war_id}/killmails/`  --- This route is cached for up to 3600 seconds
-pub async fn get_wars_war_id_killmails(configuration: &configuration::Configuration, war_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<crate::models::GetWarsWarIdKillmails200Ok>, Error<GetWarsWarIdKillmailsError>> {
+pub async fn get_wars_war_id_killmails(configuration: &configuration::Configuration, params: GetWarsWarIdKillmailsParams) -> Result<ResponseContent<GetWarsWarIdKillmailsSuccess>, Error<GetWarsWarIdKillmailsError>> {
+    // unbox the parameters
+    let war_id = params.war_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -151,7 +233,9 @@ pub async fn get_wars_war_id_killmails(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetWarsWarIdKillmailsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetWarsWarIdKillmailsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

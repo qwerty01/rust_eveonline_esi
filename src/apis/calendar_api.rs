@@ -14,6 +14,100 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_calendar`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdCalendarParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// The event ID to retrieve events from
+    pub from_event: Option<i32>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_calendar_event_id`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdCalendarEventIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The id of the event requested
+    pub event_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_calendar_event_id_attendees`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdCalendarEventIdAttendeesParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The id of the event requested
+    pub event_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_characters_character_id_calendar_event_id`
+#[derive(Clone, Debug)]
+pub struct PutCharactersCharacterIdCalendarEventIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The ID of the event requested
+    pub event_id: i32,
+    pub response: crate::models::PutCharactersCharacterIdCalendarEventIdResponse,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_calendar`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdCalendarSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdCalendar200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_calendar_event_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdCalendarEventIdSuccess {
+    Status200(crate::models::GetCharactersCharacterIdCalendarEventIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_calendar_event_id_attendees`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdCalendarEventIdAttendeesSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdCalendarEventIdAttendees200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_characters_character_id_calendar_event_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutCharactersCharacterIdCalendarEventIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_calendar`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -75,7 +169,14 @@ pub enum PutCharactersCharacterIdCalendarEventIdError {
 
 
 /// Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event  --- Alternate route: `/dev/characters/{character_id}/calendar/`  Alternate route: `/legacy/characters/{character_id}/calendar/`  Alternate route: `/v1/characters/{character_id}/calendar/`  Alternate route: `/v2/characters/{character_id}/calendar/`  --- This route is cached for up to 5 seconds
-pub async fn get_characters_character_id_calendar(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, from_event: Option<i32>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdCalendar200Ok>, Error<GetCharactersCharacterIdCalendarError>> {
+pub async fn get_characters_character_id_calendar(configuration: &configuration::Configuration, params: GetCharactersCharacterIdCalendarParams) -> Result<ResponseContent<GetCharactersCharacterIdCalendarSuccess>, Error<GetCharactersCharacterIdCalendarError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let from_event = params.from_event;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -108,7 +209,9 @@ pub async fn get_characters_character_id_calendar(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdCalendarSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdCalendarError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -117,7 +220,14 @@ pub async fn get_characters_character_id_calendar(configuration: &configuration:
 }
 
 /// Get all the information for a specific event  --- Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/v4/characters/{character_id}/calendar/{event_id}/`  --- This route is cached for up to 5 seconds
-pub async fn get_characters_character_id_calendar_event_id(configuration: &configuration::Configuration, character_id: i32, event_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdCalendarEventIdOk, Error<GetCharactersCharacterIdCalendarEventIdError>> {
+pub async fn get_characters_character_id_calendar_event_id(configuration: &configuration::Configuration, params: GetCharactersCharacterIdCalendarEventIdParams) -> Result<ResponseContent<GetCharactersCharacterIdCalendarEventIdSuccess>, Error<GetCharactersCharacterIdCalendarEventIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let event_id = params.event_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -147,7 +257,9 @@ pub async fn get_characters_character_id_calendar_event_id(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdCalendarEventIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdCalendarEventIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -156,7 +268,14 @@ pub async fn get_characters_character_id_calendar_event_id(configuration: &confi
 }
 
 /// Get all invited attendees for a given event  --- Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/attendees/`  Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/attendees/`  Alternate route: `/v1/characters/{character_id}/calendar/{event_id}/attendees/`  Alternate route: `/v2/characters/{character_id}/calendar/{event_id}/attendees/`  --- This route is cached for up to 600 seconds
-pub async fn get_characters_character_id_calendar_event_id_attendees(configuration: &configuration::Configuration, character_id: i32, event_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdCalendarEventIdAttendees200Ok>, Error<GetCharactersCharacterIdCalendarEventIdAttendeesError>> {
+pub async fn get_characters_character_id_calendar_event_id_attendees(configuration: &configuration::Configuration, params: GetCharactersCharacterIdCalendarEventIdAttendeesParams) -> Result<ResponseContent<GetCharactersCharacterIdCalendarEventIdAttendeesSuccess>, Error<GetCharactersCharacterIdCalendarEventIdAttendeesError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let event_id = params.event_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -186,7 +305,9 @@ pub async fn get_characters_character_id_calendar_event_id_attendees(configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdCalendarEventIdAttendeesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdCalendarEventIdAttendeesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -195,7 +316,14 @@ pub async fn get_characters_character_id_calendar_event_id_attendees(configurati
 }
 
 /// Set your response status to an event  --- Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`  Alternate route: `/v4/characters/{character_id}/calendar/{event_id}/`  --- This route is cached for up to 5 seconds
-pub async fn put_characters_character_id_calendar_event_id(configuration: &configuration::Configuration, character_id: i32, event_id: i32, response: crate::models::PutCharactersCharacterIdCalendarEventIdResponse, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutCharactersCharacterIdCalendarEventIdError>> {
+pub async fn put_characters_character_id_calendar_event_id(configuration: &configuration::Configuration, params: PutCharactersCharacterIdCalendarEventIdParams) -> Result<ResponseContent<PutCharactersCharacterIdCalendarEventIdSuccess>, Error<PutCharactersCharacterIdCalendarEventIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let event_id = params.event_id;
+    let response = params.response;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -223,7 +351,9 @@ pub async fn put_characters_character_id_calendar_event_id(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutCharactersCharacterIdCalendarEventIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutCharactersCharacterIdCalendarEventIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

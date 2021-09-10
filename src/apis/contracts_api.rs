@@ -14,6 +14,220 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_contracts`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdContractsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_contracts_contract_id_bids`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdContractsContractIdBidsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// ID of a contract
+    pub contract_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_contracts_contract_id_items`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdContractsContractIdItemsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// ID of a contract
+    pub contract_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_contracts_public_bids_contract_id`
+#[derive(Clone, Debug)]
+pub struct GetContractsPublicBidsContractIdParams {
+    /// ID of a contract
+    pub contract_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_contracts_public_items_contract_id`
+#[derive(Clone, Debug)]
+pub struct GetContractsPublicItemsContractIdParams {
+    /// ID of a contract
+    pub contract_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_contracts_public_region_id`
+#[derive(Clone, Debug)]
+pub struct GetContractsPublicRegionIdParams {
+    /// An EVE region id
+    pub region_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_contracts`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContractsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_contracts_contract_id_bids`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContractsContractIdBidsParams {
+    /// ID of a contract
+    pub contract_id: i32,
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_contracts_contract_id_items`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContractsContractIdItemsParams {
+    /// ID of a contract
+    pub contract_id: i32,
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_contracts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdContractsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdContracts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_contracts_contract_id_bids`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdContractsContractIdBidsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdContractsContractIdBids200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_contracts_contract_id_items`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdContractsContractIdItemsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdContractsContractIdItems200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_contracts_public_bids_contract_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetContractsPublicBidsContractIdSuccess {
+    Status200(Vec<crate::models::GetContractsPublicBidsContractId200Ok>),
+    Status204(),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_contracts_public_items_contract_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetContractsPublicItemsContractIdSuccess {
+    Status200(Vec<crate::models::GetContractsPublicItemsContractId200Ok>),
+    Status204(),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_contracts_public_region_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetContractsPublicRegionIdSuccess {
+    Status200(Vec<crate::models::GetContractsPublicRegionId200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_contracts`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContractsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContracts200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_contracts_contract_id_bids`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContractsContractIdBidsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContractsContractIdBids200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_contracts_contract_id_items`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContractsContractIdItemsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContractsContractIdItems200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_contracts`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -147,7 +361,14 @@ pub enum GetCorporationsCorporationIdContractsContractIdItemsError {
 
 
 /// Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".  --- Alternate route: `/dev/characters/{character_id}/contracts/`  Alternate route: `/legacy/characters/{character_id}/contracts/`  Alternate route: `/v1/characters/{character_id}/contracts/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_contracts(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdContracts200Ok>, Error<GetCharactersCharacterIdContractsError>> {
+pub async fn get_characters_character_id_contracts(configuration: &configuration::Configuration, params: GetCharactersCharacterIdContractsParams) -> Result<ResponseContent<GetCharactersCharacterIdContractsSuccess>, Error<GetCharactersCharacterIdContractsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -180,7 +401,9 @@ pub async fn get_characters_character_id_contracts(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdContractsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdContractsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -189,7 +412,14 @@ pub async fn get_characters_character_id_contracts(configuration: &configuration
 }
 
 /// Lists bids on a particular auction contract  --- Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/bids/`  Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/bids/`  Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/bids/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_contracts_contract_id_bids(configuration: &configuration::Configuration, character_id: i32, contract_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdContractsContractIdBids200Ok>, Error<GetCharactersCharacterIdContractsContractIdBidsError>> {
+pub async fn get_characters_character_id_contracts_contract_id_bids(configuration: &configuration::Configuration, params: GetCharactersCharacterIdContractsContractIdBidsParams) -> Result<ResponseContent<GetCharactersCharacterIdContractsContractIdBidsSuccess>, Error<GetCharactersCharacterIdContractsContractIdBidsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let contract_id = params.contract_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -219,7 +449,9 @@ pub async fn get_characters_character_id_contracts_contract_id_bids(configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdContractsContractIdBidsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdContractsContractIdBidsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -228,7 +460,14 @@ pub async fn get_characters_character_id_contracts_contract_id_bids(configuratio
 }
 
 /// Lists items of a particular contract  --- Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/items/`  Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/items/`  Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/items/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_contracts_contract_id_items(configuration: &configuration::Configuration, character_id: i32, contract_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdContractsContractIdItems200Ok>, Error<GetCharactersCharacterIdContractsContractIdItemsError>> {
+pub async fn get_characters_character_id_contracts_contract_id_items(configuration: &configuration::Configuration, params: GetCharactersCharacterIdContractsContractIdItemsParams) -> Result<ResponseContent<GetCharactersCharacterIdContractsContractIdItemsSuccess>, Error<GetCharactersCharacterIdContractsContractIdItemsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let contract_id = params.contract_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -258,7 +497,9 @@ pub async fn get_characters_character_id_contracts_contract_id_items(configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdContractsContractIdItemsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdContractsContractIdItemsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -267,7 +508,13 @@ pub async fn get_characters_character_id_contracts_contract_id_items(configurati
 }
 
 /// Lists bids on a public auction contract  --- Alternate route: `/dev/contracts/public/bids/{contract_id}/`  Alternate route: `/legacy/contracts/public/bids/{contract_id}/`  Alternate route: `/v1/contracts/public/bids/{contract_id}/`  --- This route is cached for up to 300 seconds
-pub async fn get_contracts_public_bids_contract_id(configuration: &configuration::Configuration, contract_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<crate::models::GetContractsPublicBidsContractId200Ok>, Error<GetContractsPublicBidsContractIdError>> {
+pub async fn get_contracts_public_bids_contract_id(configuration: &configuration::Configuration, params: GetContractsPublicBidsContractIdParams) -> Result<ResponseContent<GetContractsPublicBidsContractIdSuccess>, Error<GetContractsPublicBidsContractIdError>> {
+    // unbox the parameters
+    let contract_id = params.contract_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -294,7 +541,9 @@ pub async fn get_contracts_public_bids_contract_id(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetContractsPublicBidsContractIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetContractsPublicBidsContractIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -303,7 +552,13 @@ pub async fn get_contracts_public_bids_contract_id(configuration: &configuration
 }
 
 /// Lists items of a public contract  --- Alternate route: `/dev/contracts/public/items/{contract_id}/`  Alternate route: `/legacy/contracts/public/items/{contract_id}/`  Alternate route: `/v1/contracts/public/items/{contract_id}/`  --- This route is cached for up to 3600 seconds
-pub async fn get_contracts_public_items_contract_id(configuration: &configuration::Configuration, contract_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<crate::models::GetContractsPublicItemsContractId200Ok>, Error<GetContractsPublicItemsContractIdError>> {
+pub async fn get_contracts_public_items_contract_id(configuration: &configuration::Configuration, params: GetContractsPublicItemsContractIdParams) -> Result<ResponseContent<GetContractsPublicItemsContractIdSuccess>, Error<GetContractsPublicItemsContractIdError>> {
+    // unbox the parameters
+    let contract_id = params.contract_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -330,7 +585,9 @@ pub async fn get_contracts_public_items_contract_id(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetContractsPublicItemsContractIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetContractsPublicItemsContractIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -339,7 +596,13 @@ pub async fn get_contracts_public_items_contract_id(configuration: &configuratio
 }
 
 /// Returns a paginated list of all public contracts in the given region  --- Alternate route: `/dev/contracts/public/{region_id}/`  Alternate route: `/legacy/contracts/public/{region_id}/`  Alternate route: `/v1/contracts/public/{region_id}/`  --- This route is cached for up to 1800 seconds
-pub async fn get_contracts_public_region_id(configuration: &configuration::Configuration, region_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>) -> Result<Vec<crate::models::GetContractsPublicRegionId200Ok>, Error<GetContractsPublicRegionIdError>> {
+pub async fn get_contracts_public_region_id(configuration: &configuration::Configuration, params: GetContractsPublicRegionIdParams) -> Result<ResponseContent<GetContractsPublicRegionIdSuccess>, Error<GetContractsPublicRegionIdError>> {
+    // unbox the parameters
+    let region_id = params.region_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+
 
     let local_var_client = &configuration.client;
 
@@ -366,7 +629,9 @@ pub async fn get_contracts_public_region_id(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetContractsPublicRegionIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetContractsPublicRegionIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -375,7 +640,14 @@ pub async fn get_contracts_public_region_id(configuration: &configuration::Confi
 }
 
 /// Returns contracts available to a corporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".  --- Alternate route: `/dev/corporations/{corporation_id}/contracts/`  Alternate route: `/legacy/corporations/{corporation_id}/contracts/`  Alternate route: `/v1/corporations/{corporation_id}/contracts/`  --- This route is cached for up to 300 seconds
-pub async fn get_corporations_corporation_id_contracts(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContracts200Ok>, Error<GetCorporationsCorporationIdContractsError>> {
+pub async fn get_corporations_corporation_id_contracts(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContractsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContractsSuccess>, Error<GetCorporationsCorporationIdContractsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -408,7 +680,9 @@ pub async fn get_corporations_corporation_id_contracts(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContractsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContractsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -417,7 +691,15 @@ pub async fn get_corporations_corporation_id_contracts(configuration: &configura
 }
 
 /// Lists bids on a particular auction contract  --- Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/bids/`  Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/bids/`  Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_contracts_contract_id_bids(configuration: &configuration::Configuration, contract_id: i32, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContractsContractIdBids200Ok>, Error<GetCorporationsCorporationIdContractsContractIdBidsError>> {
+pub async fn get_corporations_corporation_id_contracts_contract_id_bids(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContractsContractIdBidsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContractsContractIdBidsSuccess>, Error<GetCorporationsCorporationIdContractsContractIdBidsError>> {
+    // unbox the parameters
+    let contract_id = params.contract_id;
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -450,7 +732,9 @@ pub async fn get_corporations_corporation_id_contracts_contract_id_bids(configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContractsContractIdBidsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContractsContractIdBidsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -459,7 +743,14 @@ pub async fn get_corporations_corporation_id_contracts_contract_id_bids(configur
 }
 
 /// Lists items of a particular contract  --- Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/items/`  Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/items/`  Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/items/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_contracts_contract_id_items(configuration: &configuration::Configuration, contract_id: i32, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContractsContractIdItems200Ok>, Error<GetCorporationsCorporationIdContractsContractIdItemsError>> {
+pub async fn get_corporations_corporation_id_contracts_contract_id_items(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContractsContractIdItemsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContractsContractIdItemsSuccess>, Error<GetCorporationsCorporationIdContractsContractIdItemsError>> {
+    // unbox the parameters
+    let contract_id = params.contract_id;
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -489,7 +780,9 @@ pub async fn get_corporations_corporation_id_contracts_contract_id_items(configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContractsContractIdItemsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContractsContractIdItemsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

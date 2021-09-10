@@ -14,6 +14,108 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_opportunities`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdOpportunitiesParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_opportunities_groups`
+#[derive(Clone, Debug)]
+pub struct GetOpportunitiesGroupsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_opportunities_groups_group_id`
+#[derive(Clone, Debug)]
+pub struct GetOpportunitiesGroupsGroupIdParams {
+    /// ID of an opportunities group
+    pub group_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>
+}
+
+/// struct for passing parameters to the method `get_opportunities_tasks`
+#[derive(Clone, Debug)]
+pub struct GetOpportunitiesTasksParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_opportunities_tasks_task_id`
+#[derive(Clone, Debug)]
+pub struct GetOpportunitiesTasksTaskIdParams {
+    /// ID of an opportunities task
+    pub task_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_opportunities`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdOpportunitiesSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdOpportunities200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_opportunities_groups`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetOpportunitiesGroupsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_opportunities_groups_group_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetOpportunitiesGroupsGroupIdSuccess {
+    Status200(crate::models::GetOpportunitiesGroupsGroupIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_opportunities_tasks`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetOpportunitiesTasksSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_opportunities_tasks_task_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetOpportunitiesTasksTaskIdSuccess {
+    Status200(crate::models::GetOpportunitiesTasksTaskIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_opportunities`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -79,7 +181,13 @@ pub enum GetOpportunitiesTasksTaskIdError {
 
 
 /// Return a list of tasks finished by a character  --- Alternate route: `/dev/characters/{character_id}/opportunities/`  Alternate route: `/legacy/characters/{character_id}/opportunities/`  Alternate route: `/v1/characters/{character_id}/opportunities/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_opportunities(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdOpportunities200Ok>, Error<GetCharactersCharacterIdOpportunitiesError>> {
+pub async fn get_characters_character_id_opportunities(configuration: &configuration::Configuration, params: GetCharactersCharacterIdOpportunitiesParams) -> Result<ResponseContent<GetCharactersCharacterIdOpportunitiesSuccess>, Error<GetCharactersCharacterIdOpportunitiesError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -109,7 +217,9 @@ pub async fn get_characters_character_id_opportunities(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdOpportunitiesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdOpportunitiesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -118,7 +228,11 @@ pub async fn get_characters_character_id_opportunities(configuration: &configura
 }
 
 /// Return a list of opportunities groups  --- Alternate route: `/dev/opportunities/groups/`  Alternate route: `/legacy/opportunities/groups/`  Alternate route: `/v1/opportunities/groups/`  --- This route expires daily at 11:05
-pub async fn get_opportunities_groups(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetOpportunitiesGroupsError>> {
+pub async fn get_opportunities_groups(configuration: &configuration::Configuration, params: GetOpportunitiesGroupsParams) -> Result<ResponseContent<GetOpportunitiesGroupsSuccess>, Error<GetOpportunitiesGroupsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -142,7 +256,9 @@ pub async fn get_opportunities_groups(configuration: &configuration::Configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetOpportunitiesGroupsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetOpportunitiesGroupsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -151,7 +267,14 @@ pub async fn get_opportunities_groups(configuration: &configuration::Configurati
 }
 
 /// Return information of an opportunities group  --- Alternate route: `/dev/opportunities/groups/{group_id}/`  Alternate route: `/legacy/opportunities/groups/{group_id}/`  Alternate route: `/v1/opportunities/groups/{group_id}/`  --- This route expires daily at 11:05
-pub async fn get_opportunities_groups_group_id(configuration: &configuration::Configuration, group_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>) -> Result<crate::models::GetOpportunitiesGroupsGroupIdOk, Error<GetOpportunitiesGroupsGroupIdError>> {
+pub async fn get_opportunities_groups_group_id(configuration: &configuration::Configuration, params: GetOpportunitiesGroupsGroupIdParams) -> Result<ResponseContent<GetOpportunitiesGroupsGroupIdSuccess>, Error<GetOpportunitiesGroupsGroupIdError>> {
+    // unbox the parameters
+    let group_id = params.group_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+
 
     let local_var_client = &configuration.client;
 
@@ -181,7 +304,9 @@ pub async fn get_opportunities_groups_group_id(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetOpportunitiesGroupsGroupIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetOpportunitiesGroupsGroupIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -190,7 +315,11 @@ pub async fn get_opportunities_groups_group_id(configuration: &configuration::Co
 }
 
 /// Return a list of opportunities tasks  --- Alternate route: `/dev/opportunities/tasks/`  Alternate route: `/legacy/opportunities/tasks/`  Alternate route: `/v1/opportunities/tasks/`  --- This route expires daily at 11:05
-pub async fn get_opportunities_tasks(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetOpportunitiesTasksError>> {
+pub async fn get_opportunities_tasks(configuration: &configuration::Configuration, params: GetOpportunitiesTasksParams) -> Result<ResponseContent<GetOpportunitiesTasksSuccess>, Error<GetOpportunitiesTasksError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -214,7 +343,9 @@ pub async fn get_opportunities_tasks(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetOpportunitiesTasksSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetOpportunitiesTasksError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -223,7 +354,12 @@ pub async fn get_opportunities_tasks(configuration: &configuration::Configuratio
 }
 
 /// Return information of an opportunities task  --- Alternate route: `/dev/opportunities/tasks/{task_id}/`  Alternate route: `/legacy/opportunities/tasks/{task_id}/`  Alternate route: `/v1/opportunities/tasks/{task_id}/`  --- This route expires daily at 11:05
-pub async fn get_opportunities_tasks_task_id(configuration: &configuration::Configuration, task_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetOpportunitiesTasksTaskIdOk, Error<GetOpportunitiesTasksTaskIdError>> {
+pub async fn get_opportunities_tasks_task_id(configuration: &configuration::Configuration, params: GetOpportunitiesTasksTaskIdParams) -> Result<ResponseContent<GetOpportunitiesTasksTaskIdSuccess>, Error<GetOpportunitiesTasksTaskIdError>> {
+    // unbox the parameters
+    let task_id = params.task_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -247,7 +383,9 @@ pub async fn get_opportunities_tasks_task_id(configuration: &configuration::Conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetOpportunitiesTasksTaskIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetOpportunitiesTasksTaskIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

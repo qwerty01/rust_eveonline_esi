@@ -14,6 +14,506 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_corporations_corporation_id`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_alliancehistory`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdAlliancehistoryParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_blueprints`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdBlueprintsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_containers_logs`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdContainersLogsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_divisions`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdDivisionsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_facilities`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdFacilitiesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_icons`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdIconsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_medals`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMedalsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_medals_issued`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMedalsIssuedParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_members`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMembersParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_members_limit`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMembersLimitParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_members_titles`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMembersTitlesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_membertracking`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdMembertrackingParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_roles`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdRolesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_roles_history`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdRolesHistoryParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_shareholders`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdShareholdersParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_standings`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdStandingsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_starbases`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdStarbasesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_starbases_starbase_id`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdStarbasesStarbaseIdParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// An EVE starbase (POS) ID
+    pub starbase_id: i64,
+    /// The solar system this starbase (POS) is located in,
+    pub system_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_structures`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdStructuresParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_titles`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdTitlesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_npccorps`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsNpccorpsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_corporations_corporation_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdSuccess {
+    Status200(crate::models::GetCorporationsCorporationIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_alliancehistory`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdAlliancehistorySuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdAlliancehistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_blueprints`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdBlueprintsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdBlueprints200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_containers_logs`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdContainersLogsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdContainersLogs200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_divisions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdDivisionsSuccess {
+    Status200(crate::models::GetCorporationsCorporationIdDivisionsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_facilities`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdFacilitiesSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdFacilities200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_icons`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdIconsSuccess {
+    Status200(crate::models::GetCorporationsCorporationIdIconsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_medals`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMedalsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdMedals200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_medals_issued`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMedalsIssuedSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdMedalsIssued200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_members`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMembersSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_members_limit`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMembersLimitSuccess {
+    Status200(i32),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_members_titles`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMembersTitlesSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdMembersTitles200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_membertracking`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdMembertrackingSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdMembertracking200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_roles`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdRolesSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdRoles200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_roles_history`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdRolesHistorySuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdRolesHistory200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_shareholders`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdShareholdersSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdShareholders200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_standings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdStandingsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdStandings200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_starbases`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdStarbasesSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdStarbases200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_starbases_starbase_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdStarbasesStarbaseIdSuccess {
+    Status200(crate::models::GetCorporationsCorporationIdStarbasesStarbaseIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_structures`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdStructuresSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdStructures200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_titles`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdTitlesSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdTitles200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_npccorps`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsNpccorpsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_corporations_corporation_id`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -319,7 +819,12 @@ pub enum GetCorporationsNpccorpsError {
 
 
 /// Public information about a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/`  Alternate route: `/v5/corporations/{corporation_id}/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetCorporationsCorporationIdOk, Error<GetCorporationsCorporationIdError>> {
+pub async fn get_corporations_corporation_id(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdParams) -> Result<ResponseContent<GetCorporationsCorporationIdSuccess>, Error<GetCorporationsCorporationIdError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -343,7 +848,9 @@ pub async fn get_corporations_corporation_id(configuration: &configuration::Conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -352,7 +859,12 @@ pub async fn get_corporations_corporation_id(configuration: &configuration::Conf
 }
 
 /// Get a list of all the alliances a corporation has been a member of  --- Alternate route: `/dev/corporations/{corporation_id}/alliancehistory/`  Alternate route: `/v3/corporations/{corporation_id}/alliancehistory/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_alliancehistory(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdAlliancehistory200Ok>, Error<GetCorporationsCorporationIdAlliancehistoryError>> {
+pub async fn get_corporations_corporation_id_alliancehistory(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdAlliancehistoryParams) -> Result<ResponseContent<GetCorporationsCorporationIdAlliancehistorySuccess>, Error<GetCorporationsCorporationIdAlliancehistoryError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -376,7 +888,9 @@ pub async fn get_corporations_corporation_id_alliancehistory(configuration: &con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdAlliancehistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdAlliancehistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -385,7 +899,14 @@ pub async fn get_corporations_corporation_id_alliancehistory(configuration: &con
 }
 
 /// Returns a list of blueprints the corporation owns  --- Alternate route: `/dev/corporations/{corporation_id}/blueprints/`  Alternate route: `/v3/corporations/{corporation_id}/blueprints/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_blueprints(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdBlueprints200Ok>, Error<GetCorporationsCorporationIdBlueprintsError>> {
+pub async fn get_corporations_corporation_id_blueprints(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdBlueprintsParams) -> Result<ResponseContent<GetCorporationsCorporationIdBlueprintsSuccess>, Error<GetCorporationsCorporationIdBlueprintsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -418,7 +939,9 @@ pub async fn get_corporations_corporation_id_blueprints(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdBlueprintsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdBlueprintsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -427,7 +950,14 @@ pub async fn get_corporations_corporation_id_blueprints(configuration: &configur
 }
 
 /// Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation  --- Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`  Alternate route: `/v3/corporations/{corporation_id}/containers/logs/`  --- This route is cached for up to 600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_containers_logs(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdContainersLogs200Ok>, Error<GetCorporationsCorporationIdContainersLogsError>> {
+pub async fn get_corporations_corporation_id_containers_logs(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdContainersLogsParams) -> Result<ResponseContent<GetCorporationsCorporationIdContainersLogsSuccess>, Error<GetCorporationsCorporationIdContainersLogsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -460,7 +990,9 @@ pub async fn get_corporations_corporation_id_containers_logs(configuration: &con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdContainersLogsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdContainersLogsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -469,7 +1001,13 @@ pub async fn get_corporations_corporation_id_containers_logs(configuration: &con
 }
 
 /// Return corporation hangar and wallet division names, only show if a division is not using the default name  --- Alternate route: `/dev/corporations/{corporation_id}/divisions/`  Alternate route: `/v2/corporations/{corporation_id}/divisions/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_divisions(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCorporationsCorporationIdDivisionsOk, Error<GetCorporationsCorporationIdDivisionsError>> {
+pub async fn get_corporations_corporation_id_divisions(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdDivisionsParams) -> Result<ResponseContent<GetCorporationsCorporationIdDivisionsSuccess>, Error<GetCorporationsCorporationIdDivisionsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -499,7 +1037,9 @@ pub async fn get_corporations_corporation_id_divisions(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdDivisionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdDivisionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -508,7 +1048,13 @@ pub async fn get_corporations_corporation_id_divisions(configuration: &configura
 }
 
 /// Return a corporation's facilities  --- Alternate route: `/dev/corporations/{corporation_id}/facilities/`  Alternate route: `/v2/corporations/{corporation_id}/facilities/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Factory_Manager 
-pub async fn get_corporations_corporation_id_facilities(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdFacilities200Ok>, Error<GetCorporationsCorporationIdFacilitiesError>> {
+pub async fn get_corporations_corporation_id_facilities(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdFacilitiesParams) -> Result<ResponseContent<GetCorporationsCorporationIdFacilitiesSuccess>, Error<GetCorporationsCorporationIdFacilitiesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -538,7 +1084,9 @@ pub async fn get_corporations_corporation_id_facilities(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdFacilitiesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdFacilitiesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -547,7 +1095,12 @@ pub async fn get_corporations_corporation_id_facilities(configuration: &configur
 }
 
 /// Get the icon urls for a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/icons/`  Alternate route: `/v2/corporations/{corporation_id}/icons/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_icons(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetCorporationsCorporationIdIconsOk, Error<GetCorporationsCorporationIdIconsError>> {
+pub async fn get_corporations_corporation_id_icons(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdIconsParams) -> Result<ResponseContent<GetCorporationsCorporationIdIconsSuccess>, Error<GetCorporationsCorporationIdIconsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -571,7 +1124,9 @@ pub async fn get_corporations_corporation_id_icons(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdIconsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdIconsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -580,7 +1135,14 @@ pub async fn get_corporations_corporation_id_icons(configuration: &configuration
 }
 
 /// Returns a corporation's medals  --- Alternate route: `/dev/corporations/{corporation_id}/medals/`  Alternate route: `/v2/corporations/{corporation_id}/medals/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_medals(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdMedals200Ok>, Error<GetCorporationsCorporationIdMedalsError>> {
+pub async fn get_corporations_corporation_id_medals(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMedalsParams) -> Result<ResponseContent<GetCorporationsCorporationIdMedalsSuccess>, Error<GetCorporationsCorporationIdMedalsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -613,7 +1175,9 @@ pub async fn get_corporations_corporation_id_medals(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMedalsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMedalsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -622,7 +1186,14 @@ pub async fn get_corporations_corporation_id_medals(configuration: &configuratio
 }
 
 /// Returns medals issued by a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/medals/issued/`  Alternate route: `/v2/corporations/{corporation_id}/medals/issued/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_medals_issued(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdMedalsIssued200Ok>, Error<GetCorporationsCorporationIdMedalsIssuedError>> {
+pub async fn get_corporations_corporation_id_medals_issued(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMedalsIssuedParams) -> Result<ResponseContent<GetCorporationsCorporationIdMedalsIssuedSuccess>, Error<GetCorporationsCorporationIdMedalsIssuedError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -655,7 +1226,9 @@ pub async fn get_corporations_corporation_id_medals_issued(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMedalsIssuedSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMedalsIssuedError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -664,7 +1237,13 @@ pub async fn get_corporations_corporation_id_medals_issued(configuration: &confi
 }
 
 /// Return the current member list of a corporation, the token's character need to be a member of the corporation.  --- Alternate route: `/dev/corporations/{corporation_id}/members/`  Alternate route: `/v4/corporations/{corporation_id}/members/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_members(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<i32>, Error<GetCorporationsCorporationIdMembersError>> {
+pub async fn get_corporations_corporation_id_members(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMembersParams) -> Result<ResponseContent<GetCorporationsCorporationIdMembersSuccess>, Error<GetCorporationsCorporationIdMembersError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -694,7 +1273,9 @@ pub async fn get_corporations_corporation_id_members(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMembersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMembersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -703,7 +1284,13 @@ pub async fn get_corporations_corporation_id_members(configuration: &configurati
 }
 
 /// Return a corporation's member limit, not including CEO himself  --- Alternate route: `/dev/corporations/{corporation_id}/members/limit/`  Alternate route: `/v2/corporations/{corporation_id}/members/limit/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_members_limit(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<i32, Error<GetCorporationsCorporationIdMembersLimitError>> {
+pub async fn get_corporations_corporation_id_members_limit(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMembersLimitParams) -> Result<ResponseContent<GetCorporationsCorporationIdMembersLimitSuccess>, Error<GetCorporationsCorporationIdMembersLimitError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -733,7 +1320,9 @@ pub async fn get_corporations_corporation_id_members_limit(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMembersLimitSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMembersLimitError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -742,7 +1331,13 @@ pub async fn get_corporations_corporation_id_members_limit(configuration: &confi
 }
 
 /// Returns a corporation's members' titles  --- Alternate route: `/dev/corporations/{corporation_id}/members/titles/`  Alternate route: `/v2/corporations/{corporation_id}/members/titles/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_members_titles(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdMembersTitles200Ok>, Error<GetCorporationsCorporationIdMembersTitlesError>> {
+pub async fn get_corporations_corporation_id_members_titles(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMembersTitlesParams) -> Result<ResponseContent<GetCorporationsCorporationIdMembersTitlesSuccess>, Error<GetCorporationsCorporationIdMembersTitlesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -772,7 +1367,9 @@ pub async fn get_corporations_corporation_id_members_titles(configuration: &conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMembersTitlesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMembersTitlesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -781,7 +1378,13 @@ pub async fn get_corporations_corporation_id_members_titles(configuration: &conf
 }
 
 /// Returns additional information about a corporation's members which helps tracking their activities  --- Alternate route: `/dev/corporations/{corporation_id}/membertracking/`  Alternate route: `/v2/corporations/{corporation_id}/membertracking/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_membertracking(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdMembertracking200Ok>, Error<GetCorporationsCorporationIdMembertrackingError>> {
+pub async fn get_corporations_corporation_id_membertracking(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdMembertrackingParams) -> Result<ResponseContent<GetCorporationsCorporationIdMembertrackingSuccess>, Error<GetCorporationsCorporationIdMembertrackingError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -811,7 +1414,9 @@ pub async fn get_corporations_corporation_id_membertracking(configuration: &conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdMembertrackingSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdMembertrackingError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -820,7 +1425,13 @@ pub async fn get_corporations_corporation_id_membertracking(configuration: &conf
 }
 
 /// Return the roles of all members if the character has the personnel manager role or any grantable role.  --- Alternate route: `/dev/corporations/{corporation_id}/roles/`  Alternate route: `/v2/corporations/{corporation_id}/roles/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_roles(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdRoles200Ok>, Error<GetCorporationsCorporationIdRolesError>> {
+pub async fn get_corporations_corporation_id_roles(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdRolesParams) -> Result<ResponseContent<GetCorporationsCorporationIdRolesSuccess>, Error<GetCorporationsCorporationIdRolesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -850,7 +1461,9 @@ pub async fn get_corporations_corporation_id_roles(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdRolesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdRolesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -859,7 +1472,14 @@ pub async fn get_corporations_corporation_id_roles(configuration: &configuration
 }
 
 /// Return how roles have changed for a coporation's members, up to a month  --- Alternate route: `/dev/corporations/{corporation_id}/roles/history/`  Alternate route: `/v2/corporations/{corporation_id}/roles/history/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_roles_history(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdRolesHistory200Ok>, Error<GetCorporationsCorporationIdRolesHistoryError>> {
+pub async fn get_corporations_corporation_id_roles_history(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdRolesHistoryParams) -> Result<ResponseContent<GetCorporationsCorporationIdRolesHistorySuccess>, Error<GetCorporationsCorporationIdRolesHistoryError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -892,7 +1512,9 @@ pub async fn get_corporations_corporation_id_roles_history(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdRolesHistorySuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdRolesHistoryError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -901,7 +1523,14 @@ pub async fn get_corporations_corporation_id_roles_history(configuration: &confi
 }
 
 /// Return the current shareholders of a corporation.  --- Alternate route: `/dev/corporations/{corporation_id}/shareholders/`  Alternate route: `/legacy/corporations/{corporation_id}/shareholders/`  Alternate route: `/v1/corporations/{corporation_id}/shareholders/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_shareholders(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdShareholders200Ok>, Error<GetCorporationsCorporationIdShareholdersError>> {
+pub async fn get_corporations_corporation_id_shareholders(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdShareholdersParams) -> Result<ResponseContent<GetCorporationsCorporationIdShareholdersSuccess>, Error<GetCorporationsCorporationIdShareholdersError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -934,7 +1563,9 @@ pub async fn get_corporations_corporation_id_shareholders(configuration: &config
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdShareholdersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdShareholdersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -943,7 +1574,14 @@ pub async fn get_corporations_corporation_id_shareholders(configuration: &config
 }
 
 /// Return corporation standings from agents, NPC corporations, and factions  --- Alternate route: `/dev/corporations/{corporation_id}/standings/`  Alternate route: `/v2/corporations/{corporation_id}/standings/`  --- This route is cached for up to 3600 seconds
-pub async fn get_corporations_corporation_id_standings(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdStandings200Ok>, Error<GetCorporationsCorporationIdStandingsError>> {
+pub async fn get_corporations_corporation_id_standings(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdStandingsParams) -> Result<ResponseContent<GetCorporationsCorporationIdStandingsSuccess>, Error<GetCorporationsCorporationIdStandingsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -976,7 +1614,9 @@ pub async fn get_corporations_corporation_id_standings(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdStandingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdStandingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -985,7 +1625,14 @@ pub async fn get_corporations_corporation_id_standings(configuration: &configura
 }
 
 /// Returns list of corporation starbases (POSes)  --- Alternate route: `/dev/corporations/{corporation_id}/starbases/`  Alternate route: `/v2/corporations/{corporation_id}/starbases/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_starbases(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdStarbases200Ok>, Error<GetCorporationsCorporationIdStarbasesError>> {
+pub async fn get_corporations_corporation_id_starbases(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdStarbasesParams) -> Result<ResponseContent<GetCorporationsCorporationIdStarbasesSuccess>, Error<GetCorporationsCorporationIdStarbasesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -1018,7 +1665,9 @@ pub async fn get_corporations_corporation_id_starbases(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdStarbasesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdStarbasesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1027,7 +1676,15 @@ pub async fn get_corporations_corporation_id_starbases(configuration: &configura
 }
 
 /// Returns various settings and fuels of a starbase (POS)  --- Alternate route: `/dev/corporations/{corporation_id}/starbases/{starbase_id}/`  Alternate route: `/v2/corporations/{corporation_id}/starbases/{starbase_id}/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_starbases_starbase_id(configuration: &configuration::Configuration, corporation_id: i32, starbase_id: i64, system_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCorporationsCorporationIdStarbasesStarbaseIdOk, Error<GetCorporationsCorporationIdStarbasesStarbaseIdError>> {
+pub async fn get_corporations_corporation_id_starbases_starbase_id(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdStarbasesStarbaseIdParams) -> Result<ResponseContent<GetCorporationsCorporationIdStarbasesStarbaseIdSuccess>, Error<GetCorporationsCorporationIdStarbasesStarbaseIdError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let starbase_id = params.starbase_id;
+    let system_id = params.system_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -1058,7 +1715,9 @@ pub async fn get_corporations_corporation_id_starbases_starbase_id(configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdStarbasesStarbaseIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdStarbasesStarbaseIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1067,7 +1726,16 @@ pub async fn get_corporations_corporation_id_starbases_starbase_id(configuration
 }
 
 /// Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th  --- Alternate route: `/dev/corporations/{corporation_id}/structures/`  Alternate route: `/v4/corporations/{corporation_id}/structures/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Station_Manager 
-pub async fn get_corporations_corporation_id_structures(configuration: &configuration::Configuration, corporation_id: i32, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdStructures200Ok>, Error<GetCorporationsCorporationIdStructuresError>> {
+pub async fn get_corporations_corporation_id_structures(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdStructuresParams) -> Result<ResponseContent<GetCorporationsCorporationIdStructuresSuccess>, Error<GetCorporationsCorporationIdStructuresError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -1106,7 +1774,9 @@ pub async fn get_corporations_corporation_id_structures(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdStructuresSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdStructuresError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1115,7 +1785,13 @@ pub async fn get_corporations_corporation_id_structures(configuration: &configur
 }
 
 /// Returns a corporation's titles  --- Alternate route: `/dev/corporations/{corporation_id}/titles/`  Alternate route: `/v2/corporations/{corporation_id}/titles/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_titles(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdTitles200Ok>, Error<GetCorporationsCorporationIdTitlesError>> {
+pub async fn get_corporations_corporation_id_titles(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdTitlesParams) -> Result<ResponseContent<GetCorporationsCorporationIdTitlesSuccess>, Error<GetCorporationsCorporationIdTitlesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -1145,7 +1821,9 @@ pub async fn get_corporations_corporation_id_titles(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdTitlesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdTitlesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -1154,7 +1832,11 @@ pub async fn get_corporations_corporation_id_titles(configuration: &configuratio
 }
 
 /// Get a list of npc corporations  --- Alternate route: `/dev/corporations/npccorps/`  Alternate route: `/v2/corporations/npccorps/`  --- This route expires daily at 11:05
-pub async fn get_corporations_npccorps(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetCorporationsNpccorpsError>> {
+pub async fn get_corporations_npccorps(configuration: &configuration::Configuration, params: GetCorporationsNpccorpsParams) -> Result<ResponseContent<GetCorporationsNpccorpsSuccess>, Error<GetCorporationsNpccorpsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -1178,7 +1860,9 @@ pub async fn get_corporations_npccorps(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsNpccorpsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsNpccorpsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

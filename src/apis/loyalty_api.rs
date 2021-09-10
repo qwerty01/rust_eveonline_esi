@@ -14,6 +14,48 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_loyalty_points`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdLoyaltyPointsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_loyalty_stores_corporation_id_offers`
+#[derive(Clone, Debug)]
+pub struct GetLoyaltyStoresCorporationIdOffersParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_loyalty_points`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdLoyaltyPointsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdLoyaltyPoints200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_loyalty_stores_corporation_id_offers`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetLoyaltyStoresCorporationIdOffersSuccess {
+    Status200(Vec<crate::models::GetLoyaltyStoresCorporationIdOffers200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_loyalty_points`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -44,7 +86,13 @@ pub enum GetLoyaltyStoresCorporationIdOffersError {
 
 
 /// Return a list of loyalty points for all corporations the character has worked for  --- Alternate route: `/dev/characters/{character_id}/loyalty/points/`  Alternate route: `/legacy/characters/{character_id}/loyalty/points/`  Alternate route: `/v1/characters/{character_id}/loyalty/points/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_loyalty_points(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdLoyaltyPoints200Ok>, Error<GetCharactersCharacterIdLoyaltyPointsError>> {
+pub async fn get_characters_character_id_loyalty_points(configuration: &configuration::Configuration, params: GetCharactersCharacterIdLoyaltyPointsParams) -> Result<ResponseContent<GetCharactersCharacterIdLoyaltyPointsSuccess>, Error<GetCharactersCharacterIdLoyaltyPointsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -74,7 +122,9 @@ pub async fn get_characters_character_id_loyalty_points(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdLoyaltyPointsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdLoyaltyPointsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -83,7 +133,12 @@ pub async fn get_characters_character_id_loyalty_points(configuration: &configur
 }
 
 /// Return a list of offers from a specific corporation's loyalty store  --- Alternate route: `/dev/loyalty/stores/{corporation_id}/offers/`  Alternate route: `/legacy/loyalty/stores/{corporation_id}/offers/`  Alternate route: `/v1/loyalty/stores/{corporation_id}/offers/`  --- This route expires daily at 11:05
-pub async fn get_loyalty_stores_corporation_id_offers(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetLoyaltyStoresCorporationIdOffers200Ok>, Error<GetLoyaltyStoresCorporationIdOffersError>> {
+pub async fn get_loyalty_stores_corporation_id_offers(configuration: &configuration::Configuration, params: GetLoyaltyStoresCorporationIdOffersParams) -> Result<ResponseContent<GetLoyaltyStoresCorporationIdOffersSuccess>, Error<GetLoyaltyStoresCorporationIdOffersError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -107,7 +162,9 @@ pub async fn get_loyalty_stores_corporation_id_offers(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetLoyaltyStoresCorporationIdOffersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetLoyaltyStoresCorporationIdOffersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

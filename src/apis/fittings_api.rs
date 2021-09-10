@@ -14,6 +14,69 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `delete_characters_character_id_fittings_fitting_id`
+#[derive(Clone, Debug)]
+pub struct DeleteCharactersCharacterIdFittingsFittingIdParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// ID for a fitting of this character
+    pub fitting_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_fittings`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdFittingsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_fittings`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdFittingsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    pub fitting: crate::models::PostCharactersCharacterIdFittingsFitting,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `delete_characters_character_id_fittings_fitting_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteCharactersCharacterIdFittingsFittingIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_fittings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdFittingsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdFittings200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_fittings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdFittingsSuccess {
+    Status201(crate::models::PostCharactersCharacterIdFittingsCreated),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `delete_characters_character_id_fittings_fitting_id`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -59,7 +122,13 @@ pub enum PostCharactersCharacterIdFittingsError {
 
 
 /// Delete a fitting from a character  --- Alternate route: `/dev/characters/{character_id}/fittings/{fitting_id}/`  Alternate route: `/legacy/characters/{character_id}/fittings/{fitting_id}/`  Alternate route: `/v1/characters/{character_id}/fittings/{fitting_id}/` 
-pub async fn delete_characters_character_id_fittings_fitting_id(configuration: &configuration::Configuration, character_id: i32, fitting_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteCharactersCharacterIdFittingsFittingIdError>> {
+pub async fn delete_characters_character_id_fittings_fitting_id(configuration: &configuration::Configuration, params: DeleteCharactersCharacterIdFittingsFittingIdParams) -> Result<ResponseContent<DeleteCharactersCharacterIdFittingsFittingIdSuccess>, Error<DeleteCharactersCharacterIdFittingsFittingIdError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let fitting_id = params.fitting_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -86,7 +155,9 @@ pub async fn delete_characters_character_id_fittings_fitting_id(configuration: &
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteCharactersCharacterIdFittingsFittingIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteCharactersCharacterIdFittingsFittingIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -95,7 +166,13 @@ pub async fn delete_characters_character_id_fittings_fitting_id(configuration: &
 }
 
 /// Return fittings of a character  --- Alternate route: `/dev/characters/{character_id}/fittings/`  Alternate route: `/v2/characters/{character_id}/fittings/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_fittings(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdFittings200Ok>, Error<GetCharactersCharacterIdFittingsError>> {
+pub async fn get_characters_character_id_fittings(configuration: &configuration::Configuration, params: GetCharactersCharacterIdFittingsParams) -> Result<ResponseContent<GetCharactersCharacterIdFittingsSuccess>, Error<GetCharactersCharacterIdFittingsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -125,7 +202,9 @@ pub async fn get_characters_character_id_fittings(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdFittingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdFittingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -134,7 +213,13 @@ pub async fn get_characters_character_id_fittings(configuration: &configuration:
 }
 
 /// Save a new fitting for a character  --- Alternate route: `/dev/characters/{character_id}/fittings/`  Alternate route: `/v2/characters/{character_id}/fittings/` 
-pub async fn post_characters_character_id_fittings(configuration: &configuration::Configuration, character_id: i32, fitting: crate::models::PostCharactersCharacterIdFittingsFitting, datasource: Option<&str>, token: Option<&str>) -> Result<crate::models::PostCharactersCharacterIdFittingsCreated, Error<PostCharactersCharacterIdFittingsError>> {
+pub async fn post_characters_character_id_fittings(configuration: &configuration::Configuration, params: PostCharactersCharacterIdFittingsParams) -> Result<ResponseContent<PostCharactersCharacterIdFittingsSuccess>, Error<PostCharactersCharacterIdFittingsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let fitting = params.fitting;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -162,7 +247,9 @@ pub async fn post_characters_character_id_fittings(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdFittingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdFittingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

@@ -14,6 +14,138 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_assets`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdAssetsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_assets`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdAssetsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_assets_locations`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdAssetsLocationsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// A list of item ids
+    pub item_ids: Vec<i64>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_characters_character_id_assets_names`
+#[derive(Clone, Debug)]
+pub struct PostCharactersCharacterIdAssetsNamesParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// A list of item ids
+    pub item_ids: Vec<i64>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_corporations_corporation_id_assets_locations`
+#[derive(Clone, Debug)]
+pub struct PostCorporationsCorporationIdAssetsLocationsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// A list of item ids
+    pub item_ids: Vec<i64>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_corporations_corporation_id_assets_names`
+#[derive(Clone, Debug)]
+pub struct PostCorporationsCorporationIdAssetsNamesParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// A list of item ids
+    pub item_ids: Vec<i64>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_assets`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdAssetsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdAssets200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_assets`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdAssetsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdAssets200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_assets_locations`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdAssetsLocationsSuccess {
+    Status200(Vec<crate::models::PostCharactersCharacterIdAssetsLocations200Ok>),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_characters_character_id_assets_names`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCharactersCharacterIdAssetsNamesSuccess {
+    Status200(Vec<crate::models::PostCharactersCharacterIdAssetsNames200Ok>),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_corporations_corporation_id_assets_locations`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCorporationsCorporationIdAssetsLocationsSuccess {
+    Status200(Vec<crate::models::PostCorporationsCorporationIdAssetsLocations200Ok>),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_corporations_corporation_id_assets_names`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostCorporationsCorporationIdAssetsNamesSuccess {
+    Status200(Vec<crate::models::PostCorporationsCorporationIdAssetsNames200Ok>),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_assets`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -104,7 +236,14 @@ pub enum PostCorporationsCorporationIdAssetsNamesError {
 
 
 /// Return a list of the characters assets  --- Alternate route: `/dev/characters/{character_id}/assets/`  Alternate route: `/v5/characters/{character_id}/assets/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_assets(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdAssets200Ok>, Error<GetCharactersCharacterIdAssetsError>> {
+pub async fn get_characters_character_id_assets(configuration: &configuration::Configuration, params: GetCharactersCharacterIdAssetsParams) -> Result<ResponseContent<GetCharactersCharacterIdAssetsSuccess>, Error<GetCharactersCharacterIdAssetsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -137,7 +276,9 @@ pub async fn get_characters_character_id_assets(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdAssetsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdAssetsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -146,7 +287,14 @@ pub async fn get_characters_character_id_assets(configuration: &configuration::C
 }
 
 /// Return a list of the corporation assets  --- Alternate route: `/dev/corporations/{corporation_id}/assets/`  Alternate route: `/v5/corporations/{corporation_id}/assets/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Director 
-pub async fn get_corporations_corporation_id_assets(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdAssets200Ok>, Error<GetCorporationsCorporationIdAssetsError>> {
+pub async fn get_corporations_corporation_id_assets(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdAssetsParams) -> Result<ResponseContent<GetCorporationsCorporationIdAssetsSuccess>, Error<GetCorporationsCorporationIdAssetsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -179,7 +327,9 @@ pub async fn get_corporations_corporation_id_assets(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdAssetsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdAssetsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -188,7 +338,13 @@ pub async fn get_corporations_corporation_id_assets(configuration: &configuratio
 }
 
 /// Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)  --- Alternate route: `/dev/characters/{character_id}/assets/locations/`  Alternate route: `/v2/characters/{character_id}/assets/locations/` 
-pub async fn post_characters_character_id_assets_locations(configuration: &configuration::Configuration, character_id: i32, item_ids: Vec<i64>, datasource: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::PostCharactersCharacterIdAssetsLocations200Ok>, Error<PostCharactersCharacterIdAssetsLocationsError>> {
+pub async fn post_characters_character_id_assets_locations(configuration: &configuration::Configuration, params: PostCharactersCharacterIdAssetsLocationsParams) -> Result<ResponseContent<PostCharactersCharacterIdAssetsLocationsSuccess>, Error<PostCharactersCharacterIdAssetsLocationsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let item_ids = params.item_ids;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -216,7 +372,9 @@ pub async fn post_characters_character_id_assets_locations(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdAssetsLocationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdAssetsLocationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -225,7 +383,13 @@ pub async fn post_characters_character_id_assets_locations(configuration: &confi
 }
 
 /// Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.  --- Alternate route: `/dev/characters/{character_id}/assets/names/`  Alternate route: `/legacy/characters/{character_id}/assets/names/`  Alternate route: `/v1/characters/{character_id}/assets/names/` 
-pub async fn post_characters_character_id_assets_names(configuration: &configuration::Configuration, character_id: i32, item_ids: Vec<i64>, datasource: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::PostCharactersCharacterIdAssetsNames200Ok>, Error<PostCharactersCharacterIdAssetsNamesError>> {
+pub async fn post_characters_character_id_assets_names(configuration: &configuration::Configuration, params: PostCharactersCharacterIdAssetsNamesParams) -> Result<ResponseContent<PostCharactersCharacterIdAssetsNamesSuccess>, Error<PostCharactersCharacterIdAssetsNamesError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let item_ids = params.item_ids;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -253,7 +417,9 @@ pub async fn post_characters_character_id_assets_names(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCharactersCharacterIdAssetsNamesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCharactersCharacterIdAssetsNamesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -262,7 +428,13 @@ pub async fn post_characters_character_id_assets_names(configuration: &configura
 }
 
 /// Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)  --- Alternate route: `/dev/corporations/{corporation_id}/assets/locations/`  Alternate route: `/v2/corporations/{corporation_id}/assets/locations/`   --- Requires one of the following EVE corporation role(s): Director 
-pub async fn post_corporations_corporation_id_assets_locations(configuration: &configuration::Configuration, corporation_id: i32, item_ids: Vec<i64>, datasource: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::PostCorporationsCorporationIdAssetsLocations200Ok>, Error<PostCorporationsCorporationIdAssetsLocationsError>> {
+pub async fn post_corporations_corporation_id_assets_locations(configuration: &configuration::Configuration, params: PostCorporationsCorporationIdAssetsLocationsParams) -> Result<ResponseContent<PostCorporationsCorporationIdAssetsLocationsSuccess>, Error<PostCorporationsCorporationIdAssetsLocationsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let item_ids = params.item_ids;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -290,7 +462,9 @@ pub async fn post_corporations_corporation_id_assets_locations(configuration: &c
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCorporationsCorporationIdAssetsLocationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCorporationsCorporationIdAssetsLocationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -299,7 +473,13 @@ pub async fn post_corporations_corporation_id_assets_locations(configuration: &c
 }
 
 /// Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships  --- Alternate route: `/dev/corporations/{corporation_id}/assets/names/`  Alternate route: `/legacy/corporations/{corporation_id}/assets/names/`  Alternate route: `/v1/corporations/{corporation_id}/assets/names/`   --- Requires one of the following EVE corporation role(s): Director 
-pub async fn post_corporations_corporation_id_assets_names(configuration: &configuration::Configuration, corporation_id: i32, item_ids: Vec<i64>, datasource: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::PostCorporationsCorporationIdAssetsNames200Ok>, Error<PostCorporationsCorporationIdAssetsNamesError>> {
+pub async fn post_corporations_corporation_id_assets_names(configuration: &configuration::Configuration, params: PostCorporationsCorporationIdAssetsNamesParams) -> Result<ResponseContent<PostCorporationsCorporationIdAssetsNamesSuccess>, Error<PostCorporationsCorporationIdAssetsNamesError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let item_ids = params.item_ids;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -327,7 +507,9 @@ pub async fn post_corporations_corporation_id_assets_names(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostCorporationsCorporationIdAssetsNamesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostCorporationsCorporationIdAssetsNamesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

@@ -53,7 +53,7 @@ pub struct GetUniverseStationsStationIdOk {
 
 impl GetUniverseStationsStationIdOk {
     /// 200 ok object
-    pub fn new(max_dockable_ship_volume: f32, name: String, office_rental_cost: f32, position: crate::models::GetUniverseStationsStationIdPosition, reprocessing_efficiency: f32, reprocessing_stations_take: f32, services: Services, station_id: i32, system_id: i32, type_id: i32) -> GetUniverseStationsStationIdOk {
+    pub fn new(max_dockable_ship_volume: f32, name: String, office_rental_cost: f32, position: crate::models::GetUniverseStationsStationIdPosition, reprocessing_efficiency: f32, reprocessing_stations_take: f32, services: Vec<Services>, station_id: i32, system_id: i32, type_id: i32) -> GetUniverseStationsStationIdOk {
         GetUniverseStationsStationIdOk {
             max_dockable_ship_volume,
             name,

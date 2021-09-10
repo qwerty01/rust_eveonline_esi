@@ -14,6 +14,311 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `delete_fleets_fleet_id_members_member_id`
+#[derive(Clone, Debug)]
+pub struct DeleteFleetsFleetIdMembersMemberIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The character ID of a member in this fleet
+    pub member_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `delete_fleets_fleet_id_squads_squad_id`
+#[derive(Clone, Debug)]
+pub struct DeleteFleetsFleetIdSquadsSquadIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The squad to delete
+    pub squad_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `delete_fleets_fleet_id_wings_wing_id`
+#[derive(Clone, Debug)]
+pub struct DeleteFleetsFleetIdWingsWingIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The wing to delete
+    pub wing_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_fleet`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdFleetParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fleets_fleet_id`
+#[derive(Clone, Debug)]
+pub struct GetFleetsFleetIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fleets_fleet_id_members`
+#[derive(Clone, Debug)]
+pub struct GetFleetsFleetIdMembersParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fleets_fleet_id_wings`
+#[derive(Clone, Debug)]
+pub struct GetFleetsFleetIdWingsParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// Language to use in the response
+    pub accept_language: Option<String>,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Language to use in the response, takes precedence over Accept-Language
+    pub language: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_fleets_fleet_id_members`
+#[derive(Clone, Debug)]
+pub struct PostFleetsFleetIdMembersParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    pub invitation: crate::models::PostFleetsFleetIdMembersInvitation,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_fleets_fleet_id_wings`
+#[derive(Clone, Debug)]
+pub struct PostFleetsFleetIdWingsParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `post_fleets_fleet_id_wings_wing_id_squads`
+#[derive(Clone, Debug)]
+pub struct PostFleetsFleetIdWingsWingIdSquadsParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The wing_id to create squad in
+    pub wing_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_fleets_fleet_id`
+#[derive(Clone, Debug)]
+pub struct PutFleetsFleetIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    pub new_settings: crate::models::PutFleetsFleetIdNewSettings,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_fleets_fleet_id_members_member_id`
+#[derive(Clone, Debug)]
+pub struct PutFleetsFleetIdMembersMemberIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The character ID of a member in this fleet
+    pub member_id: i32,
+    pub movement: crate::models::PutFleetsFleetIdMembersMemberIdMovement,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_fleets_fleet_id_squads_squad_id`
+#[derive(Clone, Debug)]
+pub struct PutFleetsFleetIdSquadsSquadIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The squad to rename
+    pub squad_id: i64,
+    pub naming: crate::models::PutFleetsFleetIdSquadsSquadIdNaming,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `put_fleets_fleet_id_wings_wing_id`
+#[derive(Clone, Debug)]
+pub struct PutFleetsFleetIdWingsWingIdParams {
+    /// ID for a fleet
+    pub fleet_id: i64,
+    /// The wing to rename
+    pub wing_id: i64,
+    pub naming: crate::models::PutFleetsFleetIdWingsWingIdNaming,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `delete_fleets_fleet_id_members_member_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteFleetsFleetIdMembersMemberIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `delete_fleets_fleet_id_squads_squad_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteFleetsFleetIdSquadsSquadIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `delete_fleets_fleet_id_wings_wing_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DeleteFleetsFleetIdWingsWingIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_fleet`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdFleetSuccess {
+    Status200(crate::models::GetCharactersCharacterIdFleetOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fleets_fleet_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFleetsFleetIdSuccess {
+    Status200(crate::models::GetFleetsFleetIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fleets_fleet_id_members`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFleetsFleetIdMembersSuccess {
+    Status200(Vec<crate::models::GetFleetsFleetIdMembers200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fleets_fleet_id_wings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFleetsFleetIdWingsSuccess {
+    Status200(Vec<crate::models::GetFleetsFleetIdWings200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_fleets_fleet_id_members`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostFleetsFleetIdMembersSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_fleets_fleet_id_wings`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostFleetsFleetIdWingsSuccess {
+    Status201(crate::models::PostFleetsFleetIdWingsCreated),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `post_fleets_fleet_id_wings_wing_id_squads`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PostFleetsFleetIdWingsWingIdSquadsSuccess {
+    Status201(crate::models::PostFleetsFleetIdWingsWingIdSquadsCreated),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_fleets_fleet_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutFleetsFleetIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_fleets_fleet_id_members_member_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutFleetsFleetIdMembersMemberIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_fleets_fleet_id_squads_squad_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutFleetsFleetIdSquadsSquadIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `put_fleets_fleet_id_wings_wing_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum PutFleetsFleetIdWingsWingIdSuccess {
+    Status204(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `delete_fleets_fleet_id_members_member_id`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -229,7 +534,13 @@ pub enum PutFleetsFleetIdWingsWingIdError {
 
 
 /// Kick a fleet member  --- Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`  Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/` 
-pub async fn delete_fleets_fleet_id_members_member_id(configuration: &configuration::Configuration, fleet_id: i64, member_id: i32, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteFleetsFleetIdMembersMemberIdError>> {
+pub async fn delete_fleets_fleet_id_members_member_id(configuration: &configuration::Configuration, params: DeleteFleetsFleetIdMembersMemberIdParams) -> Result<ResponseContent<DeleteFleetsFleetIdMembersMemberIdSuccess>, Error<DeleteFleetsFleetIdMembersMemberIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let member_id = params.member_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -256,7 +567,9 @@ pub async fn delete_fleets_fleet_id_members_member_id(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteFleetsFleetIdMembersMemberIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteFleetsFleetIdMembersMemberIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -265,7 +578,13 @@ pub async fn delete_fleets_fleet_id_members_member_id(configuration: &configurat
 }
 
 /// Delete a fleet squad, only empty squads can be deleted  --- Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`  Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/` 
-pub async fn delete_fleets_fleet_id_squads_squad_id(configuration: &configuration::Configuration, fleet_id: i64, squad_id: i64, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteFleetsFleetIdSquadsSquadIdError>> {
+pub async fn delete_fleets_fleet_id_squads_squad_id(configuration: &configuration::Configuration, params: DeleteFleetsFleetIdSquadsSquadIdParams) -> Result<ResponseContent<DeleteFleetsFleetIdSquadsSquadIdSuccess>, Error<DeleteFleetsFleetIdSquadsSquadIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let squad_id = params.squad_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -292,7 +611,9 @@ pub async fn delete_fleets_fleet_id_squads_squad_id(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteFleetsFleetIdSquadsSquadIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteFleetsFleetIdSquadsSquadIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -301,7 +622,13 @@ pub async fn delete_fleets_fleet_id_squads_squad_id(configuration: &configuratio
 }
 
 /// Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty  --- Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`  Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/` 
-pub async fn delete_fleets_fleet_id_wings_wing_id(configuration: &configuration::Configuration, fleet_id: i64, wing_id: i64, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<DeleteFleetsFleetIdWingsWingIdError>> {
+pub async fn delete_fleets_fleet_id_wings_wing_id(configuration: &configuration::Configuration, params: DeleteFleetsFleetIdWingsWingIdParams) -> Result<ResponseContent<DeleteFleetsFleetIdWingsWingIdSuccess>, Error<DeleteFleetsFleetIdWingsWingIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let wing_id = params.wing_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -328,7 +655,9 @@ pub async fn delete_fleets_fleet_id_wings_wing_id(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<DeleteFleetsFleetIdWingsWingIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<DeleteFleetsFleetIdWingsWingIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -337,7 +666,13 @@ pub async fn delete_fleets_fleet_id_wings_wing_id(configuration: &configuration:
 }
 
 /// Return the fleet ID the character is in, if any.  --- Alternate route: `/legacy/characters/{character_id}/fleet/`  Alternate route: `/v1/characters/{character_id}/fleet/`  --- This route is cached for up to 60 seconds  --- Warning: This route has an upgrade available  --- [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/fleet/)
-pub async fn get_characters_character_id_fleet(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdFleetOk, Error<GetCharactersCharacterIdFleetError>> {
+pub async fn get_characters_character_id_fleet(configuration: &configuration::Configuration, params: GetCharactersCharacterIdFleetParams) -> Result<ResponseContent<GetCharactersCharacterIdFleetSuccess>, Error<GetCharactersCharacterIdFleetError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -367,7 +702,9 @@ pub async fn get_characters_character_id_fleet(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdFleetSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdFleetError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -376,7 +713,13 @@ pub async fn get_characters_character_id_fleet(configuration: &configuration::Co
 }
 
 /// Return details about a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/`  Alternate route: `/v1/fleets/{fleet_id}/`  --- This route is cached for up to 5 seconds
-pub async fn get_fleets_fleet_id(configuration: &configuration::Configuration, fleet_id: i64, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetFleetsFleetIdOk, Error<GetFleetsFleetIdError>> {
+pub async fn get_fleets_fleet_id(configuration: &configuration::Configuration, params: GetFleetsFleetIdParams) -> Result<ResponseContent<GetFleetsFleetIdSuccess>, Error<GetFleetsFleetIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -406,7 +749,9 @@ pub async fn get_fleets_fleet_id(configuration: &configuration::Configuration, f
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFleetsFleetIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFleetsFleetIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -415,7 +760,15 @@ pub async fn get_fleets_fleet_id(configuration: &configuration::Configuration, f
 }
 
 /// Return information about fleet members  --- Alternate route: `/dev/fleets/{fleet_id}/members/`  Alternate route: `/legacy/fleets/{fleet_id}/members/`  Alternate route: `/v1/fleets/{fleet_id}/members/`  --- This route is cached for up to 5 seconds
-pub async fn get_fleets_fleet_id_members(configuration: &configuration::Configuration, fleet_id: i64, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetFleetsFleetIdMembers200Ok>, Error<GetFleetsFleetIdMembersError>> {
+pub async fn get_fleets_fleet_id_members(configuration: &configuration::Configuration, params: GetFleetsFleetIdMembersParams) -> Result<ResponseContent<GetFleetsFleetIdMembersSuccess>, Error<GetFleetsFleetIdMembersError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -451,7 +804,9 @@ pub async fn get_fleets_fleet_id_members(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFleetsFleetIdMembersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFleetsFleetIdMembersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -460,7 +815,15 @@ pub async fn get_fleets_fleet_id_members(configuration: &configuration::Configur
 }
 
 /// Return information about wings in a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/wings/`  Alternate route: `/legacy/fleets/{fleet_id}/wings/`  Alternate route: `/v1/fleets/{fleet_id}/wings/`  --- This route is cached for up to 5 seconds
-pub async fn get_fleets_fleet_id_wings(configuration: &configuration::Configuration, fleet_id: i64, accept_language: Option<&str>, datasource: Option<&str>, if_none_match: Option<&str>, language: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetFleetsFleetIdWings200Ok>, Error<GetFleetsFleetIdWingsError>> {
+pub async fn get_fleets_fleet_id_wings(configuration: &configuration::Configuration, params: GetFleetsFleetIdWingsParams) -> Result<ResponseContent<GetFleetsFleetIdWingsSuccess>, Error<GetFleetsFleetIdWingsError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let accept_language = params.accept_language;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let language = params.language;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -496,7 +859,9 @@ pub async fn get_fleets_fleet_id_wings(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFleetsFleetIdWingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFleetsFleetIdWingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -505,7 +870,13 @@ pub async fn get_fleets_fleet_id_wings(configuration: &configuration::Configurat
 }
 
 /// Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI  --- Alternate route: `/dev/fleets/{fleet_id}/members/`  Alternate route: `/legacy/fleets/{fleet_id}/members/`  Alternate route: `/v1/fleets/{fleet_id}/members/` 
-pub async fn post_fleets_fleet_id_members(configuration: &configuration::Configuration, fleet_id: i64, invitation: crate::models::PostFleetsFleetIdMembersInvitation, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PostFleetsFleetIdMembersError>> {
+pub async fn post_fleets_fleet_id_members(configuration: &configuration::Configuration, params: PostFleetsFleetIdMembersParams) -> Result<ResponseContent<PostFleetsFleetIdMembersSuccess>, Error<PostFleetsFleetIdMembersError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let invitation = params.invitation;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -533,7 +904,9 @@ pub async fn post_fleets_fleet_id_members(configuration: &configuration::Configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PostFleetsFleetIdMembersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostFleetsFleetIdMembersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -542,7 +915,12 @@ pub async fn post_fleets_fleet_id_members(configuration: &configuration::Configu
 }
 
 /// Create a new wing in a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/wings/`  Alternate route: `/legacy/fleets/{fleet_id}/wings/`  Alternate route: `/v1/fleets/{fleet_id}/wings/` 
-pub async fn post_fleets_fleet_id_wings(configuration: &configuration::Configuration, fleet_id: i64, datasource: Option<&str>, token: Option<&str>) -> Result<crate::models::PostFleetsFleetIdWingsCreated, Error<PostFleetsFleetIdWingsError>> {
+pub async fn post_fleets_fleet_id_wings(configuration: &configuration::Configuration, params: PostFleetsFleetIdWingsParams) -> Result<ResponseContent<PostFleetsFleetIdWingsSuccess>, Error<PostFleetsFleetIdWingsError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -569,7 +947,9 @@ pub async fn post_fleets_fleet_id_wings(configuration: &configuration::Configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostFleetsFleetIdWingsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostFleetsFleetIdWingsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -578,7 +958,13 @@ pub async fn post_fleets_fleet_id_wings(configuration: &configuration::Configura
 }
 
 /// Create a new squad in a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/squads/`  Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/squads/`  Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/squads/` 
-pub async fn post_fleets_fleet_id_wings_wing_id_squads(configuration: &configuration::Configuration, fleet_id: i64, wing_id: i64, datasource: Option<&str>, token: Option<&str>) -> Result<crate::models::PostFleetsFleetIdWingsWingIdSquadsCreated, Error<PostFleetsFleetIdWingsWingIdSquadsError>> {
+pub async fn post_fleets_fleet_id_wings_wing_id_squads(configuration: &configuration::Configuration, params: PostFleetsFleetIdWingsWingIdSquadsParams) -> Result<ResponseContent<PostFleetsFleetIdWingsWingIdSquadsSuccess>, Error<PostFleetsFleetIdWingsWingIdSquadsError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let wing_id = params.wing_id;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -605,7 +991,9 @@ pub async fn post_fleets_fleet_id_wings_wing_id_squads(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<PostFleetsFleetIdWingsWingIdSquadsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PostFleetsFleetIdWingsWingIdSquadsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -614,7 +1002,13 @@ pub async fn post_fleets_fleet_id_wings_wing_id_squads(configuration: &configura
 }
 
 /// Update settings about a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/`  Alternate route: `/v1/fleets/{fleet_id}/` 
-pub async fn put_fleets_fleet_id(configuration: &configuration::Configuration, fleet_id: i64, new_settings: crate::models::PutFleetsFleetIdNewSettings, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutFleetsFleetIdError>> {
+pub async fn put_fleets_fleet_id(configuration: &configuration::Configuration, params: PutFleetsFleetIdParams) -> Result<ResponseContent<PutFleetsFleetIdSuccess>, Error<PutFleetsFleetIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let new_settings = params.new_settings;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -642,7 +1036,9 @@ pub async fn put_fleets_fleet_id(configuration: &configuration::Configuration, f
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutFleetsFleetIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutFleetsFleetIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -651,7 +1047,14 @@ pub async fn put_fleets_fleet_id(configuration: &configuration::Configuration, f
 }
 
 /// Move a fleet member around  --- Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`  Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/` 
-pub async fn put_fleets_fleet_id_members_member_id(configuration: &configuration::Configuration, fleet_id: i64, member_id: i32, movement: crate::models::PutFleetsFleetIdMembersMemberIdMovement, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutFleetsFleetIdMembersMemberIdError>> {
+pub async fn put_fleets_fleet_id_members_member_id(configuration: &configuration::Configuration, params: PutFleetsFleetIdMembersMemberIdParams) -> Result<ResponseContent<PutFleetsFleetIdMembersMemberIdSuccess>, Error<PutFleetsFleetIdMembersMemberIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let member_id = params.member_id;
+    let movement = params.movement;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -679,7 +1082,9 @@ pub async fn put_fleets_fleet_id_members_member_id(configuration: &configuration
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutFleetsFleetIdMembersMemberIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutFleetsFleetIdMembersMemberIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -688,7 +1093,14 @@ pub async fn put_fleets_fleet_id_members_member_id(configuration: &configuration
 }
 
 /// Rename a fleet squad  --- Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`  Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/` 
-pub async fn put_fleets_fleet_id_squads_squad_id(configuration: &configuration::Configuration, fleet_id: i64, squad_id: i64, naming: crate::models::PutFleetsFleetIdSquadsSquadIdNaming, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutFleetsFleetIdSquadsSquadIdError>> {
+pub async fn put_fleets_fleet_id_squads_squad_id(configuration: &configuration::Configuration, params: PutFleetsFleetIdSquadsSquadIdParams) -> Result<ResponseContent<PutFleetsFleetIdSquadsSquadIdSuccess>, Error<PutFleetsFleetIdSquadsSquadIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let squad_id = params.squad_id;
+    let naming = params.naming;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -716,7 +1128,9 @@ pub async fn put_fleets_fleet_id_squads_squad_id(configuration: &configuration::
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutFleetsFleetIdSquadsSquadIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutFleetsFleetIdSquadsSquadIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -725,7 +1139,14 @@ pub async fn put_fleets_fleet_id_squads_squad_id(configuration: &configuration::
 }
 
 /// Rename a fleet wing  --- Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`  Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`  Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/` 
-pub async fn put_fleets_fleet_id_wings_wing_id(configuration: &configuration::Configuration, fleet_id: i64, wing_id: i64, naming: crate::models::PutFleetsFleetIdWingsWingIdNaming, datasource: Option<&str>, token: Option<&str>) -> Result<(), Error<PutFleetsFleetIdWingsWingIdError>> {
+pub async fn put_fleets_fleet_id_wings_wing_id(configuration: &configuration::Configuration, params: PutFleetsFleetIdWingsWingIdParams) -> Result<ResponseContent<PutFleetsFleetIdWingsWingIdSuccess>, Error<PutFleetsFleetIdWingsWingIdError>> {
+    // unbox the parameters
+    let fleet_id = params.fleet_id;
+    let wing_id = params.wing_id;
+    let naming = params.naming;
+    let datasource = params.datasource;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -753,7 +1174,9 @@ pub async fn put_fleets_fleet_id_wings_wing_id(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        Ok(())
+        let local_var_entity: Option<PutFleetsFleetIdWingsWingIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<PutFleetsFleetIdWingsWingIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

@@ -36,7 +36,7 @@ pub struct GetCorporationsCorporationIdRolesHistory200Ok {
 
 impl GetCorporationsCorporationIdRolesHistory200Ok {
     /// 200 ok object
-    pub fn new(changed_at: String, character_id: i32, issuer_id: i32, new_roles: NewRoles, old_roles: OldRoles, role_type: RoleType) -> GetCorporationsCorporationIdRolesHistory200Ok {
+    pub fn new(changed_at: String, character_id: i32, issuer_id: i32, new_roles: Vec<NewRoles>, old_roles: Vec<OldRoles>, role_type: RoleType) -> GetCorporationsCorporationIdRolesHistory200Ok {
         GetCorporationsCorporationIdRolesHistory200Ok {
             changed_at,
             character_id,

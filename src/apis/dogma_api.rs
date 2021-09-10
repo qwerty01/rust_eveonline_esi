@@ -14,6 +14,104 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_dogma_attributes`
+#[derive(Clone, Debug)]
+pub struct GetDogmaAttributesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_dogma_attributes_attribute_id`
+#[derive(Clone, Debug)]
+pub struct GetDogmaAttributesAttributeIdParams {
+    /// A dogma attribute ID
+    pub attribute_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_dogma_dynamic_items_type_id_item_id`
+#[derive(Clone, Debug)]
+pub struct GetDogmaDynamicItemsTypeIdItemIdParams {
+    /// item_id integer
+    pub item_id: i64,
+    /// type_id integer
+    pub type_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_dogma_effects`
+#[derive(Clone, Debug)]
+pub struct GetDogmaEffectsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_dogma_effects_effect_id`
+#[derive(Clone, Debug)]
+pub struct GetDogmaEffectsEffectIdParams {
+    /// A dogma effect ID
+    pub effect_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_dogma_attributes`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDogmaAttributesSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_dogma_attributes_attribute_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDogmaAttributesAttributeIdSuccess {
+    Status200(crate::models::GetDogmaAttributesAttributeIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_dogma_dynamic_items_type_id_item_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDogmaDynamicItemsTypeIdItemIdSuccess {
+    Status200(crate::models::GetDogmaDynamicItemsTypeIdItemIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_dogma_effects`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDogmaEffectsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_dogma_effects_effect_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetDogmaEffectsEffectIdSuccess {
+    Status200(crate::models::GetDogmaEffectsEffectIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_dogma_attributes`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -80,7 +178,11 @@ pub enum GetDogmaEffectsEffectIdError {
 
 
 /// Get a list of dogma attribute ids  --- Alternate route: `/dev/dogma/attributes/`  Alternate route: `/legacy/dogma/attributes/`  Alternate route: `/v1/dogma/attributes/`  --- This route expires daily at 11:05
-pub async fn get_dogma_attributes(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetDogmaAttributesError>> {
+pub async fn get_dogma_attributes(configuration: &configuration::Configuration, params: GetDogmaAttributesParams) -> Result<ResponseContent<GetDogmaAttributesSuccess>, Error<GetDogmaAttributesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -104,7 +206,9 @@ pub async fn get_dogma_attributes(configuration: &configuration::Configuration, 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetDogmaAttributesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetDogmaAttributesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -113,7 +217,12 @@ pub async fn get_dogma_attributes(configuration: &configuration::Configuration, 
 }
 
 /// Get information on a dogma attribute  --- Alternate route: `/dev/dogma/attributes/{attribute_id}/`  Alternate route: `/legacy/dogma/attributes/{attribute_id}/`  Alternate route: `/v1/dogma/attributes/{attribute_id}/`  --- This route expires daily at 11:05
-pub async fn get_dogma_attributes_attribute_id(configuration: &configuration::Configuration, attribute_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetDogmaAttributesAttributeIdOk, Error<GetDogmaAttributesAttributeIdError>> {
+pub async fn get_dogma_attributes_attribute_id(configuration: &configuration::Configuration, params: GetDogmaAttributesAttributeIdParams) -> Result<ResponseContent<GetDogmaAttributesAttributeIdSuccess>, Error<GetDogmaAttributesAttributeIdError>> {
+    // unbox the parameters
+    let attribute_id = params.attribute_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -137,7 +246,9 @@ pub async fn get_dogma_attributes_attribute_id(configuration: &configuration::Co
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetDogmaAttributesAttributeIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetDogmaAttributesAttributeIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -146,7 +257,13 @@ pub async fn get_dogma_attributes_attribute_id(configuration: &configuration::Co
 }
 
 /// Returns info about a dynamic item resulting from mutation with a mutaplasmid.  --- Alternate route: `/dev/dogma/dynamic/items/{type_id}/{item_id}/`  Alternate route: `/legacy/dogma/dynamic/items/{type_id}/{item_id}/`  Alternate route: `/v1/dogma/dynamic/items/{type_id}/{item_id}/`  --- This route expires daily at 11:05
-pub async fn get_dogma_dynamic_items_type_id_item_id(configuration: &configuration::Configuration, item_id: i64, type_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetDogmaDynamicItemsTypeIdItemIdOk, Error<GetDogmaDynamicItemsTypeIdItemIdError>> {
+pub async fn get_dogma_dynamic_items_type_id_item_id(configuration: &configuration::Configuration, params: GetDogmaDynamicItemsTypeIdItemIdParams) -> Result<ResponseContent<GetDogmaDynamicItemsTypeIdItemIdSuccess>, Error<GetDogmaDynamicItemsTypeIdItemIdError>> {
+    // unbox the parameters
+    let item_id = params.item_id;
+    let type_id = params.type_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -170,7 +287,9 @@ pub async fn get_dogma_dynamic_items_type_id_item_id(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetDogmaDynamicItemsTypeIdItemIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetDogmaDynamicItemsTypeIdItemIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -179,7 +298,11 @@ pub async fn get_dogma_dynamic_items_type_id_item_id(configuration: &configurati
 }
 
 /// Get a list of dogma effect ids  --- Alternate route: `/dev/dogma/effects/`  Alternate route: `/legacy/dogma/effects/`  Alternate route: `/v1/dogma/effects/`  --- This route expires daily at 11:05
-pub async fn get_dogma_effects(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetDogmaEffectsError>> {
+pub async fn get_dogma_effects(configuration: &configuration::Configuration, params: GetDogmaEffectsParams) -> Result<ResponseContent<GetDogmaEffectsSuccess>, Error<GetDogmaEffectsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -203,7 +326,9 @@ pub async fn get_dogma_effects(configuration: &configuration::Configuration, dat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetDogmaEffectsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetDogmaEffectsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -212,7 +337,12 @@ pub async fn get_dogma_effects(configuration: &configuration::Configuration, dat
 }
 
 /// Get information on a dogma effect  --- Alternate route: `/dev/dogma/effects/{effect_id}/`  Alternate route: `/v2/dogma/effects/{effect_id}/`  --- This route expires daily at 11:05
-pub async fn get_dogma_effects_effect_id(configuration: &configuration::Configuration, effect_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetDogmaEffectsEffectIdOk, Error<GetDogmaEffectsEffectIdError>> {
+pub async fn get_dogma_effects_effect_id(configuration: &configuration::Configuration, params: GetDogmaEffectsEffectIdParams) -> Result<ResponseContent<GetDogmaEffectsEffectIdSuccess>, Error<GetDogmaEffectsEffectIdError>> {
+    // unbox the parameters
+    let effect_id = params.effect_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -236,7 +366,9 @@ pub async fn get_dogma_effects_effect_id(configuration: &configuration::Configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetDogmaEffectsEffectIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetDogmaEffectsEffectIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

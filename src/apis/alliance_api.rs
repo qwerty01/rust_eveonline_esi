@@ -14,6 +14,84 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_alliances`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_alliances_alliance_id`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesAllianceIdParams {
+    /// An EVE alliance ID
+    pub alliance_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_alliances_alliance_id_corporations`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesAllianceIdCorporationsParams {
+    /// An EVE alliance ID
+    pub alliance_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_alliances_alliance_id_icons`
+#[derive(Clone, Debug)]
+pub struct GetAlliancesAllianceIdIconsParams {
+    /// An EVE alliance ID
+    pub alliance_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_alliances`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_alliances_alliance_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesAllianceIdSuccess {
+    Status200(crate::models::GetAlliancesAllianceIdOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_alliances_alliance_id_corporations`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesAllianceIdCorporationsSuccess {
+    Status200(Vec<i32>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_alliances_alliance_id_icons`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetAlliancesAllianceIdIconsSuccess {
+    Status200(crate::models::GetAlliancesAllianceIdIconsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_alliances`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -67,7 +145,11 @@ pub enum GetAlliancesAllianceIdIconsError {
 
 
 /// List all active player alliances  --- Alternate route: `/dev/alliances/`  Alternate route: `/legacy/alliances/`  Alternate route: `/v1/alliances/`  Alternate route: `/v2/alliances/`  --- This route is cached for up to 3600 seconds
-pub async fn get_alliances(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetAlliancesError>> {
+pub async fn get_alliances(configuration: &configuration::Configuration, params: GetAlliancesParams) -> Result<ResponseContent<GetAlliancesSuccess>, Error<GetAlliancesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -91,7 +173,9 @@ pub async fn get_alliances(configuration: &configuration::Configuration, datasou
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -100,7 +184,12 @@ pub async fn get_alliances(configuration: &configuration::Configuration, datasou
 }
 
 /// Public information about an alliance  --- Alternate route: `/dev/alliances/{alliance_id}/`  Alternate route: `/legacy/alliances/{alliance_id}/`  Alternate route: `/v3/alliances/{alliance_id}/`  Alternate route: `/v4/alliances/{alliance_id}/`  --- This route is cached for up to 3600 seconds
-pub async fn get_alliances_alliance_id(configuration: &configuration::Configuration, alliance_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetAlliancesAllianceIdOk, Error<GetAlliancesAllianceIdError>> {
+pub async fn get_alliances_alliance_id(configuration: &configuration::Configuration, params: GetAlliancesAllianceIdParams) -> Result<ResponseContent<GetAlliancesAllianceIdSuccess>, Error<GetAlliancesAllianceIdError>> {
+    // unbox the parameters
+    let alliance_id = params.alliance_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -124,7 +213,9 @@ pub async fn get_alliances_alliance_id(configuration: &configuration::Configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesAllianceIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesAllianceIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -133,7 +224,12 @@ pub async fn get_alliances_alliance_id(configuration: &configuration::Configurat
 }
 
 /// List all current member corporations of an alliance  --- Alternate route: `/dev/alliances/{alliance_id}/corporations/`  Alternate route: `/legacy/alliances/{alliance_id}/corporations/`  Alternate route: `/v1/alliances/{alliance_id}/corporations/`  Alternate route: `/v2/alliances/{alliance_id}/corporations/`  --- This route is cached for up to 3600 seconds
-pub async fn get_alliances_alliance_id_corporations(configuration: &configuration::Configuration, alliance_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<i32>, Error<GetAlliancesAllianceIdCorporationsError>> {
+pub async fn get_alliances_alliance_id_corporations(configuration: &configuration::Configuration, params: GetAlliancesAllianceIdCorporationsParams) -> Result<ResponseContent<GetAlliancesAllianceIdCorporationsSuccess>, Error<GetAlliancesAllianceIdCorporationsError>> {
+    // unbox the parameters
+    let alliance_id = params.alliance_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -157,7 +253,9 @@ pub async fn get_alliances_alliance_id_corporations(configuration: &configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesAllianceIdCorporationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesAllianceIdCorporationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -166,7 +264,12 @@ pub async fn get_alliances_alliance_id_corporations(configuration: &configuratio
 }
 
 /// Get the icon urls for a alliance  --- Alternate route: `/legacy/alliances/{alliance_id}/icons/`  Alternate route: `/v1/alliances/{alliance_id}/icons/`  --- This route expires daily at 11:05  --- [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/alliances/{alliance_id}/icons/)
-pub async fn get_alliances_alliance_id_icons(configuration: &configuration::Configuration, alliance_id: i32, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetAlliancesAllianceIdIconsOk, Error<GetAlliancesAllianceIdIconsError>> {
+pub async fn get_alliances_alliance_id_icons(configuration: &configuration::Configuration, params: GetAlliancesAllianceIdIconsParams) -> Result<ResponseContent<GetAlliancesAllianceIdIconsSuccess>, Error<GetAlliancesAllianceIdIconsError>> {
+    // unbox the parameters
+    let alliance_id = params.alliance_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -190,7 +293,9 @@ pub async fn get_alliances_alliance_id_icons(configuration: &configuration::Conf
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetAlliancesAllianceIdIconsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetAlliancesAllianceIdIconsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

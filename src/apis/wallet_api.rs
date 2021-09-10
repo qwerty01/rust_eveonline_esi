@@ -14,6 +14,150 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_wallet`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdWalletParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_wallet_journal`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdWalletJournalParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_wallet_transactions`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdWalletTransactionsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Only show transactions happened before the one referenced by this id
+    pub from_id: Option<i64>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_wallets`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdWalletsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_wallets_division_journal`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdWalletsDivisionJournalParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// Wallet key of the division to fetch journals from
+    pub division: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_wallets_division_transactions`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdWalletsDivisionTransactionsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// Wallet key of the division to fetch journals from
+    pub division: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// Only show journal entries happened before the transaction referenced by this id
+    pub from_id: Option<i64>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_wallet`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdWalletSuccess {
+    Status200(f64),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_wallet_journal`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdWalletJournalSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdWalletJournal200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_wallet_transactions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdWalletTransactionsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdWalletTransactions200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_wallets`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdWalletsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdWallets200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_wallets_division_journal`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdWalletsDivisionJournalSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdWalletsDivisionJournal200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_wallets_division_transactions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdWalletsDivisionTransactionsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdWalletsDivisionTransactions200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_wallet`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -101,7 +245,13 @@ pub enum GetCorporationsCorporationIdWalletsDivisionTransactionsError {
 
 
 /// Returns a character's wallet balance  --- Alternate route: `/legacy/characters/{character_id}/wallet/`  Alternate route: `/v1/characters/{character_id}/wallet/`  --- This route is cached for up to 120 seconds  --- [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/wallet/)
-pub async fn get_characters_character_id_wallet(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<f64, Error<GetCharactersCharacterIdWalletError>> {
+pub async fn get_characters_character_id_wallet(configuration: &configuration::Configuration, params: GetCharactersCharacterIdWalletParams) -> Result<ResponseContent<GetCharactersCharacterIdWalletSuccess>, Error<GetCharactersCharacterIdWalletError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -131,7 +281,9 @@ pub async fn get_characters_character_id_wallet(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdWalletSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdWalletError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -140,7 +292,14 @@ pub async fn get_characters_character_id_wallet(configuration: &configuration::C
 }
 
 /// Retrieve the given character's wallet journal going 30 days back  --- Alternate route: `/dev/characters/{character_id}/wallet/journal/`  Alternate route: `/v6/characters/{character_id}/wallet/journal/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_wallet_journal(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdWalletJournal200Ok>, Error<GetCharactersCharacterIdWalletJournalError>> {
+pub async fn get_characters_character_id_wallet_journal(configuration: &configuration::Configuration, params: GetCharactersCharacterIdWalletJournalParams) -> Result<ResponseContent<GetCharactersCharacterIdWalletJournalSuccess>, Error<GetCharactersCharacterIdWalletJournalError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -173,7 +332,9 @@ pub async fn get_characters_character_id_wallet_journal(configuration: &configur
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdWalletJournalSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdWalletJournalError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -182,7 +343,14 @@ pub async fn get_characters_character_id_wallet_journal(configuration: &configur
 }
 
 /// Get wallet transactions of a character  --- Alternate route: `/dev/characters/{character_id}/wallet/transactions/`  Alternate route: `/legacy/characters/{character_id}/wallet/transactions/`  Alternate route: `/v1/characters/{character_id}/wallet/transactions/`  --- This route is cached for up to 3600 seconds
-pub async fn get_characters_character_id_wallet_transactions(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, from_id: Option<i64>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdWalletTransactions200Ok>, Error<GetCharactersCharacterIdWalletTransactionsError>> {
+pub async fn get_characters_character_id_wallet_transactions(configuration: &configuration::Configuration, params: GetCharactersCharacterIdWalletTransactionsParams) -> Result<ResponseContent<GetCharactersCharacterIdWalletTransactionsSuccess>, Error<GetCharactersCharacterIdWalletTransactionsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let from_id = params.from_id;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -215,7 +383,9 @@ pub async fn get_characters_character_id_wallet_transactions(configuration: &con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdWalletTransactionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdWalletTransactionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -224,7 +394,13 @@ pub async fn get_characters_character_id_wallet_transactions(configuration: &con
 }
 
 /// Get a corporation's wallets  --- Alternate route: `/dev/corporations/{corporation_id}/wallets/`  Alternate route: `/legacy/corporations/{corporation_id}/wallets/`  Alternate route: `/v1/corporations/{corporation_id}/wallets/`  --- This route is cached for up to 300 seconds  --- Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant 
-pub async fn get_corporations_corporation_id_wallets(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdWallets200Ok>, Error<GetCorporationsCorporationIdWalletsError>> {
+pub async fn get_corporations_corporation_id_wallets(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdWalletsParams) -> Result<ResponseContent<GetCorporationsCorporationIdWalletsSuccess>, Error<GetCorporationsCorporationIdWalletsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -254,7 +430,9 @@ pub async fn get_corporations_corporation_id_wallets(configuration: &configurati
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdWalletsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdWalletsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -263,7 +441,15 @@ pub async fn get_corporations_corporation_id_wallets(configuration: &configurati
 }
 
 /// Retrieve the given corporation's wallet journal for the given division going 30 days back  --- Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/journal/`  Alternate route: `/v4/corporations/{corporation_id}/wallets/{division}/journal/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant 
-pub async fn get_corporations_corporation_id_wallets_division_journal(configuration: &configuration::Configuration, corporation_id: i32, division: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdWalletsDivisionJournal200Ok>, Error<GetCorporationsCorporationIdWalletsDivisionJournalError>> {
+pub async fn get_corporations_corporation_id_wallets_division_journal(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdWalletsDivisionJournalParams) -> Result<ResponseContent<GetCorporationsCorporationIdWalletsDivisionJournalSuccess>, Error<GetCorporationsCorporationIdWalletsDivisionJournalError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let division = params.division;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -296,7 +482,9 @@ pub async fn get_corporations_corporation_id_wallets_division_journal(configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdWalletsDivisionJournalSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdWalletsDivisionJournalError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -305,7 +493,15 @@ pub async fn get_corporations_corporation_id_wallets_division_journal(configurat
 }
 
 /// Get wallet transactions of a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/transactions/`  Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/transactions/`  Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/transactions/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant 
-pub async fn get_corporations_corporation_id_wallets_division_transactions(configuration: &configuration::Configuration, corporation_id: i32, division: i32, datasource: Option<&str>, from_id: Option<i64>, if_none_match: Option<&str>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdWalletsDivisionTransactions200Ok>, Error<GetCorporationsCorporationIdWalletsDivisionTransactionsError>> {
+pub async fn get_corporations_corporation_id_wallets_division_transactions(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdWalletsDivisionTransactionsParams) -> Result<ResponseContent<GetCorporationsCorporationIdWalletsDivisionTransactionsSuccess>, Error<GetCorporationsCorporationIdWalletsDivisionTransactionsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let division = params.division;
+    let datasource = params.datasource;
+    let from_id = params.from_id;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -338,7 +534,9 @@ pub async fn get_corporations_corporation_id_wallets_division_transactions(confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdWalletsDivisionTransactionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdWalletsDivisionTransactionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

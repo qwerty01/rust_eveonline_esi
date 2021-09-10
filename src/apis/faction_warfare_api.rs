@@ -14,6 +14,158 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_fw_stats`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdFwStatsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_fw_stats`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdFwStatsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_leaderboards`
+#[derive(Clone, Debug)]
+pub struct GetFwLeaderboardsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_leaderboards_characters`
+#[derive(Clone, Debug)]
+pub struct GetFwLeaderboardsCharactersParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_leaderboards_corporations`
+#[derive(Clone, Debug)]
+pub struct GetFwLeaderboardsCorporationsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_stats`
+#[derive(Clone, Debug)]
+pub struct GetFwStatsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_systems`
+#[derive(Clone, Debug)]
+pub struct GetFwSystemsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_fw_wars`
+#[derive(Clone, Debug)]
+pub struct GetFwWarsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_fw_stats`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdFwStatsSuccess {
+    Status200(crate::models::GetCharactersCharacterIdFwStatsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_fw_stats`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdFwStatsSuccess {
+    Status200(crate::models::GetCorporationsCorporationIdFwStatsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_leaderboards`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwLeaderboardsSuccess {
+    Status200(crate::models::GetFwLeaderboardsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_leaderboards_characters`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwLeaderboardsCharactersSuccess {
+    Status200(crate::models::GetFwLeaderboardsCharactersOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_leaderboards_corporations`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwLeaderboardsCorporationsSuccess {
+    Status200(crate::models::GetFwLeaderboardsCorporationsOk),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_stats`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwStatsSuccess {
+    Status200(Vec<crate::models::GetFwStats200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_systems`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwSystemsSuccess {
+    Status200(Vec<crate::models::GetFwSystems200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_fw_wars`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFwWarsSuccess {
+    Status200(Vec<crate::models::GetFwWars200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_fw_stats`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -117,7 +269,13 @@ pub enum GetFwWarsError {
 
 
 /// Statistical overview of a character involved in faction warfare  --- Alternate route: `/dev/characters/{character_id}/fw/stats/`  Alternate route: `/legacy/characters/{character_id}/fw/stats/`  Alternate route: `/v1/characters/{character_id}/fw/stats/`  Alternate route: `/v2/characters/{character_id}/fw/stats/`  --- This route expires daily at 11:05
-pub async fn get_characters_character_id_fw_stats(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCharactersCharacterIdFwStatsOk, Error<GetCharactersCharacterIdFwStatsError>> {
+pub async fn get_characters_character_id_fw_stats(configuration: &configuration::Configuration, params: GetCharactersCharacterIdFwStatsParams) -> Result<ResponseContent<GetCharactersCharacterIdFwStatsSuccess>, Error<GetCharactersCharacterIdFwStatsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -147,7 +305,9 @@ pub async fn get_characters_character_id_fw_stats(configuration: &configuration:
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdFwStatsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdFwStatsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -156,7 +316,13 @@ pub async fn get_characters_character_id_fw_stats(configuration: &configuration:
 }
 
 /// Statistics about a corporation involved in faction warfare  --- Alternate route: `/dev/corporations/{corporation_id}/fw/stats/`  Alternate route: `/legacy/corporations/{corporation_id}/fw/stats/`  Alternate route: `/v1/corporations/{corporation_id}/fw/stats/`  Alternate route: `/v2/corporations/{corporation_id}/fw/stats/`  --- This route expires daily at 11:05
-pub async fn get_corporations_corporation_id_fw_stats(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, token: Option<&str>) -> Result<crate::models::GetCorporationsCorporationIdFwStatsOk, Error<GetCorporationsCorporationIdFwStatsError>> {
+pub async fn get_corporations_corporation_id_fw_stats(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdFwStatsParams) -> Result<ResponseContent<GetCorporationsCorporationIdFwStatsSuccess>, Error<GetCorporationsCorporationIdFwStatsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -186,7 +352,9 @@ pub async fn get_corporations_corporation_id_fw_stats(configuration: &configurat
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdFwStatsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdFwStatsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -195,7 +363,11 @@ pub async fn get_corporations_corporation_id_fw_stats(configuration: &configurat
 }
 
 /// Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday  --- Alternate route: `/dev/fw/leaderboards/`  Alternate route: `/legacy/fw/leaderboards/`  Alternate route: `/v1/fw/leaderboards/`  Alternate route: `/v2/fw/leaderboards/`  --- This route expires daily at 11:05
-pub async fn get_fw_leaderboards(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetFwLeaderboardsOk, Error<GetFwLeaderboardsError>> {
+pub async fn get_fw_leaderboards(configuration: &configuration::Configuration, params: GetFwLeaderboardsParams) -> Result<ResponseContent<GetFwLeaderboardsSuccess>, Error<GetFwLeaderboardsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -219,7 +391,9 @@ pub async fn get_fw_leaderboards(configuration: &configuration::Configuration, d
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwLeaderboardsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwLeaderboardsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -228,7 +402,11 @@ pub async fn get_fw_leaderboards(configuration: &configuration::Configuration, d
 }
 
 /// Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday  --- Alternate route: `/dev/fw/leaderboards/characters/`  Alternate route: `/legacy/fw/leaderboards/characters/`  Alternate route: `/v1/fw/leaderboards/characters/`  Alternate route: `/v2/fw/leaderboards/characters/`  --- This route expires daily at 11:05
-pub async fn get_fw_leaderboards_characters(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetFwLeaderboardsCharactersOk, Error<GetFwLeaderboardsCharactersError>> {
+pub async fn get_fw_leaderboards_characters(configuration: &configuration::Configuration, params: GetFwLeaderboardsCharactersParams) -> Result<ResponseContent<GetFwLeaderboardsCharactersSuccess>, Error<GetFwLeaderboardsCharactersError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -252,7 +430,9 @@ pub async fn get_fw_leaderboards_characters(configuration: &configuration::Confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwLeaderboardsCharactersSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwLeaderboardsCharactersError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -261,7 +441,11 @@ pub async fn get_fw_leaderboards_characters(configuration: &configuration::Confi
 }
 
 /// Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday  --- Alternate route: `/dev/fw/leaderboards/corporations/`  Alternate route: `/legacy/fw/leaderboards/corporations/`  Alternate route: `/v1/fw/leaderboards/corporations/`  Alternate route: `/v2/fw/leaderboards/corporations/`  --- This route expires daily at 11:05
-pub async fn get_fw_leaderboards_corporations(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<crate::models::GetFwLeaderboardsCorporationsOk, Error<GetFwLeaderboardsCorporationsError>> {
+pub async fn get_fw_leaderboards_corporations(configuration: &configuration::Configuration, params: GetFwLeaderboardsCorporationsParams) -> Result<ResponseContent<GetFwLeaderboardsCorporationsSuccess>, Error<GetFwLeaderboardsCorporationsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -285,7 +469,9 @@ pub async fn get_fw_leaderboards_corporations(configuration: &configuration::Con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwLeaderboardsCorporationsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwLeaderboardsCorporationsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -294,7 +480,11 @@ pub async fn get_fw_leaderboards_corporations(configuration: &configuration::Con
 }
 
 /// Statistical overviews of factions involved in faction warfare  --- Alternate route: `/dev/fw/stats/`  Alternate route: `/legacy/fw/stats/`  Alternate route: `/v1/fw/stats/`  Alternate route: `/v2/fw/stats/`  --- This route expires daily at 11:05
-pub async fn get_fw_stats(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetFwStats200Ok>, Error<GetFwStatsError>> {
+pub async fn get_fw_stats(configuration: &configuration::Configuration, params: GetFwStatsParams) -> Result<ResponseContent<GetFwStatsSuccess>, Error<GetFwStatsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -318,7 +508,9 @@ pub async fn get_fw_stats(configuration: &configuration::Configuration, datasour
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwStatsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwStatsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -327,7 +519,11 @@ pub async fn get_fw_stats(configuration: &configuration::Configuration, datasour
 }
 
 /// An overview of the current ownership of faction warfare solar systems  --- Alternate route: `/dev/fw/systems/`  Alternate route: `/legacy/fw/systems/`  Alternate route: `/v2/fw/systems/`  Alternate route: `/v3/fw/systems/`  --- This route is cached for up to 1800 seconds
-pub async fn get_fw_systems(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetFwSystems200Ok>, Error<GetFwSystemsError>> {
+pub async fn get_fw_systems(configuration: &configuration::Configuration, params: GetFwSystemsParams) -> Result<ResponseContent<GetFwSystemsSuccess>, Error<GetFwSystemsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -351,7 +547,9 @@ pub async fn get_fw_systems(configuration: &configuration::Configuration, dataso
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwSystemsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwSystemsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -360,7 +558,11 @@ pub async fn get_fw_systems(configuration: &configuration::Configuration, dataso
 }
 
 /// Data about which NPC factions are at war  --- Alternate route: `/dev/fw/wars/`  Alternate route: `/legacy/fw/wars/`  Alternate route: `/v1/fw/wars/`  Alternate route: `/v2/fw/wars/`  --- This route expires daily at 11:05
-pub async fn get_fw_wars(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetFwWars200Ok>, Error<GetFwWarsError>> {
+pub async fn get_fw_wars(configuration: &configuration::Configuration, params: GetFwWarsParams) -> Result<ResponseContent<GetFwWarsSuccess>, Error<GetFwWarsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -384,7 +586,9 @@ pub async fn get_fw_wars(configuration: &configuration::Configuration, datasourc
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetFwWarsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetFwWarsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };

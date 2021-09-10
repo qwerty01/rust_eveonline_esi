@@ -14,6 +14,190 @@ use reqwest;
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
 
+/// struct for passing parameters to the method `get_characters_character_id_industry_jobs`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdIndustryJobsParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days
+    pub include_completed: Option<bool>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_characters_character_id_mining`
+#[derive(Clone, Debug)]
+pub struct GetCharactersCharacterIdMiningParams {
+    /// An EVE character ID
+    pub character_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporation_corporation_id_mining_extractions`
+#[derive(Clone, Debug)]
+pub struct GetCorporationCorporationIdMiningExtractionsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporation_corporation_id_mining_observers`
+#[derive(Clone, Debug)]
+pub struct GetCorporationCorporationIdMiningObserversParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporation_corporation_id_mining_observers_observer_id`
+#[derive(Clone, Debug)]
+pub struct GetCorporationCorporationIdMiningObserversObserverIdParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// A mining observer id
+    pub observer_id: i64,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_corporations_corporation_id_industry_jobs`
+#[derive(Clone, Debug)]
+pub struct GetCorporationsCorporationIdIndustryJobsParams {
+    /// An EVE corporation ID
+    pub corporation_id: i32,
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>,
+    /// Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days
+    pub include_completed: Option<bool>,
+    /// Which page of results to return
+    pub page: Option<i32>,
+    /// Access token to use if unable to set a header
+    pub token: Option<String>
+}
+
+/// struct for passing parameters to the method `get_industry_facilities`
+#[derive(Clone, Debug)]
+pub struct GetIndustryFacilitiesParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+/// struct for passing parameters to the method `get_industry_systems`
+#[derive(Clone, Debug)]
+pub struct GetIndustrySystemsParams {
+    /// The server name you would like data from
+    pub datasource: Option<String>,
+    /// ETag from a previous request. A 304 will be returned if this matches the current ETag
+    pub if_none_match: Option<String>
+}
+
+
+/// struct for typed successes of method `get_characters_character_id_industry_jobs`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdIndustryJobsSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdIndustryJobs200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_characters_character_id_mining`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCharactersCharacterIdMiningSuccess {
+    Status200(Vec<crate::models::GetCharactersCharacterIdMining200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporation_corporation_id_mining_extractions`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationCorporationIdMiningExtractionsSuccess {
+    Status200(Vec<crate::models::GetCorporationCorporationIdMiningExtractions200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporation_corporation_id_mining_observers`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationCorporationIdMiningObserversSuccess {
+    Status200(Vec<crate::models::GetCorporationCorporationIdMiningObservers200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporation_corporation_id_mining_observers_observer_id`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationCorporationIdMiningObserversObserverIdSuccess {
+    Status200(Vec<crate::models::GetCorporationCorporationIdMiningObserversObserverId200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_corporations_corporation_id_industry_jobs`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetCorporationsCorporationIdIndustryJobsSuccess {
+    Status200(Vec<crate::models::GetCorporationsCorporationIdIndustryJobs200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_industry_facilities`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetIndustryFacilitiesSuccess {
+    Status200(Vec<crate::models::GetIndustryFacilities200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method `get_industry_systems`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetIndustrySystemsSuccess {
+    Status200(Vec<crate::models::GetIndustrySystems200Ok>),
+    Status304(),
+    UnknownValue(serde_json::Value),
+}
 
 /// struct for typed errors of method `get_characters_character_id_industry_jobs`
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -125,7 +309,14 @@ pub enum GetIndustrySystemsError {
 
 
 /// List industry jobs placed by a character  --- Alternate route: `/dev/characters/{character_id}/industry/jobs/`  Alternate route: `/legacy/characters/{character_id}/industry/jobs/`  Alternate route: `/v1/characters/{character_id}/industry/jobs/`  --- This route is cached for up to 300 seconds
-pub async fn get_characters_character_id_industry_jobs(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, include_completed: Option<bool>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdIndustryJobs200Ok>, Error<GetCharactersCharacterIdIndustryJobsError>> {
+pub async fn get_characters_character_id_industry_jobs(configuration: &configuration::Configuration, params: GetCharactersCharacterIdIndustryJobsParams) -> Result<ResponseContent<GetCharactersCharacterIdIndustryJobsSuccess>, Error<GetCharactersCharacterIdIndustryJobsError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let include_completed = params.include_completed;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -158,7 +349,9 @@ pub async fn get_characters_character_id_industry_jobs(configuration: &configura
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdIndustryJobsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdIndustryJobsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -167,7 +360,14 @@ pub async fn get_characters_character_id_industry_jobs(configuration: &configura
 }
 
 /// Paginated record of all mining done by a character for the past 30 days   --- Alternate route: `/dev/characters/{character_id}/mining/`  Alternate route: `/legacy/characters/{character_id}/mining/`  Alternate route: `/v1/characters/{character_id}/mining/`  --- This route is cached for up to 600 seconds
-pub async fn get_characters_character_id_mining(configuration: &configuration::Configuration, character_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCharactersCharacterIdMining200Ok>, Error<GetCharactersCharacterIdMiningError>> {
+pub async fn get_characters_character_id_mining(configuration: &configuration::Configuration, params: GetCharactersCharacterIdMiningParams) -> Result<ResponseContent<GetCharactersCharacterIdMiningSuccess>, Error<GetCharactersCharacterIdMiningError>> {
+    // unbox the parameters
+    let character_id = params.character_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -200,7 +400,9 @@ pub async fn get_characters_character_id_mining(configuration: &configuration::C
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCharactersCharacterIdMiningSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCharactersCharacterIdMiningError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -209,7 +411,14 @@ pub async fn get_characters_character_id_mining(configuration: &configuration::C
 }
 
 /// Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.   --- Alternate route: `/dev/corporation/{corporation_id}/mining/extractions/`  Alternate route: `/legacy/corporation/{corporation_id}/mining/extractions/`  Alternate route: `/v1/corporation/{corporation_id}/mining/extractions/`  --- This route is cached for up to 1800 seconds  --- Requires one of the following EVE corporation role(s): Station_Manager 
-pub async fn get_corporation_corporation_id_mining_extractions(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationCorporationIdMiningExtractions200Ok>, Error<GetCorporationCorporationIdMiningExtractionsError>> {
+pub async fn get_corporation_corporation_id_mining_extractions(configuration: &configuration::Configuration, params: GetCorporationCorporationIdMiningExtractionsParams) -> Result<ResponseContent<GetCorporationCorporationIdMiningExtractionsSuccess>, Error<GetCorporationCorporationIdMiningExtractionsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -242,7 +451,9 @@ pub async fn get_corporation_corporation_id_mining_extractions(configuration: &c
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationCorporationIdMiningExtractionsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationCorporationIdMiningExtractionsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -251,7 +462,14 @@ pub async fn get_corporation_corporation_id_mining_extractions(configuration: &c
 }
 
 /// Paginated list of all entities capable of observing and recording mining for a corporation   --- Alternate route: `/dev/corporation/{corporation_id}/mining/observers/`  Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/`  Alternate route: `/v1/corporation/{corporation_id}/mining/observers/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Accountant 
-pub async fn get_corporation_corporation_id_mining_observers(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationCorporationIdMiningObservers200Ok>, Error<GetCorporationCorporationIdMiningObserversError>> {
+pub async fn get_corporation_corporation_id_mining_observers(configuration: &configuration::Configuration, params: GetCorporationCorporationIdMiningObserversParams) -> Result<ResponseContent<GetCorporationCorporationIdMiningObserversSuccess>, Error<GetCorporationCorporationIdMiningObserversError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -284,7 +502,9 @@ pub async fn get_corporation_corporation_id_mining_observers(configuration: &con
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationCorporationIdMiningObserversSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationCorporationIdMiningObserversError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -293,7 +513,15 @@ pub async fn get_corporation_corporation_id_mining_observers(configuration: &con
 }
 
 /// Paginated record of all mining seen by an observer   --- Alternate route: `/dev/corporation/{corporation_id}/mining/observers/{observer_id}/`  Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/{observer_id}/`  Alternate route: `/v1/corporation/{corporation_id}/mining/observers/{observer_id}/`  --- This route is cached for up to 3600 seconds  --- Requires one of the following EVE corporation role(s): Accountant 
-pub async fn get_corporation_corporation_id_mining_observers_observer_id(configuration: &configuration::Configuration, corporation_id: i32, observer_id: i64, datasource: Option<&str>, if_none_match: Option<&str>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationCorporationIdMiningObserversObserverId200Ok>, Error<GetCorporationCorporationIdMiningObserversObserverIdError>> {
+pub async fn get_corporation_corporation_id_mining_observers_observer_id(configuration: &configuration::Configuration, params: GetCorporationCorporationIdMiningObserversObserverIdParams) -> Result<ResponseContent<GetCorporationCorporationIdMiningObserversObserverIdSuccess>, Error<GetCorporationCorporationIdMiningObserversObserverIdError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let observer_id = params.observer_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -326,7 +554,9 @@ pub async fn get_corporation_corporation_id_mining_observers_observer_id(configu
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationCorporationIdMiningObserversObserverIdSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationCorporationIdMiningObserversObserverIdError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -335,7 +565,15 @@ pub async fn get_corporation_corporation_id_mining_observers_observer_id(configu
 }
 
 /// List industry jobs run by a corporation  --- Alternate route: `/dev/corporations/{corporation_id}/industry/jobs/`  Alternate route: `/legacy/corporations/{corporation_id}/industry/jobs/`  Alternate route: `/v1/corporations/{corporation_id}/industry/jobs/`  --- This route is cached for up to 300 seconds  --- Requires one of the following EVE corporation role(s): Factory_Manager 
-pub async fn get_corporations_corporation_id_industry_jobs(configuration: &configuration::Configuration, corporation_id: i32, datasource: Option<&str>, if_none_match: Option<&str>, include_completed: Option<bool>, page: Option<i32>, token: Option<&str>) -> Result<Vec<crate::models::GetCorporationsCorporationIdIndustryJobs200Ok>, Error<GetCorporationsCorporationIdIndustryJobsError>> {
+pub async fn get_corporations_corporation_id_industry_jobs(configuration: &configuration::Configuration, params: GetCorporationsCorporationIdIndustryJobsParams) -> Result<ResponseContent<GetCorporationsCorporationIdIndustryJobsSuccess>, Error<GetCorporationsCorporationIdIndustryJobsError>> {
+    // unbox the parameters
+    let corporation_id = params.corporation_id;
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+    let include_completed = params.include_completed;
+    let page = params.page;
+    let token = params.token;
+
 
     let local_var_client = &configuration.client;
 
@@ -371,7 +609,9 @@ pub async fn get_corporations_corporation_id_industry_jobs(configuration: &confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetCorporationsCorporationIdIndustryJobsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetCorporationsCorporationIdIndustryJobsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -380,7 +620,11 @@ pub async fn get_corporations_corporation_id_industry_jobs(configuration: &confi
 }
 
 /// Return a list of industry facilities  --- Alternate route: `/dev/industry/facilities/`  Alternate route: `/legacy/industry/facilities/`  Alternate route: `/v1/industry/facilities/`  --- This route is cached for up to 3600 seconds
-pub async fn get_industry_facilities(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetIndustryFacilities200Ok>, Error<GetIndustryFacilitiesError>> {
+pub async fn get_industry_facilities(configuration: &configuration::Configuration, params: GetIndustryFacilitiesParams) -> Result<ResponseContent<GetIndustryFacilitiesSuccess>, Error<GetIndustryFacilitiesError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -404,7 +648,9 @@ pub async fn get_industry_facilities(configuration: &configuration::Configuratio
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetIndustryFacilitiesSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetIndustryFacilitiesError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
@@ -413,7 +659,11 @@ pub async fn get_industry_facilities(configuration: &configuration::Configuratio
 }
 
 /// Return cost indices for solar systems  --- Alternate route: `/dev/industry/systems/`  Alternate route: `/legacy/industry/systems/`  Alternate route: `/v1/industry/systems/`  --- This route is cached for up to 3600 seconds
-pub async fn get_industry_systems(configuration: &configuration::Configuration, datasource: Option<&str>, if_none_match: Option<&str>) -> Result<Vec<crate::models::GetIndustrySystems200Ok>, Error<GetIndustrySystemsError>> {
+pub async fn get_industry_systems(configuration: &configuration::Configuration, params: GetIndustrySystemsParams) -> Result<ResponseContent<GetIndustrySystemsSuccess>, Error<GetIndustrySystemsError>> {
+    // unbox the parameters
+    let datasource = params.datasource;
+    let if_none_match = params.if_none_match;
+
 
     let local_var_client = &configuration.client;
 
@@ -437,7 +687,9 @@ pub async fn get_industry_systems(configuration: &configuration::Configuration, 
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        let local_var_entity: Option<GetIndustrySystemsSuccess> = serde_json::from_str(&local_var_content).ok();
+        let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Ok(local_var_result)
     } else {
         let local_var_entity: Option<GetIndustrySystemsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
