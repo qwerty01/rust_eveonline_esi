@@ -1,6 +1,6 @@
 [package]
 name = "rust_eveonline_esi"
-version = "1.0.0"
+version = "1.10.1"
 authors = ["OpenAPI Generator team and contributors"]
 edition = "2018"
 
@@ -11,7 +11,6 @@ serde_json = "^1.0"
 url = "^2.2"
 [dependencies.reqwest]
 version = "^0.11"
-default-features = false
 features = ["json", "multipart"]
 
 [dev-dependencies]

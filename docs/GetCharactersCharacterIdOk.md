@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **alliance_id** | Option<**i32**> | The character's alliance ID | [optional]
-**ancestry_id** | Option<**i32**> | ancestry_id integer | [optional]
 **birthday** | **String** | Creation date of the character | 
 **bloodline_id** | **i32** | bloodline_id integer | 
 **corporation_id** | **i32** | The character's corporation ID | 

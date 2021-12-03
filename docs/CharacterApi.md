@@ -26,7 +26,7 @@ Method | HTTP request | Description
 > crate::models::GetCharactersCharacterIdOk get_characters_character_id(character_id, datasource, if_none_match)
 Get character's public information
 
-Public information about a character  --- Alternate route: `/v4/characters/{character_id}/`  --- This route is cached for up to 86400 seconds  --- Warning: This route has an upgrade available  --- [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/)
+Public information about a character  --- Alternate route: `/dev/characters/{character_id}/`  Alternate route: `/legacy/characters/{character_id}/`  Alternate route: `/v5/characters/{character_id}/`  --- This route is cached for up to 86400 seconds
 
 ### Parameters
 

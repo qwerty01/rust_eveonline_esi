@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **acceptor_id** | **i32** | Who will accept the contract | 
-**assignee_id** | **i32** | ID to whom the contract is assigned, can be corporation or character ID | 
+**assignee_id** | **i32** | ID to whom the contract is assigned, can be alliance, corporation or character ID | 
 **availability** | **String** | To whom the contract is available | 
 **buyout** | Option<**f64**> | Buyout price (for Auctions only) | [optional]
 **collateral** | Option<**f64**> | Collateral price (for Couriers only) | [optional]
