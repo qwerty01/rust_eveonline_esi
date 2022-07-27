@@ -154,7 +154,7 @@ Open the New Mail window, according to settings from the request if applicable  
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**new_mail** | [**PostUiOpenwindowNewmailNewMail**](PostUiOpenwindowNewmailNewMail.md) |  | [required] |
+**new_mail** | [**PostUiOpenwindowNewmailNewMail**](PostUiOpenwindowNewmailNewMail.md) | The details of mail to create | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 

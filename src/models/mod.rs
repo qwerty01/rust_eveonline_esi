@@ -458,8 +458,6 @@ pub mod get_opportunities_tasks_task_id_ok;
 pub use self::get_opportunities_tasks_task_id_ok::GetOpportunitiesTasksTaskIdOk;
 pub mod get_route_origin_destination_not_found;
 pub use self::get_route_origin_destination_not_found::GetRouteOriginDestinationNotFound;
-pub mod get_search_ok;
-pub use self::get_search_ok::GetSearchOk;
 pub mod get_sovereignty_campaigns_200_ok;
 pub use self::get_sovereignty_campaigns_200_ok::GetSovereigntyCampaigns200Ok;
 pub mod get_sovereignty_campaigns_participant;

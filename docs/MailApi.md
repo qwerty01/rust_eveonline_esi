@@ -230,7 +230,7 @@ Create and send a new mail  --- Alternate route: `/dev/characters/{character_id}
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **character_id** | **i32** | An EVE character ID | [required] |
-**mail** | [**PostCharactersCharacterIdMailMail**](PostCharactersCharacterIdMailMail.md) |  | [required] |
+**mail** | [**PostCharactersCharacterIdMailMail**](PostCharactersCharacterIdMailMail.md) | The mail to send | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -263,7 +263,7 @@ Create a mail label  --- Alternate route: `/dev/characters/{character_id}/mail/l
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **character_id** | **i32** | An EVE character ID | [required] |
-**label** | [**PostCharactersCharacterIdMailLabelsLabel**](PostCharactersCharacterIdMailLabelsLabel.md) |  | [required] |
+**label** | [**PostCharactersCharacterIdMailLabelsLabel**](PostCharactersCharacterIdMailLabelsLabel.md) | Label to create | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **character_id** | **i32** | An EVE character ID | [required] |
 **mail_id** | **i32** | An EVE mail ID | [required] |
-**contents** | [**PutCharactersCharacterIdMailMailIdContents**](PutCharactersCharacterIdMailMailIdContents.md) |  | [required] |
+**contents** | [**PutCharactersCharacterIdMailMailIdContents**](PutCharactersCharacterIdMailMailIdContents.md) | Data used to update the mail | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 

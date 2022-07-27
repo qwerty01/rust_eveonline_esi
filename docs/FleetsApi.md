@@ -269,7 +269,7 @@ Invite a character into the fleet. If a character has a CSPA charge set it is no
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **fleet_id** | **i64** | ID for a fleet | [required] |
-**invitation** | [**PostFleetsFleetIdMembersInvitation**](PostFleetsFleetIdMembersInvitation.md) |  | [required] |
+**invitation** | [**PostFleetsFleetIdMembersInvitation**](PostFleetsFleetIdMembersInvitation.md) | Details of the invitation | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -367,7 +367,7 @@ Update settings about a fleet  --- Alternate route: `/dev/fleets/{fleet_id}/`  A
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **fleet_id** | **i64** | ID for a fleet | [required] |
-**new_settings** | [**PutFleetsFleetIdNewSettings**](PutFleetsFleetIdNewSettings.md) |  | [required] |
+**new_settings** | [**PutFleetsFleetIdNewSettings**](PutFleetsFleetIdNewSettings.md) | What to update for this fleet | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **fleet_id** | **i64** | ID for a fleet | [required] |
 **member_id** | **i32** | The character ID of a member in this fleet | [required] |
-**movement** | [**PutFleetsFleetIdMembersMemberIdMovement**](PutFleetsFleetIdMembersMemberIdMovement.md) |  | [required] |
+**movement** | [**PutFleetsFleetIdMembersMemberIdMovement**](PutFleetsFleetIdMembersMemberIdMovement.md) | Details of the invitation | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -435,7 +435,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **fleet_id** | **i64** | ID for a fleet | [required] |
 **squad_id** | **i64** | The squad to rename | [required] |
-**naming** | [**PutFleetsFleetIdSquadsSquadIdNaming**](PutFleetsFleetIdSquadsSquadIdNaming.md) |  | [required] |
+**naming** | [**PutFleetsFleetIdSquadsSquadIdNaming**](PutFleetsFleetIdSquadsSquadIdNaming.md) | New name of the squad | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
@@ -469,7 +469,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **fleet_id** | **i64** | ID for a fleet | [required] |
 **wing_id** | **i64** | The wing to rename | [required] |
-**naming** | [**PutFleetsFleetIdWingsWingIdNaming**](PutFleetsFleetIdWingsWingIdNaming.md) |  | [required] |
+**naming** | [**PutFleetsFleetIdWingsWingIdNaming**](PutFleetsFleetIdWingsWingIdNaming.md) | New name of the wing | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 

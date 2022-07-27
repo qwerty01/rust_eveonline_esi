@@ -5,7 +5,6 @@ All URIs are relative to *https://esi.evetech.net/latest*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_characters_character_id_search**](SearchApi.md#get_characters_character_id_search) | **GET** /characters/{character_id}/search/ | Search on a string
-[**get_search**](SearchApi.md#get_search) | **GET** /search/ | Search on a string
 
 
 
@@ -38,42 +37,6 @@ Name | Type | Description  | Required | Notes
 ### Authorization
 
 [evesso](../README.md#evesso)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## get_search
-
-> crate::models::GetSearchOk get_search(categories, search, accept_language, datasource, if_none_match, language, strict)
-Search on a string
-
-Search for entities that match a given sub-string.  --- Alternate route: `/dev/search/`  Alternate route: `/legacy/search/`  Alternate route: `/v2/search/`  --- This route is cached for up to 3600 seconds
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**categories** | [**Vec<String>**](String.md) | Type of entities to search for | [required] |
-**search** | **String** | The string to search on | [required] |
-**accept_language** | Option<**String**> | Language to use in the response |  |[default to en]
-**datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
-**if_none_match** | Option<**String**> | ETag from a previous request. A 304 will be returned if this matches the current ETag |  |
-**language** | Option<**String**> | Language to use in the response, takes precedence over Accept-Language |  |[default to en]
-**strict** | Option<**bool**> | Whether the search should be a strict match |  |[default to false]
-
-### Return type
-
-[**crate::models::GetSearchOk**](get_search_ok.md)
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 

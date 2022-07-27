@@ -89,7 +89,7 @@ Save a new fitting for a character  --- Alternate route: `/dev/characters/{chara
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **character_id** | **i32** | An EVE character ID | [required] |
-**fitting** | [**PostCharactersCharacterIdFittingsFitting**](PostCharactersCharacterIdFittingsFitting.md) |  | [required] |
+**fitting** | [**PostCharactersCharacterIdFittingsFitting**](PostCharactersCharacterIdFittingsFitting.md) | Details about the new fitting | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 

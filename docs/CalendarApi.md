@@ -127,7 +127,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **character_id** | **i32** | An EVE character ID | [required] |
 **event_id** | **i32** | The ID of the event requested | [required] |
-**response** | [**PutCharactersCharacterIdCalendarEventIdResponse**](PutCharactersCharacterIdCalendarEventIdResponse.md) |  | [required] |
+**response** | [**PutCharactersCharacterIdCalendarEventIdResponse**](PutCharactersCharacterIdCalendarEventIdResponse.md) | The response value to set, overriding current value | [required] |
 **datasource** | Option<**String**> | The server name you would like data from |  |[default to tranquility]
 **token** | Option<**String**> | Access token to use if unable to set a header |  |
 
