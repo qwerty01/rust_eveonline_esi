@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**color** | Option<**String**> | color string | [optional][default to Color_Ffffff]
+**color** | Option<**String**> | color string | [optional][default to Ffffff]
 **label_id** | Option<**i32**> | label_id integer | [optional]
 **name** | Option<**String**> | name string | [optional]
 **unread_count** | Option<**i32**> | unread_count integer | [optional]

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **sender_type** | **String** | sender_type string | 
 **text** | Option<**String**> | text string | [optional]
 **timestamp** | **String** | timestamp string | 
-**_type** | **String** | type string | 
+**r#type** | **String** | type string | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **reward** | Option<**f64**> | Remuneration for contract (for Couriers only) | [optional]
 **start_location_id** | Option<**i64**> | Start location ID (for Couriers contract) | [optional]
 **title** | Option<**String**> | Title of the contract | [optional]
-**_type** | **String** | Type of the contract | 
+**r#type** | **String** | Type of the contract | 
 **volume** | Option<**f64**> | Volume of items in the contract | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
