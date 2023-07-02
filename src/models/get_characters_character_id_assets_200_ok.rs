@@ -73,6 +73,8 @@ pub enum LocationFlag {
     BoosterBay,
     #[serde(rename = "Cargo")]
     Cargo,
+    #[serde(rename = "CorporationGoalDeliveries")]
+    CorporationGoalDeliveries,
     #[serde(rename = "CorpseBay")]
     CorpseBay,
     #[serde(rename = "Deliveries")]
@@ -153,6 +155,8 @@ pub enum LocationFlag {
     MedSlot6,
     #[serde(rename = "MedSlot7")]
     MedSlot7,
+    #[serde(rename = "MobileDepotHold")]
+    MobileDepotHold,
     #[serde(rename = "QuafeBay")]
     QuafeBay,
     #[serde(rename = "RigSlot0")]

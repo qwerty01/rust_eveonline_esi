@@ -95,6 +95,8 @@ pub enum LocationFlag {
     CorpSag6,
     #[serde(rename = "CorpSAG7")]
     CorpSag7,
+    #[serde(rename = "CorporationGoalDeliveries")]
+    CorporationGoalDeliveries,
     #[serde(rename = "CrateLoot")]
     CrateLoot,
     #[serde(rename = "Deliveries")]
@@ -185,6 +187,8 @@ pub enum LocationFlag {
     MedSlot6,
     #[serde(rename = "MedSlot7")]
     MedSlot7,
+    #[serde(rename = "MobileDepotHold")]
+    MobileDepotHold,
     #[serde(rename = "OfficeFolder")]
     OfficeFolder,
     #[serde(rename = "Pilot")]

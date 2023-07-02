@@ -225,6 +225,12 @@ pub enum RHashType {
     CorpWarRetractedMsg,
     #[serde(rename = "CorpWarSurrenderMsg")]
     CorpWarSurrenderMsg,
+    #[serde(rename = "CorporationGoalClosed")]
+    CorporationGoalClosed,
+    #[serde(rename = "CorporationGoalCompleted")]
+    CorporationGoalCompleted,
+    #[serde(rename = "CorporationGoalCreated")]
+    CorporationGoalCreated,
     #[serde(rename = "CustomsMsg")]
     CustomsMsg,
     #[serde(rename = "DeclareWar")]
@@ -465,6 +471,8 @@ pub enum RHashType {
     StructureLostShields,
     #[serde(rename = "StructureOnline")]
     StructureOnline,
+    #[serde(rename = "StructurePaintPurchased")]
+    StructurePaintPurchased,
     #[serde(rename = "StructureServicesOffline")]
     StructureServicesOffline,
     #[serde(rename = "StructureUnanchoring")]

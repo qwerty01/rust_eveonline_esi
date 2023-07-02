@@ -162,6 +162,8 @@ pub enum GrantableRoles {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -268,6 +270,8 @@ pub enum GrantableRolesAtBase {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -374,6 +378,8 @@ pub enum GrantableRolesAtHq {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -480,6 +486,8 @@ pub enum GrantableRolesAtOther {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -586,6 +594,8 @@ pub enum Roles {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -692,6 +702,8 @@ pub enum RolesAtBase {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -798,6 +810,8 @@ pub enum RolesAtHq {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
@@ -904,6 +918,8 @@ pub enum RolesAtOther {
     RentResearchFacility,
     #[serde(rename = "Security_Officer")]
     SecurityOfficer,
+    #[serde(rename = "Skill_Plan_Manager")]
+    SkillPlanManager,
     #[serde(rename = "Starbase_Defense_Operator")]
     StarbaseDefenseOperator,
     #[serde(rename = "Starbase_Fuel_Technician")]
