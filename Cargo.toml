@@ -1,6 +1,6 @@
 [package]
 name = "rust_eveonline_esi"
-version = "1.17.0"
+version = "1.17"
 authors = ["OpenAPI Generator team and contributors"]
 description = "An OpenAPI for EVE Online"
 # Override this license by providing a License Object in the OpenAPI.
